@@ -1,0 +1,6 @@
+2017.05.29 at 16:36:36 CST ERROR com.bupt.test.Hello 12 hello - Did it again!
+2017.05.29 at 16:36:36 CST FATAL com.bupt.test.Hello 16 hello - 我是fatal信息
+2017.05.29 at 16:36:36 CST ERROR com.bupt.test.Test 15 main - hello
+2017.05.29 at 16:45:31 CST ERROR com.bupt.test.Hello 12 hello - Did it again!
+2017.05.29 at 16:45:31 CST FATAL com.bupt.test.Hello 16 hello - 我是fatal信息
+2017.05.29 at 16:45:31 CST ERROR com.bupt.test.Test 15 main - hello
