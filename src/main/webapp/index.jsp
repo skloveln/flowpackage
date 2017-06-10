@@ -8,6 +8,8 @@
 <title>流量充值项目</title>
 </head>
 <body>
-流量充值项目
+<script language="javascript"type="text/javascript"> 
+window.location.href="${ctx}/index.htm"; 
+</script>
 </body>
 </html>
