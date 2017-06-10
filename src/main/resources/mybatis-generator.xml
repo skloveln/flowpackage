@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <!-- Class Driver Path -->
+    <classPathEntry location="D:\software\apache-maven-3.3.9\respository\postgresql\postgresql\9.1-901.jdbc4\postgresql-9.1-901.jdbc4.jar"/>
+	
+    <context id="context" targetRuntime="MyBatis3">
+        <property name="jdbcType" value="true"/>
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>      <!--消除注释-->
+        </commentGenerator>
+        
+        <!-- jdbc connection-->
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://192.168.181.31:5432/weixin" userId="weixin" password="weixin" />
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        
+        <!-- model file-->
+        <javaModelGenerator targetPackage="com.yazuo.weixin.lottery.model" 
+                            targetProject="src/test/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- mapping file-->
+        <sqlMapGenerator targetPackage="com.yazuo.weixin.lottery.mapping" 
+                         targetProject="src/test/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- mapper file-->
+        <javaClientGenerator targetPackage="com.yazuo.weixin.lottery.mapper" 
+                             targetProject="src/test/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        
+        
+        <table tableName="weixin_mall_merchant_dict" domainObjectName="SubbranchVo" enableSelectByExample="false"
+               enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false" />
+    </context>
+</generatorConfiguration>
