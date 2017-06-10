@@ -112,7 +112,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>6.0.5</version>
+			<version>5.1.41</version>
 		</dependency>
 		<!-- 阿里巴巴数据库连接池 -->
 		<dependency>

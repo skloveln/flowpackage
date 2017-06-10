@@ -40,7 +40,7 @@
         </property>
     </bean>
     
-    <!-- <import resource="spring-weixin-datasource.xml"/> -->
+    <import resource="spring-datasource.xml"/>
     
     <!--<import resource="spring-dubbo.xml"/>
     <import resource="spring-redis.xml"/> -->
