@@ -15,9 +15,9 @@
                 </td>
             </tr>
             <tr>
-                <td>稍等发生地方对对对
+                <td>
                     密码:<input type="text" name="password">
-                </td>水电费电费
+                </td>
             </tr>
             <tr>
                 <td>
