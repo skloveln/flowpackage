@@ -15,7 +15,7 @@
                 </td>
             </tr>
             <tr>
-                <td>稍等发生地方
+                <td>稍等发生地方对对对
                     密码:<input type="text" name="password">
                 </td>
             </tr>
