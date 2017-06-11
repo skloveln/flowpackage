@@ -7,8 +7,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-out.println("欢迎");
-%>
+<form action="register.jsp" method="post">
+        <table>
+            <tr>
+                <td>
+                    姓名:<input type="text" name="userName">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    密码:<input type="text" name="password">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    年龄:<input type="text" name="age">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit">
+                </td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
