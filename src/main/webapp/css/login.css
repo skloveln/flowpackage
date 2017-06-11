@@ -8,7 +8,7 @@ body{
     background: #FFFFFF;
     overflow: hidden;
     font-size: 14px;
-    font-family: 'Î¢ÈíÑÅºÚ','ÎÄÈªæäÕıºÚ','ºÚÌå';
+    font-family: 'å¾®è½¯é›…é»‘','æ–‡æ³‰é©¿æ­£é»‘','é»‘ä½“';
 }
 .loginwarrp .logo{
 	width:100%;
@@ -55,11 +55,11 @@ body{
     width: 150px;
     color: #FFFFFF;
     font-size: 16px;
-    font-family: 'Î¢ÈíÑÅºÚ','ÎÄÈªæäÕıºÚ','ºÚÌå';
+    font-family: 'å¾®è½¯é›…é»‘','æ–‡æ³‰é©¿æ­£é»‘','é»‘ä½“';
     border: none;
     border-radius: 5px;
 }
 .loginwarrp .login_form .login-item .error{
 	color: #F00;
-	font-family: 'Î¢ÈíÑÅºÚ','ÎÄÈªæäÕıºÚ','ºÚÌå';
+	font-family: 'å¾®è½¯é›…é»‘','æ–‡æ³‰é©¿æ­£é»‘','é»‘ä½“';
 }
