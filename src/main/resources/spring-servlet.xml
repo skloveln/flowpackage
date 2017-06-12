@@ -44,8 +44,15 @@
 	</bean>
 	
 	<!-- ④：定义文件上传处理器,最大1M -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
-	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <!-- 默认编码 -->  
+        <property name="defaultEncoding" value="utf-8" />  
+        <!-- 文件大小最大值 -->  
+        <property name="maxUploadSize" value="10240" />  
+        <!-- 内存中的最大值 -->  
+        <property name="maxInMemorySize" value="10240" />  
+    </bean>  	
+
 	<!-- 5：定义BEAN对象转换用视图，用在EXCEL导出 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"	p:order="3"/>
 	

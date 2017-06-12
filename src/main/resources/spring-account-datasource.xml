@@ -12,7 +12,7 @@
           init-method="init" destroy-method="close">
         <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
         <property name="driverClassName" value="${jdbc.driver}" />
-        <property name="url" value="${jdbc.url}" />
+        <property name="url" value="${account.jdbc.url}" />
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
         <!-- 配置初始化大小、最小、最大 -->
@@ -37,12 +37,12 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath*:com/bupt/flowpackage/biz/**/mapper/*Mapper.xml"/>
+        <property name="mapperLocations" value="classpath*:com/bupt/flowpackage/mybatis/account/**/mappping/*Mapper.xml"/>
     </bean>
 
     <!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.bupt.flowpackage.biz"/>
+        <property name="basePackage" value="com.bupt.flowpackage.mybatis"/>
         <property name="annotationClass" value="com.bupt.flowpackage.annotation.MyBatisRepository"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
