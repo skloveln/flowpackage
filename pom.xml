@@ -131,6 +131,11 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+		<dependency>
+		  <groupId>com.github.pagehelper</groupId>
+		  <artifactId>pagehelper</artifactId>
+		  <version>5.0.0</version>
+		</dependency>
 		<!-- mybatis end -->
 		<!-- http 请求 -->
 		<dependency>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bupt.flowpackage.mybatis.account.privilege.mapper.PrivilegeMapper" >
+  <resultMap id="BaseResultMap" type="com.bupt.flowpackage.mybatis.account.privilege.model.Privilege" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="master_type" property="masterType" jdbcType="TINYINT" />
+    <result column="master_id" property="masterId" jdbcType="INTEGER" />
+    <result column="access_type" property="accessType" jdbcType="TINYINT" />
+    <result column="access_id" property="accessId" jdbcType="INTEGER" />
+    <result column="is_operatation" property="isOperatation" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, master_type, master_id, access_type, access_id, is_operatation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_privilege
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cf_privilege
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.flowpackage.mybatis.account.privilege.model.Privilege" >
+    insert into cf_privilege (id, master_type, master_id, 
+      access_type, access_id, is_operatation
+      )
+    values (#{id,jdbcType=INTEGER}, #{masterType,jdbcType=TINYINT}, #{masterId,jdbcType=INTEGER}, 
+      #{accessType,jdbcType=TINYINT}, #{accessId,jdbcType=INTEGER}, #{isOperatation,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.flowpackage.mybatis.account.privilege.model.Privilege" >
+    insert into cf_privilege
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="masterType != null" >
+        master_type,
+      </if>
+      <if test="masterId != null" >
+        master_id,
+      </if>
+      <if test="accessType != null" >
+        access_type,
+      </if>
+      <if test="accessId != null" >
+        access_id,
+      </if>
+      <if test="isOperatation != null" >
+        is_operatation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="masterType != null" >
+        #{masterType,jdbcType=TINYINT},
+      </if>
+      <if test="masterId != null" >
+        #{masterId,jdbcType=INTEGER},
+      </if>
+      <if test="accessType != null" >
+        #{accessType,jdbcType=TINYINT},
+      </if>
+      <if test="accessId != null" >
+        #{accessId,jdbcType=INTEGER},
+      </if>
+      <if test="isOperatation != null" >
+        #{isOperatation,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.flowpackage.mybatis.account.privilege.model.Privilege" >
+    update cf_privilege
+    <set >
+      <if test="masterType != null" >
+        master_type = #{masterType,jdbcType=TINYINT},
+      </if>
+      <if test="masterId != null" >
+        master_id = #{masterId,jdbcType=INTEGER},
+      </if>
+      <if test="accessType != null" >
+        access_type = #{accessType,jdbcType=TINYINT},
+      </if>
+      <if test="accessId != null" >
+        access_id = #{accessId,jdbcType=INTEGER},
+      </if>
+      <if test="isOperatation != null" >
+        is_operatation = #{isOperatation,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.flowpackage.mybatis.account.privilege.model.Privilege" >
+    update cf_privilege
+    set master_type = #{masterType,jdbcType=TINYINT},
+      master_id = #{masterId,jdbcType=INTEGER},
+      access_type = #{accessType,jdbcType=TINYINT},
+      access_id = #{accessId,jdbcType=INTEGER},
+      is_operatation = #{isOperatation,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

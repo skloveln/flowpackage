@@ -6,18 +6,22 @@
 
     <properties>
         <property name="dialect" value="MYSQL"/>
-        <property name="pageSqlId" value=".*Page$"/>
     </properties>
 
     <settings>
         <setting name="cacheEnabled" value="true"/>
         <!-- 使用log4j2 显示 sql-->
         <setting name="logImpl" value="SLF4J" />
-
+        <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>
 
     <plugins>
-        <plugin interceptor="com.bupt.flowpackage.interceptors.PaginationInterceptor"/>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/>
+            <property name="offsetAsPageNum" value="true"/>
+            <property name="rowBoundsWithCount" value="true"/>
+            <property name="pageSizeZero" value="true"/>
+        </plugin>
     </plugins>
     
 

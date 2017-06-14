@@ -5,8 +5,10 @@
 <generatorConfiguration>
 
     <!-- Class Driver Path -->
-    <classPathEntry location="D:\software-install\apache-maven-3.3.9\repository\mysql\mysql-connector-Java\5.1.41\mysql-connector-java-5.1.41.jar"/>
-	
+    <!-- <classPathEntry location="D:\software-install\apache-maven-3.3.9\repository\mysql\mysql-connector-Java\5.1.41\mysql-connector-java-5.1.41.jar"/>
+	 -->
+	<classPathEntry location="D:\software\apache-maven-3.3.9\respository\mysql\mysql-connector-java\5.1.41\mysql-connector-java-5.1.41.jar"/>
+    
     <context id="context" targetRuntime="MyBatis3">
         <property name="jdbcType" value="true"/>
         <commentGenerator>
@@ -22,26 +24,26 @@
         </javaTypeResolver>
         
         <!-- model file-->
-        <javaModelGenerator targetPackage="com.bupt.flowpackage.account.model" 
+        <javaModelGenerator targetPackage="com.bupt.flowpackage.mybatis.account.privilege.model" 
                             targetProject="src/test/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- mapping file-->
-        <sqlMapGenerator targetPackage="com.bupt.flowpackage.account.mapping" 
+        <sqlMapGenerator targetPackage="com.bupt.flowpackage.mybatis.account.privilege.mapping" 
                          targetProject="src/test/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- mapper file-->
-        <javaClientGenerator targetPackage="com.bupt.flowpackage.account.mapper" 
+        <javaClientGenerator targetPackage="com.bupt.flowpackage.mybatis.account.privilege.mapper" 
                              targetProject="src/test/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         
         
-        <table tableName="cf_admin" domainObjectName="Admin" enableSelectByExample="false"
+        <table tableName="cf_privilege" domainObjectName="Privilege" enableSelectByExample="false"
                enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false" />
     </context>
 </generatorConfiguration>

@@ -1,9 +1,13 @@
-package com.bupt.flowpackage.mybatis.account.model;
+package com.bupt.flowpackage.mybatis.account.admin.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AdminVo {
-    private Integer id;
+public class Admin implements Serializable{
+   
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String loginName;
 

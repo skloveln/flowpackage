@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.bupt.flowpackage.account.mapper.AdminMapper" >
-  <resultMap id="BaseResultMap" type="com.bupt.flowpackage.account.model.Admin" >
+<mapper namespace="com.bupt.flowpackage.mybatis.account.admin.mapper.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.bupt.flowpackage.mybatis.account.admin.model.Admin" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="login_name" property="loginName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
@@ -31,7 +31,7 @@
     delete from cf_admin
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bupt.flowpackage.account.model.Admin" >
+  <insert id="insert" parameterType="com.bupt.flowpackage.mybatis.account.admin.model.Admin" >
     insert into cf_admin (id, login_name, password, 
       real_name, sex, mobile, 
       email, create_user_name, create_time, 
@@ -43,7 +43,7 @@
       #{modifyName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{firstLoginTime,jdbcType=TIMESTAMP}, 
       #{lastLoginTime,jdbcType=TIMESTAMP}, #{availableFlag,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.bupt.flowpackage.account.model.Admin" >
+  <insert id="insertSelective" parameterType="com.bupt.flowpackage.mybatis.account.admin.model.Admin" >
     insert into cf_admin
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -134,7 +134,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.flowpackage.account.model.Admin" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.flowpackage.mybatis.account.admin.model.Admin" >
     update cf_admin
     <set >
       <if test="loginName != null" >
@@ -179,7 +179,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bupt.flowpackage.account.model.Admin" >
+  <update id="updateByPrimaryKey" parameterType="com.bupt.flowpackage.mybatis.account.admin.model.Admin" >
     update cf_admin
     set login_name = #{loginName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
