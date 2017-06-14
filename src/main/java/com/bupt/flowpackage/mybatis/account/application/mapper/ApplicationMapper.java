@@ -1,6 +1,6 @@
 package com.bupt.flowpackage.mybatis.account.application.mapper;
 
-import com.bupt.flowpackage.annotation.MyBatisRepository;
+import com.bupt.flowpackage.common.annotation.MyBatisRepository;
 import com.bupt.flowpackage.mybatis.account.application.model.Application;
 @MyBatisRepository
 public interface ApplicationMapper {

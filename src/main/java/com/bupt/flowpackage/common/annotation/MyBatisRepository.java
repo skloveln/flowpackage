@@ -1,4 +1,4 @@
-package com.bupt.flowpackage.annotation;
+package com.bupt.flowpackage.common.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

@@ -1,6 +1,6 @@
 package com.bupt.flowpackage.mybatis.account.privilege.mapper;
 
-import com.bupt.flowpackage.annotation.MyBatisRepository;
+import com.bupt.flowpackage.common.annotation.MyBatisRepository;
 import com.bupt.flowpackage.mybatis.account.privilege.model.Privilege;
 @MyBatisRepository
 public interface PrivilegeMapper {
