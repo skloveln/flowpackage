@@ -3,8 +3,7 @@ package com.bupt.flowpackage.mybatis.account.admin.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Admin implements Serializable{
-   
+public class Admin implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -34,6 +33,8 @@ public class Admin implements Serializable{
     private Date lastLoginTime;
 
     private Boolean availableFlag;
+
+    private Boolean issuper;
 
     public Integer getId() {
         return id;
@@ -145,5 +146,13 @@ public class Admin implements Serializable{
 
     public void setAvailableFlag(Boolean availableFlag) {
         this.availableFlag = availableFlag;
+    }
+
+    public Boolean getIssuper() {
+        return issuper;
+    }
+
+    public void setIssuper(Boolean issuper) {
+        this.issuper = issuper;
     }
 }

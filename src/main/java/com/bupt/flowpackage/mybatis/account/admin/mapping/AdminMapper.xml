@@ -16,10 +16,11 @@
     <result column="first_login_time" property="firstLoginTime" jdbcType="TIMESTAMP" />
     <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
     <result column="available_flag" property="availableFlag" jdbcType="BIT" />
+    <result column="isSuper" property="issuper" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, login_name, password, real_name, sex, mobile, email, create_user_name, create_time, 
-    modify_name, update_time, first_login_time, last_login_time, available_flag
+    modify_name, update_time, first_login_time, last_login_time, available_flag, isSuper
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -36,12 +37,14 @@
       real_name, sex, mobile, 
       email, create_user_name, create_time, 
       modify_name, update_time, first_login_time, 
-      last_login_time, available_flag)
+      last_login_time, available_flag, isSuper
+      )
     values (#{id,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{realName,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{modifyName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{firstLoginTime,jdbcType=TIMESTAMP}, 
-      #{lastLoginTime,jdbcType=TIMESTAMP}, #{availableFlag,jdbcType=BIT})
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{availableFlag,jdbcType=BIT}, #{issuper,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.bupt.flowpackage.mybatis.account.admin.model.Admin" >
     insert into cf_admin
@@ -88,6 +91,9 @@
       <if test="availableFlag != null" >
         available_flag,
       </if>
+      <if test="issuper != null" >
+        isSuper,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -131,6 +137,9 @@
       </if>
       <if test="availableFlag != null" >
         #{availableFlag,jdbcType=BIT},
+      </if>
+      <if test="issuper != null" >
+        #{issuper,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -176,6 +185,9 @@
       <if test="availableFlag != null" >
         available_flag = #{availableFlag,jdbcType=BIT},
       </if>
+      <if test="issuper != null" >
+        isSuper = #{issuper,jdbcType=BIT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -193,7 +205,8 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       first_login_time = #{firstLoginTime,jdbcType=TIMESTAMP},
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
-      available_flag = #{availableFlag,jdbcType=BIT}
+      available_flag = #{availableFlag,jdbcType=BIT},
+      isSuper = #{issuper,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
