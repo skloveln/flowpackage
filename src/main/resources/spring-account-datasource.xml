@@ -36,14 +36,14 @@
     <!-- MyBatis SqlSessionFactoryBean -->
     <bean id="accountSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="accountDataSource"/>
-        <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath*:com/bupt/flowpackage/mybatis/account/**/mappping/*Mapper.xml"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
     </bean>
 
     <!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.bupt.flowpackage.mybatis.account"/>
-        <property name="annotationClass" value="com.bupt.flowpackage.annotation.MyBatisRepository"/>
+        <property name="annotationClass" value="com.bupt.flowpackage.common.annotation.MyBatisRepository"/>
         <property name="sqlSessionFactoryBeanName" value="accountSqlSessionFactory" />
     </bean>
 

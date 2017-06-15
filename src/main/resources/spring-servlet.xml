@@ -39,7 +39,7 @@
     
     <!-- ③：对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/view" />
+		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
@@ -55,6 +55,13 @@
 
 	<!-- 5：定义BEAN对象转换用视图，用在EXCEL导出 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"	p:order="3"/>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.bupt.flowpackage.common.interceptors.RequestParameterInteceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
 	<mvc:resources mapping="/images/**" location="/images/"/>
     <mvc:resources mapping="/js/**" location="/js/" />

@@ -9,7 +9,7 @@ import com.bupt.flowpackage.common.enums.ResultCode;
 
 public class ExceptionHelper {
 	
-	static public Logger logger = LoggerFactory.getLogger(ExceptionHelper.class);
+	public static Logger logger = LoggerFactory.getLogger(ExceptionHelper.class);
 	
 	public static <T> BaseResponse<T> createResponse(Throwable e, BaseRequest request){
 		if (e instanceof IException) {

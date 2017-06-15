@@ -43,7 +43,7 @@
     <!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.bupt.flowpackage.mybatis.order"/>
-        <property name="annotationClass" value="com.bupt.flowpackage.annotation.MyBatisRepository"/>
+        <property name="annotationClass" value="com.bupt.flowpackage.common.annotation.MyBatisRepository"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 

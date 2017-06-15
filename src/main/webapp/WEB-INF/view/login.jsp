@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<form action="login.html" method="post">
+	姓名：<input type="text" name="name" value=""><br/>
+	密码：<input type="text" name="password" value="">
+	<input type="submit">
+</form>
 </body>
 </html>
