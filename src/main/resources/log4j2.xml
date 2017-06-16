@@ -19,8 +19,34 @@
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
         </Console>
         
+        <!-- 设置日志格式并配置日志压缩格式(eg: info-2017-02-12-1.log.gz) -->  
+        <RollingFile name="Infolog2" fileName="${LOG_HOME}/info2.log"  
+                     filePattern="${LOG_HOME}/info2-%d{yyyy-MM-dd}-%i.log.gz">  
+            <Filters>  
+                <ThresholdFilter level="INFO"/>  
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>  
+            </Filters>  
+            <!--  
+                %d{yyyy-MM-dd HH:mm:ss, SSS} : 日志生产时间  
+                %p : 日志输出格式  
+                %c : logger的名称  
+                %m : 日志内容，即 logger.info("message")  
+                %n : 换行符  
+                %C : Java类名  
+                %L : 日志输出所在行数  
+                %M : 日志输出所在方法名  
+                hostName : 本地机器名  
+                hostAddress : 本地ip地址  
+             -->  
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%p] - %l - %m%n"/>  
+            <Policies>  
+                <TimeBasedTriggeringPolicy/>  
+                <SizeBasedTriggeringPolicy size="20 MB"/>  
+            </Policies>  
+        </RollingFile> 
+        
         <!-- info日志文件 -->
-        <RollingRandomAccessFile name="Infolog" bufferedIO="false" immediateFlush="true" fileName="${LOG_HOME}/info.log"
+        <RollingRandomAccessFile name="Infolog" immediateFlush="true" fileName="${LOG_HOME}/info.log"
                                  filePattern="${LOG_HOME}/info-%d{yyyy-MM-dd}-%i.log.gz">
             <Filters>  
                 <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>  
@@ -48,7 +74,7 @@
 
 
         <!-- error日志文件 -->
-        <RollingRandomAccessFile name="Errorlog" bufferedIO="false" immediateFlush="true" fileName="${LOG_HOME}/error.log"
+        <RollingRandomAccessFile name="Errorlog" immediateFlush="true" fileName="${LOG_HOME}/error.log"
                                  filePattern="${LOG_HOME}/error-%d{yyyy-MM-dd}-%i.log">
             <Filters>  
                 <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>  
@@ -70,7 +96,7 @@
 
     <Loggers>
         <!-- 配置日志的根节点 -->
-        <root level="info">
+        <root level="debug">
         	<!-- <appender-ref ref="Console"/> -->
         	<appender-ref ref="Infolog"/>
             <appender-ref ref="Errorlog"/>
