@@ -1,58 +1,45 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@include file="/WEB-INF/page/common/taglib.jsp"%>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Cache-Control" content="no-cache">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<script type="text/javascript">
-    var ctx = '${ctx}';
-</script>
-
-<!-- ************************Bootstrap CSS******************************-->
-<link href="${ctx}/viewport/lib/bootstrap/css/bootstrap.min.css?v=${sop_version}" rel="stylesheet">
-<link href="${ctx}/viewport/lib/page/bootstrap.min.css?v=${sop_version}" rel="stylesheet">
-<link href="${ctx}/viewport/lib/bootstrap/css/plugin-table/bootstrap-table.min.css?v=${sop_version}" rel="stylesheet">
-<link href="${ctx}/viewport/lib/bootstrap/css/plugin-timepicker/bootstrap-datetimepicker.min.css?v=${sop_version}" rel="stylesheet">
-<link href="${ctx}/viewport/lib/bootstrap/css/plugin-table/bootstrapValidator.min.css?v=${sop_version}" rel="stylesheet">
-<link href="${ctx}/viewport/lib/bootstrap/css/plugin-table/bootstrap-table-fixed-columns.css?v=${sop_version}" rel="stylesheet">
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-<script src="${ctx}/oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js?v=${sop_version}"></script>
-<script src="${ctx}/oss.maxcdn.com/respond/1.4.2/respond.min.js?v=${sop_version}"></script>
-<![endif]-->
-<!-- *****************************Bootstrap CSS End****************************** -->
-
-<!-- *********************Bootstrap JavaScript******************************** -->
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="${ctx}/viewport/lib/jquery-1.11.3.min.js?v=${sop_version}"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="${ctx}/viewport/lib/bootstrap/js/bootstrap.min.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/lib/bootstrap/js/plugin-table/bootstrap-table.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/lib/bootstrap/js/plugin-timepicker/bootstrap-datetimepicker.min.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/lib/bootstrap/js/plugin-table/bootstrap-table-zh-CN.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/lib/bootstrap/js/plugin-table/bootstrapValidator.min.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/lib/bootstrap/js/plugin-table/bootbox.min.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/lib/bootstrap/js/plugin-timepicker/bootstrap-datetimepicker.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/lib/bootstrap/js/plugin-timepicker/locales/bootstrap-datetimepicker.zh-CN.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/lib/bootstrap/js/plugin-timepicker/locales/bootstrap-datetimepicker.fr.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/lib/bootstrap/js/plugin-typeahead/bootstrap-typeahead.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/lib/bootstrap/js/plugin-treeview/bootstrap-treeview.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/lib/bootstrap/js/plugin-table/extensions/fixed-columns/bootstrap-table-fixed-columns.js?v=${sop_version}"></script>
-<!-- ***************************Bootstrap JavaScript End******************************-->
-
-<!-- ***********************自定义 css********************************* -->
-<link href="${ctx}/viewport/src/common/common.css?v=${sop_version}" rel="stylesheet">
-<link href="${ctx}/viewport/src/common/app.css?v=${sop_version}" rel="stylesheet">
-
-<link href="${ctx}/viewport/src/widget/asset/css/zeus.custom.css?v=${sop_version}" rel="stylesheet">
-<!-- ***********************自定义css  End*********************************  -->
-
-<!-- ***********************自定义JavaScript************************************ -->
-<script src="${ctx}/viewport/src/common/setup.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/src/common/common.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/src/common/confirm.js?v=${sop_version}"></script>
-<script src="${ctx}/viewport/src/widget/asset/js/zeus.custom.js?v=${sop_version}"></script>
-
-<!-- ***********************自定义JavaScript End******************************-->
+<!--_header 作为公共模版分离出去-->
+<header class="navbar-wrapper">
+	<div class="navbar navbar-fixed-top">
+		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">H-ui.admin</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a> 
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v3.0</span> 
+			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
+			<nav class="nav navbar-nav">
+				<ul class="cl">
+					<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
+							<li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
+							<li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
+							<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+				<ul class="cl">
+					<li>超级管理员</li>
+					<li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
+							<li><a href="#">切换账户</a></li>
+							<li><a href="#">退出</a></li>
+				</ul>
+			</li>
+					<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+					<li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
+							<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
+							<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
+							<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
+							<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
+							<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</div>
+</div>
+</header>
