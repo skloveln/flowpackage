@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/view/commons/taglib.jsp"%>
 <meta name="keywords" content="摩尔科技,流量充值,手机流量">
 <meta name="description" content="摩尔科技,专业的手机流量充值网站,专为企业流量充值服务"> 

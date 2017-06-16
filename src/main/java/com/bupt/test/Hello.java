@@ -1,10 +1,10 @@
 package com.bupt.test;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Hello {
-	static Logger logger = LogManager.getLogger(Hello.class.getName());
+	public static Logger logger = LoggerFactory.getLogger(Hello.class);
 	
 
     public boolean hello() {
@@ -13,7 +13,6 @@ public class Hello {
         logger.info("我是info信息");    //info级别的信息
         logger.debug("我是debug信息");
         logger.warn("我是warn信息");
-        logger.fatal("我是fatal信息");
         logger.trace("exit");
         return false;
     }

@@ -20,8 +20,8 @@
         </Console>
         
         <!-- info日志文件 -->
-        <RollingRandomAccessFile name="Infolog" immediateFlush="false" fileName="${LOG_HOME}/info.log"
-                                 filePattern="${LOG_HOME}/info-%d{yyyy-MM-dd}-%i.log">
+        <RollingRandomAccessFile name="Infolog" bufferedIO="false" immediateFlush="true" fileName="${LOG_HOME}/info.log"
+                                 filePattern="${LOG_HOME}/info-%d{yyyy-MM-dd}-%i.log.gz">
             <Filters>  
                 <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>  
             </Filters>
@@ -48,7 +48,7 @@
 
 
         <!-- error日志文件 -->
-        <RollingRandomAccessFile name="Errorlog"  immediateFlush="false" fileName="${LOG_HOME}/error.log"
+        <RollingRandomAccessFile name="Errorlog" bufferedIO="false" immediateFlush="true" fileName="${LOG_HOME}/error.log"
                                  filePattern="${LOG_HOME}/error-%d{yyyy-MM-dd}-%i.log">
             <Filters>  
                 <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>  
@@ -70,11 +70,15 @@
 
     <Loggers>
         <!-- 配置日志的根节点 -->
-        <root level="debug">
-            <appender-ref ref="Console"/>
-            <appender-ref ref="Infolog"/>
+        <root level="info">
+        	<!-- <appender-ref ref="Console"/> -->
+        	<appender-ref ref="Infolog"/>
             <appender-ref ref="Errorlog"/>
         </root>
+        
+        <!-- <logger name="com.bupt.flowpackage" level="info" includeLocation="true" additivity="false">
+        	<appender-ref ref="Infolog"/>
+        </logger> -->
         
         <logger name="com.bupt.test.Helloxx" level="debug" includeLocation="true" additivity="false">
         	<appender-ref ref="Debuglog"/>

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!--_menu 作为公共模版分离出去-->
 <aside class="Hui-aside">
 
