@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 @Controller
 public class LoginController {
-	private static final String LOGIN_PAGE ="login";
+	private static final String LOGIN_PAGE ="home";
 	
 	@ResponseBody
 	@RequestMapping("/login")

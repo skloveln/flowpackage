@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,14 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-   Enumeration headerNames = request.getHeaderNames();
-   while(headerNames.hasMoreElements()) {
-      String paramName = (String)headerNames.nextElement();
-      out.print("<tr><td>" + paramName + "</td>\n");
-      String paramValue = request.getHeader(paramName);
-      out.println("<td> " + paramValue + "</td></tr>\n");
-   }
-%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+输出：<c:out value="${ctx}"></c:out>
 </body>
 </html>

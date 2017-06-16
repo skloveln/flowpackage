@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
 <!--_header 作为公共模版分离出去-->
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
