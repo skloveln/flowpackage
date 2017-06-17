@@ -22,7 +22,7 @@ public class LoginController {
 	@RequestMapping("/index")
 	public ModelAndView index() {
 		try{
-			int i = 1/0;
+			//int i = 1/0;
 		}catch(Exception e) {
 			logger.error("访问首页失败！", e);
 		}
