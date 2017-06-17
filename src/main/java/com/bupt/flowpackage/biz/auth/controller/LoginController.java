@@ -11,22 +11,20 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 	public static Logger logger = LoggerFactory.getLogger(LoginController.class);
-	private static final String LOGIN_PAGE ="home";
+	private static final String INDEX_PAGE ="home";
+	private static final String LOGIN_PAGE ="login";
 	
 	@ResponseBody
 	@RequestMapping("/login")
-	public String login() {
-		return "test道建";
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView(LOGIN_PAGE);
+		return mv;
 	}
 	
 	@RequestMapping("/index")
-	public ModelAndView index() {
-		try{
-			//int i = 1/0;
-		}catch(Exception e) {
-			logger.error("访问首页失败！", e);
-		}
-		ModelAndView mv = new ModelAndView(LOGIN_PAGE);
-		return mv;
+	public String index() {
+		/*ModelAndView mv = new ModelAndView(INDEX_PAGE);
+		return mv;*/
+		return INDEX_PAGE;
 	}
 }

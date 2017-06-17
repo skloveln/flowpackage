@@ -63,13 +63,6 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
-	<!-- <mvc:resources mapping="/images/**" location="/images/"/>
-    <mvc:resources mapping="/js/**" location="/js/" />
-    <mvc:resources mapping="/css/**" location="/css/" />
-    <mvc:resources mapping="/staticlib/**" location="/staticlib/" /> -->
-    
-	<!-- <mvc:interceptors>
-		请求参数日志
-		<bean class="com.bupt.core.filter.RequestParameterInteceptor"/>
-	</mvc:interceptors> -->
+	<mvc:default-servlet-handler/>
+	
 </beans>

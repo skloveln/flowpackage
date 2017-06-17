@@ -63,6 +63,14 @@
 	</filter-mapping>
 	<!-- log4j2 end-->
 	
+	<servlet-mapping>  
+	  <servlet-name>default</servlet-name>  
+	  <url-pattern>*.js</url-pattern>  
+	  <url-pattern>*.css</url-pattern>  
+	  <url-pattern>/staticlib/*</url-pattern>  
+	  <url-pattern>/images/*</url-pattern>  
+	</servlet-mapping>
+	
 	<!-- Spring MVC -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
@@ -75,7 +83,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
 	<!-- druid 监控 -->  
