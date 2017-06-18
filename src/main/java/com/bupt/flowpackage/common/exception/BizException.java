@@ -7,7 +7,7 @@ public class BizException extends RuntimeException implements IException {
 
 	private Integer code;
 	
-	private String message;
+	private String msg;
 	
 	private Integer subCode;
 	
@@ -16,7 +16,7 @@ public class BizException extends RuntimeException implements IException {
 	public BizException(ResultCode resultCode, Integer subCode, String subMessage) {
 		super(subMessage);
 		this.code = resultCode.getCode();
-		this.message = resultCode.getMsg();
+		this.msg = resultCode.getMsg();
 		this.subCode = subCode;
 		this.subMessage = subMessage;
 	}
@@ -24,7 +24,7 @@ public class BizException extends RuntimeException implements IException {
 	public BizException(Integer code, String message, Integer subCode, String subMessage) {
 		super(subMessage);
 		this.code = code;
-		this.message = message;
+		this.msg = message;
 		this.subCode = subCode;
 		this.subMessage = subMessage;
 	}
@@ -32,7 +32,7 @@ public class BizException extends RuntimeException implements IException {
 	public BizException(Integer code, String message, Integer subCode, String subMessage, Throwable cause) {
 		super(subMessage, cause);
 		this.code = code;
-		this.message = message;
+		this.msg = message;
 		this.subCode = subCode;
 		this.subMessage = subMessage;
 	}
@@ -51,11 +51,6 @@ public class BizException extends RuntimeException implements IException {
 	}
 
 	@Override
-	public String getMessage() {
-		return this.message;
-	}
-	
-	@Override
 	public Integer getSubCode() {
 		return subCode;
 	}
@@ -63,5 +58,10 @@ public class BizException extends RuntimeException implements IException {
 	@Override
 	public String getSubMessage() {
 		return subMessage;
+	}
+
+	@Override
+	public String getMsg() {
+		return msg;
 	}
 }

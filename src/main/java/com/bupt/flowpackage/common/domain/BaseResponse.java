@@ -9,7 +9,7 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 	
 	private Integer code;
 	
-	private String message;
+	private String msg;
 	
 	private Integer subCode;
 	
@@ -17,25 +17,23 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 	
 	private T data;
 	
+	public BaseResponse(){
+		this(ResultCode.Result_SUCCESS);
+	}
+	
 	public BaseResponse(Integer code,String message, Integer subCode, String subMessage){
 		this.code = code;
-		this.message = message;
+		this.msg = message;
 		this.subCode = subCode;
 		this.subMessage = subMessage;
 	}
 	
 	public BaseResponse(ResultCode result){
-		this.code = result.getCode();
-		this.message = result.getMsg();
-		this.subCode = result.getCode();
-		this.subMessage = result.getMsg();
+		this(result.getCode(), result.getMsg(), result.getCode(), result.getMsg());
 	}
 	
 	public BaseResponse(T data){
-		this.code = ResultCode.Result_SUCCESS.getCode();
-		this.message = ResultCode.Result_SUCCESS.getMsg();
-		this.subCode = ResultCode.Result_SUCCESS.getCode();
-		this.subMessage = ResultCode.Result_SUCCESS.getMsg();;
+		this(ResultCode.Result_SUCCESS);
 		this.data = data;
 	}
 	
@@ -53,11 +51,6 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 	}
 
 	@Override
-	public String getMessage() {
-		return message;
-	}
-
-	@Override
 	public Integer getSubCode() {
 		return subCode;
 	}
@@ -69,5 +62,10 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 	
 	public boolean isSuccess(){
 		return code.equals(ResultCode.Result_SUCCESS.getCode());
+	}
+
+	@Override
+	public String getMsg() {
+		return msg;
 	}
 }

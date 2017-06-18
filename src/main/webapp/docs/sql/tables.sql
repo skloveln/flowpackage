@@ -96,8 +96,9 @@ create table sys_application
    application_desc     varchar(256) comment '模块描述',
    primary key (id)
 );
-
+ALTER TABLE sys_application ADD UNIQUE (application_code); 
 alter table sys_application comment '系统模块';
+
 
 
 drop table if exists sys_menu;
@@ -119,7 +120,7 @@ create table sys_menu
    is_leaf              boolean,
    primary key (id)
 );
-
+ALTER TABLE sys_menu ADD UNIQUE (menu_no);
 alter table sys_menu comment '系统菜单表';
 
 drop table if exists sys_button;

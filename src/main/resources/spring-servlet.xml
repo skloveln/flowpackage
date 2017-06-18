@@ -11,7 +11,7 @@
 	    http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 	    
 	<!-- 使用Annotation自动注册Bean,只扫描@Controller -->
-    <context:component-scan base-package="com.bupt.flowpackage" use-default-filters="false">
+    <context:component-scan base-package="com.bupt.flowpackage.biz" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>	
     <!-- 声明式驱动, 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 

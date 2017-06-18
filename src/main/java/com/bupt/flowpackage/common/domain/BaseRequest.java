@@ -7,7 +7,7 @@ public class BaseRequest extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	private String requestNo = RandomUtil.produceRequestNo();
 	
-	private String operatorId = "api";
+	private String operatorId = "web";
 
 	public String getRequestNo() {
 		return requestNo;

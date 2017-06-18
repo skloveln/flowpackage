@@ -15,7 +15,7 @@
         default-lazy-init="true">
         
         <!-- 使用Annotation自动注册Bean，解决事物失效问题：在主容器中不扫描@Controller注解，在SpringMvc中只扫描@Controller注解 -->
-    <context:component-scan base-package="com.bupt.flowpackage" use-default-filters="false">
+    <context:component-scan base-package="com.bupt.flowpackage.biz">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     
@@ -46,4 +46,12 @@
     
     <!--<import resource="spring-dubbo.xml"/>
     <import resource="spring-redis.xml"/> -->
+    
+    <bean id="validateAdvitor" class="com.bupt.flowpackage.common.aop.ParamValidateAdvisor"/> 
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="servicePointcut" expression="execution(* com.bupt.flowpackage.biz..service.*Service.*(..))"/>
+        <aop:aspect ref="validateAdvitor">
+            <aop:around method="validate" pointcut-ref="servicePointcut"/>
+        </aop:aspect>
+    </aop:config>
 </beans>

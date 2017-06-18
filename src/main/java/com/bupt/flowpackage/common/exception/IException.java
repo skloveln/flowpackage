@@ -4,7 +4,7 @@ public interface IException {
 	
 	Integer getCode();
 
-	String getMessage();
+	String getMsg();
 	
 	Integer getSubCode();
 	
