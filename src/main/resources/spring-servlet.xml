@@ -36,7 +36,7 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-    
+	
     <!-- ③：对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/view/" />
@@ -59,10 +59,11 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/staticlib/**" />
 			<bean class="com.bupt.flowpackage.common.interceptors.RequestParameterInteceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
-	<mvc:default-servlet-handler/>
+	<mvc:default-servlet-handler/> 
 	
 </beans>

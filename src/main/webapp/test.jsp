@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="/WEB-INF/view/commons/taglib.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:set var="ctx" value="${pageContext.request.contextPath}"/>
-输出：<c:out value="${ctx}"></c:out>
+输出：<c:out value="${flowVersion}"></c:out>
 </body>
 </html>

@@ -9,15 +9,15 @@
 <link href="images/icon.png" rel="shortcut icon" />
 
 <!--[if lt IE 9]> 
-<script type="text/javascript" src="staticlib/otherjs/html5shiv.js"></script>
-<script type="text/javascript" src="staticlib/otherjs/respond.min.js"></script>
+<script type="text/javascript" src="staticlib/otherjs/html5shiv.js?v=${flowVersion}"></script>
+<script type="text/javascript" src="staticlib/otherjs/respond.min.js?v=${flowVersion}"></script>
 <![endif]-->
-<link href="staticlib/h-ui/css/H-ui.css" rel="stylesheet" type="text/css" />
-<link href="staticlib/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="staticlib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
-<link href="staticlib/h-ui.admin/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin"/>
-<link href="staticlib/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
+<link href="staticlib/h-ui/css/H-ui.css?v=${flowVersion}" rel="stylesheet" type="text/css" />
+<link href="staticlib/h-ui.admin/css/H-ui.admin.css?v=${flowVersion}" rel="stylesheet" type="text/css" />
+<link href="staticlib/Hui-iconfont/1.0.8/iconfont.css?v=${flowVersion}" rel="stylesheet" type="text/css" />
+<link href="staticlib/h-ui.admin/skin/default/skin.css?v=${flowVersion}" rel="stylesheet" type="text/css" id="skin"/>
+<link href="staticlib/h-ui.admin/css/style.css?v=${flowVersion}" rel="stylesheet" type="text/css" />
 <!--[if IE 6]> 
-<script type="text/javascript" src="staticlib/otherjs/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script type="text/javascript" src="staticlib/otherjs/DD_belatedPNG_0.0.8a-min.js?v=${flowVersion}" ></script>
 <script>DD_belatedPNG.fix('.pngfix,.icon');</script> 
 <![endif]-->
