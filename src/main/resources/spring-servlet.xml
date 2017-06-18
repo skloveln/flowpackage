@@ -56,6 +56,7 @@
 	<!-- 5：定义BEAN对象转换用视图，用在EXCEL导出 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"	p:order="3"/>
 	
+	<!-- 请求参数拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
@@ -63,7 +64,7 @@
 			<bean class="com.bupt.flowpackage.common.interceptors.RequestParameterInteceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
-	
+	<!-- 处理静态资源 -->
 	<mvc:default-servlet-handler/> 
 	
 </beans>

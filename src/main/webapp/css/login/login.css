@@ -2,7 +2,7 @@ body{
 	background: #ddd
 }
 .loginwarrp{
-	margin: 250px auto;
+	margin: 120px auto;
     width: 400px;
     padding: 30px 50px;
     background: #FFFFFF;
@@ -62,4 +62,4 @@ body{
 .loginwarrp .login_form .login-item .error{
 	color: #F00;
 	font-family: '微软雅黑','文泉驿正黑','黑体';
-}
+} 
