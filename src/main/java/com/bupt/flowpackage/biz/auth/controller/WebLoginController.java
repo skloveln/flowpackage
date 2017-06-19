@@ -1,6 +1,7 @@
 package com.bupt.flowpackage.biz.auth.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +15,10 @@ import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
 import com.bupt.flowpackage.common.domain.BaseResponse;
 import com.bupt.flowpackage.common.domain.SessionVo;
 import com.bupt.flowpackage.common.exception.ExceptionHelper;
+import com.bupt.flowpackage.common.session.SessionUtil;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes(types=SessionVo.class)
 public class WebLoginController {
 	public static Logger logger = LoggerFactory.getLogger(WebLoginController.class);
 	private static final String INDEX_PAGE ="home";
@@ -28,14 +29,22 @@ public class WebLoginController {
 	
 	@ResponseBody
 	@RequestMapping("/login")
-	public BaseResponse<String> login(UserLoginWebRequest req) {
+	public BaseResponse<String> login(UserLoginWebRequest req, HttpServletRequest request) {
 		BaseResponse<String> baseResp = new BaseResponse<String>();
 		try{
 			baseResp = adminRoleService.checkLoginUserAndPwd(req);
+			SessionVo sessionInfo = new SessionVo();
+			sessionInfo.setLoginName(req.getLoginName());
+			SessionUtil.setSessionInfo(request.getSession(), sessionInfo);
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);
 		}
 		return baseResp;
+	}
+	
+	@RequestMapping("/tologin")
+	public String tologin() {
+		return LOGIN_PAGE;
 	}
 	
 	@RequestMapping("/index")
