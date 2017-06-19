@@ -17,8 +17,9 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 			throws Exception {
 		SessionVo sessionInfo = SessionUtil.getSessionInfo(request.getSession());
 		if(sessionInfo == null) {
-			logger.info("\n用户未登陆或session过期, 强制跳转到tologin登陆页");
-			response.sendRedirect("/tologin");
+			String uri = request.getRequestURI();
+			logger.info("\n用户访问url={} 因未登陆或session过期, 强制跳转到tologin登陆页", uri);
+			response.sendRedirect("tologin");
 			return false;
 		}
 		return true;

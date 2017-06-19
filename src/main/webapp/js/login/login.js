@@ -1,9 +1,34 @@
 $(function(){
-	$('#username').blur(checkLoginForm);
+	/*$('#username').blur(checkLoginForm);*/
 	$('#password').blur(checkLoginForm);
+	
+	$('#loginForm').on('submit', function() {
+		if(!checkLoginForm()) {
+			return false;
+		}
+		
+		$.ajax({
+			url: "login",
+	        type: "POST",
+	        async: false,
+	        data: $('#loginForm').serialize(),
+	        dataType: "json",
+	        success: function (result) {
+	        	if(result.success) {
+	        		window.location.href="index";  
+	        	}else {
+	        		$('#errMsg').html(result.subMessage);
+	        	}
+	        },
+	        error: function(data) {
+	        	$('#errMsg').html("系统异常！");
+	        }
+	    });
+		return false;
+	});
 });
 
-function CheckPassWord(password) {//必须为字母加数字且长度不小于8位
+function CheckPassWord(password) {//必须为字母加数字且长度不小于5位
 	   var str = password;
 	    if (str == null || str.length <5) {
 	        return false;
@@ -30,7 +55,7 @@ function checkLoginForm() {
 	
 	var reg = /^\w{4,20}$/;
 	if(!reg.test(name)){
-		$('#errMsg').html("用户名必须是4-20个字母或数字或下划线");
+		$('#errMsg').html("用户名必须是5-20个字母或数字或下划线");
 		return false;
 	}
 	
@@ -40,13 +65,16 @@ function checkLoginForm() {
 		$('#errMsg').html("密码不能为空");
 		return false;
 	}
-	
-	if(!CheckPassWord(password)){
-		$('#errMsg').html("密码必须为字母加数字且长度不小于5位");
+	var reg = /^\w{5,20}$/;
+	if(!reg.test(password)){
+		$('#errMsg').html("密码必须是5-20个字母或数字或下划线");
 		return false;
 	}
+	
+	/*if(!CheckPassWord(password)){
+		$('#errMsg').html("密码必须为字母加数字且长度不小于5位");
+		return false;
+	}*/
 	$('#errMsg').empty();
 	return true;
 }
-
-

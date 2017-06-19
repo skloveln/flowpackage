@@ -15,14 +15,14 @@
 		<div class="loginwarrp">
 			<div class="logo"><!-- 摩尔科技流量充值后台管理系统 -->登录</div>
 			<div class="login_form">
-				<form id="Login" name="Login" method="post" onsubmit="" action="">
+				<form id="loginForm" name="Login" method="post">
 					<ul>
 						<li class="login-error">
 							<div class="error" id="errMsg"></div>
 						</li>
 						<li class="login-item">
 							<span>用户名：</span>
-							<input type="text" id="username" name="UserName" class="login_input" autocomplete="off">
+							<input type="text" id="username" name="loginName" class="login_input" autocomplete="off">
 						</li>
 						<li class="login-item">
 							<span>密　码：</span>

@@ -61,7 +61,9 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/tologin" />
+			<mvc:exclude-mapping path="/login" />
 			<mvc:exclude-mapping path="/api/**" />
+			<mvc:exclude-mapping path="/staticlib/**" />
 			<bean class="com.bupt.flowpackage.common.interceptors.LoginInteceptor"/>
 		</mvc:interceptor>
 		<mvc:interceptor>

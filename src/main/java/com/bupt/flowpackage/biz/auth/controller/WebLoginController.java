@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
@@ -33,11 +34,15 @@ public class WebLoginController {
 		BaseResponse<String> baseResp = new BaseResponse<String>();
 		try{
 			baseResp = adminRoleService.checkLoginUserAndPwd(req);
-			SessionVo sessionInfo = new SessionVo();
-			sessionInfo.setLoginName(req.getLoginName());
-			SessionUtil.setSessionInfo(request.getSession(), sessionInfo);
+			if(baseResp.isSuccess()) {
+				SessionVo sessionVo = new SessionVo();
+				sessionVo.setLoginName(req.getLoginName());
+				SessionUtil.setSessionInfo(request.getSession(), sessionVo);
+			}
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);
+		}finally{
+			logger.info("\nWebLoginController.login reuqestNo={} 返回对象resp=[{}]", req.getRequestNo(), baseResp);
 		}
 		return baseResp;
 	}
@@ -49,8 +54,6 @@ public class WebLoginController {
 	
 	@RequestMapping("/index")
 	public String index() {
-		/*ModelAndView mv = new ModelAndView(INDEX_PAGE);
-		return mv;*/
 		return INDEX_PAGE;
 	}
 }
