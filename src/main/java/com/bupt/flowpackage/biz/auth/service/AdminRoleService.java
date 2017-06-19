@@ -17,6 +17,6 @@ public interface AdminRoleService {
 	 * @param @return      
 	 * @return BaseResponse<Boolean>
 	 */
-	public BaseResponse<Boolean> checkLoginUserAndPwd(UserLoginWebRequest req);
+	public BaseResponse<String> checkLoginUserAndPwd(UserLoginWebRequest req);
 	
 }

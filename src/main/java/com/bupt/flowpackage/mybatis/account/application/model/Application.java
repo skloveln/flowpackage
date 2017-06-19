@@ -1,13 +1,13 @@
 package com.bupt.flowpackage.mybatis.account.application.model;
 
-import java.io.Serializable;
+import com.bupt.flowpackage.common.domain.BaseBean;
 
-public class Application implements Serializable{
+public class Application extends BaseBean{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 
-    private String applicationCode;
+    private Short applicationCode;
 
     private String applicationName;
 
@@ -21,12 +21,12 @@ public class Application implements Serializable{
         this.id = id;
     }
 
-    public String getApplicationCode() {
+    public Short getApplicationCode() {
         return applicationCode;
     }
 
-    public void setApplicationCode(String applicationCode) {
-        this.applicationCode = applicationCode == null ? null : applicationCode.trim();
+    public void setApplicationCode(Short applicationCode) {
+        this.applicationCode = applicationCode;
     }
 
     public String getApplicationName() {

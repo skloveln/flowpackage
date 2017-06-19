@@ -14,6 +14,10 @@
         <setting name="logImpl" value="SLF4J" />
         <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>
+    
+    <typeAliases>
+		<typeAlias type="com.bupt.flowpackage.mybatis.account.admin.model.Admin" alias="admin"/>
+	</typeAliases>
 
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageHelper">
@@ -23,6 +27,5 @@
             <property name="pageSizeZero" value="true"/>
         </plugin>
     </plugins>
-    
-
+	
 </configuration>

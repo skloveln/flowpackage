@@ -32,6 +32,10 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 		this(result.getCode(), result.getMsg(), result.getCode(), result.getMsg());
 	}
 	
+	public static BaseResponse<String> success() {
+		return new BaseResponse<String>();
+	}
+	
 	public BaseResponse(T data){
 		this(ResultCode.Result_SUCCESS);
 		this.data = data;

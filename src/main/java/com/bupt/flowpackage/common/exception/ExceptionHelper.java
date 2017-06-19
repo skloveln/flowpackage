@@ -17,7 +17,7 @@ public class ExceptionHelper {
 			logger.info("\n requestNo={} 请求业务失败! error={}, errMsg={}", request.getRequestNo(), ex.getSubCode(), ex.getSubMessage());
 			return new BaseResponse<T>(ex.getCode(), ex.getMsg(), ex.getSubCode(), ex.getSubMessage());
 		}else {
-			logger.error("\n requestNo={} 请求系统异常!\r\n", request.getRequestNo(), e);
+			logger.error("\n requestNo={} 请求系统异常!", request.getRequestNo(), e);
 			return new BaseResponse<T>(ResultCode.Result_ERROR);
 		}
 	}

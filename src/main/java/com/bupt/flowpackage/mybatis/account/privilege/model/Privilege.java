@@ -1,8 +1,8 @@
 package com.bupt.flowpackage.mybatis.account.privilege.model;
 
-import java.io.Serializable;
+import com.bupt.flowpackage.common.domain.BaseBean;
 
-public class Privilege implements Serializable{
+public class Privilege extends BaseBean{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;

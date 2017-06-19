@@ -3,7 +3,7 @@
 <mapper namespace="com.bupt.flowpackage.mybatis.account.application.mapper.ApplicationMapper" >
   <resultMap id="BaseResultMap" type="com.bupt.flowpackage.mybatis.account.application.model.Application" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="application_code" property="applicationCode" jdbcType="VARCHAR" />
+    <result column="application_code" property="applicationCode" jdbcType="SMALLINT" />
     <result column="application_name" property="applicationName" jdbcType="VARCHAR" />
     <result column="application_desc" property="applicationDesc" jdbcType="VARCHAR" />
   </resultMap>
@@ -23,7 +23,7 @@
   <insert id="insert" parameterType="com.bupt.flowpackage.mybatis.account.application.model.Application" >
     insert into sys_application (id, application_code, application_name, 
       application_desc)
-    values (#{id,jdbcType=INTEGER}, #{applicationCode,jdbcType=VARCHAR}, #{applicationName,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{applicationCode,jdbcType=SMALLINT}, #{applicationName,jdbcType=VARCHAR}, 
       #{applicationDesc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bupt.flowpackage.mybatis.account.application.model.Application" >
@@ -47,7 +47,7 @@
         #{id,jdbcType=INTEGER},
       </if>
       <if test="applicationCode != null" >
-        #{applicationCode,jdbcType=VARCHAR},
+        #{applicationCode,jdbcType=SMALLINT},
       </if>
       <if test="applicationName != null" >
         #{applicationName,jdbcType=VARCHAR},
@@ -61,7 +61,7 @@
     update sys_application
     <set >
       <if test="applicationCode != null" >
-        application_code = #{applicationCode,jdbcType=VARCHAR},
+        application_code = #{applicationCode,jdbcType=SMALLINT},
       </if>
       <if test="applicationName != null" >
         application_name = #{applicationName,jdbcType=VARCHAR},
@@ -74,7 +74,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bupt.flowpackage.mybatis.account.application.model.Application" >
     update sys_application
-    set application_code = #{applicationCode,jdbcType=VARCHAR},
+    set application_code = #{applicationCode,jdbcType=SMALLINT},
       application_name = #{applicationName,jdbcType=VARCHAR},
       application_desc = #{applicationDesc,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

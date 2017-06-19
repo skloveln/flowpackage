@@ -1,9 +1,10 @@
 package com.bupt.flowpackage.mybatis.account.admin.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Admin implements Serializable {
+import com.bupt.flowpackage.common.domain.BaseBean;
+
+public class Admin extends BaseBean{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
@@ -34,7 +35,7 @@ public class Admin implements Serializable {
 
     private Boolean availableFlag;
 
-    private Boolean issuper;
+    private Boolean isSuper;
 
     public Integer getId() {
         return id;
@@ -148,11 +149,11 @@ public class Admin implements Serializable {
         this.availableFlag = availableFlag;
     }
 
-    public Boolean getIssuper() {
-        return issuper;
-    }
+	public Boolean getIsSuper() {
+		return isSuper;
+	}
 
-    public void setIssuper(Boolean issuper) {
-        this.issuper = issuper;
-    }
+	public void setIsSuper(Boolean isSuper) {
+		this.isSuper = isSuper;
+	}
 }

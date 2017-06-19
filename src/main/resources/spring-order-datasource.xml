@@ -37,7 +37,7 @@
     <bean id="orderSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="orderDataSource"/>
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
-        <property name="mapperLocations" value="classpath*:com/bupt/flowpackage/mybatis/order/**/mappping/*Mapper.xml"/>
+        <property name="mapperLocations" value="classpath*:com/bupt/flowpackage/mybatis/order/**/mapping/*Mapper.xml"/>
     </bean>
 
     <!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口-->

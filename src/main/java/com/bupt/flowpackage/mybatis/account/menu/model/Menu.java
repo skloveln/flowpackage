@@ -1,17 +1,17 @@
 package com.bupt.flowpackage.mybatis.account.menu.model;
 
-import java.io.Serializable;
+import com.bupt.flowpackage.common.domain.BaseBean;
 
-public class Menu implements Serializable{
+public class Menu extends BaseBean{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 
-    private String menuCode;
+    private Short menuNo;
 
-    private Integer applicationId;
+    private Short applicationCode;
 
-    private Integer menuParentId;
+    private Short menuParentNo;
 
     private Short menuOrder;
 
@@ -33,28 +33,28 @@ public class Menu implements Serializable{
         this.id = id;
     }
 
-    public String getMenuCode() {
-        return menuCode;
+    public Short getMenuNo() {
+        return menuNo;
     }
 
-    public void setMenuCode(String menuCode) {
-        this.menuCode = menuCode == null ? null : menuCode.trim();
+    public void setMenuNo(Short menuNo) {
+        this.menuNo = menuNo;
     }
 
-    public Integer getApplicationId() {
-        return applicationId;
+    public Short getApplicationCode() {
+        return applicationCode;
     }
 
-    public void setApplicationId(Integer applicationId) {
-        this.applicationId = applicationId;
+    public void setApplicationCode(Short applicationCode) {
+        this.applicationCode = applicationCode;
     }
 
-    public Integer getMenuParentId() {
-        return menuParentId;
+    public Short getMenuParentNo() {
+        return menuParentNo;
     }
 
-    public void setMenuParentId(Integer menuParentId) {
-        this.menuParentId = menuParentId;
+    public void setMenuParentNo(Short menuParentNo) {
+        this.menuParentNo = menuParentNo;
     }
 
     public Short getMenuOrder() {

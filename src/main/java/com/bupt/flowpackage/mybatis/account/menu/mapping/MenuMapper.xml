@@ -3,9 +3,9 @@
 <mapper namespace="com.bupt.flowpackage.mybatis.account.menu.mapper.MenuMapper" >
   <resultMap id="BaseResultMap" type="com.bupt.flowpackage.mybatis.account.menu.model.Menu" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="menu_code" property="menuCode" jdbcType="VARCHAR" />
-    <result column="application_id" property="applicationId" jdbcType="INTEGER" />
-    <result column="menu_parent_id" property="menuParentId" jdbcType="INTEGER" />
+    <result column="menu_no" property="menuNo" jdbcType="SMALLINT" />
+    <result column="application_code" property="applicationCode" jdbcType="SMALLINT" />
+    <result column="menu_parent_no" property="menuParentNo" jdbcType="SMALLINT" />
     <result column="menu_order" property="menuOrder" jdbcType="SMALLINT" />
     <result column="munu_name" property="munuName" jdbcType="VARCHAR" />
     <result column="munu_url" property="munuUrl" jdbcType="VARCHAR" />
@@ -14,7 +14,7 @@
     <result column="is_leaf" property="isLeaf" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, menu_code, application_id, menu_parent_id, menu_order, munu_name, munu_url, menu_icon, 
+    id, menu_no, application_code, menu_parent_no, menu_order, munu_name, munu_url, menu_icon, 
     is_visible, is_leaf
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -28,12 +28,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.bupt.flowpackage.mybatis.account.menu.model.Menu" >
-    insert into sys_menu (id, menu_code, application_id, 
-      menu_parent_id, menu_order, munu_name, 
+    insert into sys_menu (id, menu_no, application_code, 
+      menu_parent_no, menu_order, munu_name, 
       munu_url, menu_icon, is_visible, 
       is_leaf)
-    values (#{id,jdbcType=INTEGER}, #{menuCode,jdbcType=VARCHAR}, #{applicationId,jdbcType=INTEGER}, 
-      #{menuParentId,jdbcType=INTEGER}, #{menuOrder,jdbcType=SMALLINT}, #{munuName,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{menuNo,jdbcType=SMALLINT}, #{applicationCode,jdbcType=SMALLINT}, 
+      #{menuParentNo,jdbcType=SMALLINT}, #{menuOrder,jdbcType=SMALLINT}, #{munuName,jdbcType=VARCHAR}, 
       #{munuUrl,jdbcType=VARCHAR}, #{menuIcon,jdbcType=VARCHAR}, #{isVisible,jdbcType=BIT}, 
       #{isLeaf,jdbcType=BIT})
   </insert>
@@ -43,14 +43,14 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="menuCode != null" >
-        menu_code,
+      <if test="menuNo != null" >
+        menu_no,
       </if>
-      <if test="applicationId != null" >
-        application_id,
+      <if test="applicationCode != null" >
+        application_code,
       </if>
-      <if test="menuParentId != null" >
-        menu_parent_id,
+      <if test="menuParentNo != null" >
+        menu_parent_no,
       </if>
       <if test="menuOrder != null" >
         menu_order,
@@ -75,14 +75,14 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="menuCode != null" >
-        #{menuCode,jdbcType=VARCHAR},
+      <if test="menuNo != null" >
+        #{menuNo,jdbcType=SMALLINT},
       </if>
-      <if test="applicationId != null" >
-        #{applicationId,jdbcType=INTEGER},
+      <if test="applicationCode != null" >
+        #{applicationCode,jdbcType=SMALLINT},
       </if>
-      <if test="menuParentId != null" >
-        #{menuParentId,jdbcType=INTEGER},
+      <if test="menuParentNo != null" >
+        #{menuParentNo,jdbcType=SMALLINT},
       </if>
       <if test="menuOrder != null" >
         #{menuOrder,jdbcType=SMALLINT},
@@ -107,14 +107,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.bupt.flowpackage.mybatis.account.menu.model.Menu" >
     update sys_menu
     <set >
-      <if test="menuCode != null" >
-        menu_code = #{menuCode,jdbcType=VARCHAR},
+      <if test="menuNo != null" >
+        menu_no = #{menuNo,jdbcType=SMALLINT},
       </if>
-      <if test="applicationId != null" >
-        application_id = #{applicationId,jdbcType=INTEGER},
+      <if test="applicationCode != null" >
+        application_code = #{applicationCode,jdbcType=SMALLINT},
       </if>
-      <if test="menuParentId != null" >
-        menu_parent_id = #{menuParentId,jdbcType=INTEGER},
+      <if test="menuParentNo != null" >
+        menu_parent_no = #{menuParentNo,jdbcType=SMALLINT},
       </if>
       <if test="menuOrder != null" >
         menu_order = #{menuOrder,jdbcType=SMALLINT},
@@ -139,9 +139,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bupt.flowpackage.mybatis.account.menu.model.Menu" >
     update sys_menu
-    set menu_code = #{menuCode,jdbcType=VARCHAR},
-      application_id = #{applicationId,jdbcType=INTEGER},
-      menu_parent_id = #{menuParentId,jdbcType=INTEGER},
+    set menu_no = #{menuNo,jdbcType=SMALLINT},
+      application_code = #{applicationCode,jdbcType=SMALLINT},
+      menu_parent_no = #{menuParentNo,jdbcType=SMALLINT},
       menu_order = #{menuOrder,jdbcType=SMALLINT},
       munu_name = #{munuName,jdbcType=VARCHAR},
       munu_url = #{munuUrl,jdbcType=VARCHAR},

@@ -4,7 +4,6 @@ import com.bupt.flowpackage.common.annotation.MyBatisRepository;
 import com.bupt.flowpackage.mybatis.account.admin.model.Admin;
 @MyBatisRepository
 public interface AdminMapper {
-	
     int deleteByPrimaryKey(Integer id);
 
     int insert(Admin record);
@@ -12,6 +11,10 @@ public interface AdminMapper {
     int insertSelective(Admin record);
 
     Admin selectByPrimaryKey(Integer id);
+    
+    Admin selectBySelective(Admin admin);
+    
+    int selectCountBySelective(Admin admin);
 
     int updateByPrimaryKeySelective(Admin record);
 

@@ -1,10 +1,16 @@
 package com.bupt.flowpackage.biz.auth.service.impl;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
 import com.bupt.flowpackage.common.domain.BaseResponse;
+import com.bupt.flowpackage.common.exception.BizException;
+import com.bupt.flowpackage.mybatis.account.admin.mapper.AdminMapper;
+import com.bupt.flowpackage.mybatis.account.admin.model.Admin;
 
 /**
  * <p>Description:管理员权限角色接口服务</p>
@@ -14,12 +20,23 @@ import com.bupt.flowpackage.common.domain.BaseResponse;
  */
 @Service
 public class AdminRoleServiceImpl implements AdminRoleService{
+	
+	@Resource
+	private AdminMapper adminMapper;
 
 	@Override
-	public BaseResponse<Boolean> checkLoginUserAndPwd(UserLoginWebRequest req){
-		
-		return null;
+	public BaseResponse<String> checkLoginUserAndPwd(UserLoginWebRequest req){
+		Admin admin = new Admin();
+		admin.setLoginName(req.getLoginName());
+		int count = adminMapper.selectCountBySelective(admin);
+		if(count == 0) {
+			BizException.warn(101, "用户名不存在!");
+		}
+		admin.setPassword(req.getPassword());
+		count = adminMapper.selectCountBySelective(admin);
+		if(count == 0) {
+			BizException.warn(102, "密码不正确，请重新输入!");
+		}
+		return BaseResponse.success();
 	}
-	
-	
 }

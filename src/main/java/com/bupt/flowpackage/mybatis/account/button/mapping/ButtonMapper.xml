@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bupt.flowpackage.mybatis.account.button.mapper.ButtonMapper" >
+  <resultMap id="BaseResultMap" type="com.bupt.flowpackage.mybatis.account.button.model.Button" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="btn_no" property="btnNo" jdbcType="SMALLINT" />
+    <result column="btn_name" property="btnName" jdbcType="VARCHAR" />
+    <result column="btn_class" property="btnClass" jdbcType="VARCHAR" />
+    <result column="btn_icon" property="btnIcon" jdbcType="VARCHAR" />
+    <result column="menu_no" property="menuNo" jdbcType="INTEGER" />
+    <result column="init_status" property="initStatus" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, btn_no, btn_name, btn_class, btn_icon, menu_no, init_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_button
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_button
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.flowpackage.mybatis.account.button.model.Button" >
+    insert into sys_button (id, btn_no, btn_name, 
+      btn_class, btn_icon, menu_no, 
+      init_status)
+    values (#{id,jdbcType=INTEGER}, #{btnNo,jdbcType=SMALLINT}, #{btnName,jdbcType=VARCHAR}, 
+      #{btnClass,jdbcType=VARCHAR}, #{btnIcon,jdbcType=VARCHAR}, #{menuNo,jdbcType=INTEGER}, 
+      #{initStatus,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.flowpackage.mybatis.account.button.model.Button" >
+    insert into sys_button
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="btnNo != null" >
+        btn_no,
+      </if>
+      <if test="btnName != null" >
+        btn_name,
+      </if>
+      <if test="btnClass != null" >
+        btn_class,
+      </if>
+      <if test="btnIcon != null" >
+        btn_icon,
+      </if>
+      <if test="menuNo != null" >
+        menu_no,
+      </if>
+      <if test="initStatus != null" >
+        init_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="btnNo != null" >
+        #{btnNo,jdbcType=SMALLINT},
+      </if>
+      <if test="btnName != null" >
+        #{btnName,jdbcType=VARCHAR},
+      </if>
+      <if test="btnClass != null" >
+        #{btnClass,jdbcType=VARCHAR},
+      </if>
+      <if test="btnIcon != null" >
+        #{btnIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="menuNo != null" >
+        #{menuNo,jdbcType=INTEGER},
+      </if>
+      <if test="initStatus != null" >
+        #{initStatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.flowpackage.mybatis.account.button.model.Button" >
+    update sys_button
+    <set >
+      <if test="btnNo != null" >
+        btn_no = #{btnNo,jdbcType=SMALLINT},
+      </if>
+      <if test="btnName != null" >
+        btn_name = #{btnName,jdbcType=VARCHAR},
+      </if>
+      <if test="btnClass != null" >
+        btn_class = #{btnClass,jdbcType=VARCHAR},
+      </if>
+      <if test="btnIcon != null" >
+        btn_icon = #{btnIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="menuNo != null" >
+        menu_no = #{menuNo,jdbcType=INTEGER},
+      </if>
+      <if test="initStatus != null" >
+        init_status = #{initStatus,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.flowpackage.mybatis.account.button.model.Button" >
+    update sys_button
+    set btn_no = #{btnNo,jdbcType=SMALLINT},
+      btn_name = #{btnName,jdbcType=VARCHAR},
+      btn_class = #{btnClass,jdbcType=VARCHAR},
+      btn_icon = #{btnIcon,jdbcType=VARCHAR},
+      menu_no = #{menuNo,jdbcType=INTEGER},
+      init_status = #{initStatus,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

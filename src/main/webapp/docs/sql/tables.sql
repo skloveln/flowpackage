@@ -18,7 +18,8 @@ create table cf_admin
    update_time          datetime comment '更改时间',
    first_login_time     datetime comment '第一次登录时间',
    last_login_time      datetime comment '最后一次登录时间',
-   available_flag       boolean default 1 comment '是否可用表 1可用 0 不可用',
+   available_flag       boolean default true comment '是否可用',
+   is_super             boolean default false comment '是否为超级管理员',
    primary key (id)
 );
 

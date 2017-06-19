@@ -24,26 +24,27 @@
         </javaTypeResolver>
         
         <!-- model file-->
-        <javaModelGenerator targetPackage="com.bupt.flowpackage.mybatis.account.admin.model" 
+        <javaModelGenerator targetPackage="com.bupt.flowpackage.mybatis.account.button.model" 
                             targetProject="src/test/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- mapping file-->
-        <sqlMapGenerator targetPackage="com.bupt.flowpackage.mybatis.account.admin.mapping" 
+        <sqlMapGenerator targetPackage="com.bupt.flowpackage.mybatis.account.button.mapping" 
                          targetProject="src/test/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- mapper file-->
-        <javaClientGenerator targetPackage="com.bupt.flowpackage.mybatis.account.admin.mapper" 
+        <javaClientGenerator targetPackage="com.bupt.flowpackage.mybatis.account.button.mapper" 
                              targetProject="src/test/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         
         
-        <table tableName="cf_admin" domainObjectName="Admin" enableSelectByExample="false"
+        <table tableName="sys_button" domainObjectName="Button" enableSelectByExample="false"
                enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false" />
+   		
     </context>
 </generatorConfiguration>

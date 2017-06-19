@@ -30,7 +30,7 @@ public class ParamValidateAdvisor {
 					ValidatorUtil.validReqBean(arg);
 					logger.info("\n requestNo={} method={}校验参数通过!", requestNo,  clsAndMethodName);
 				}catch(Exception e) {
-					logger.error("\n requestNo={} method={}校验参数失败! errorMsg={}", requestNo, clsAndMethodName, e.getMessage());
+					logger.info("\n requestNo={} method={}校验参数失败! errorMsg={}", requestNo, clsAndMethodName, e.getMessage());
 					throw e;
 				}
 			}

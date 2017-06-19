@@ -1,12 +1,9 @@
 package com.bupt.flowpackage.mybatis.account.role.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Role implements Serializable{
-	private static final long serialVersionUID = 1L;
-
-	private Integer id;
+public class Role {
+    private Integer id;
 
     private String roleName;
 

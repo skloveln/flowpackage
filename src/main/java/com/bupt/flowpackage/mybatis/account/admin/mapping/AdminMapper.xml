@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bupt.flowpackage.mybatis.account.admin.mapper.AdminMapper" >
-  <resultMap id="BaseResultMap" type="com.bupt.flowpackage.mybatis.account.admin.model.Admin" >
+  <resultMap id="BaseResultMap" type="admin" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="login_name" property="loginName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
@@ -16,11 +16,11 @@
     <result column="first_login_time" property="firstLoginTime" jdbcType="TIMESTAMP" />
     <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
     <result column="available_flag" property="availableFlag" jdbcType="BIT" />
-    <result column="isSuper" property="issuper" jdbcType="BIT" />
+    <result column="is_super" property="isSuper" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, login_name, password, real_name, sex, mobile, email, create_user_name, create_time, 
-    modify_name, update_time, first_login_time, last_login_time, available_flag, isSuper
+    modify_name, update_time, first_login_time, last_login_time, available_flag, is_super
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -28,25 +28,71 @@
     from cf_admin
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectBySelective" resultMap="BaseResultMap" parameterType="admin" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_admin
+    <where>
+    	available_flag = 1 
+    	<if test="loginName != null">
+		    AND login_name = #{loginName}
+	    </if>
+	    <if test="password != null">
+	    	AND password = #{password}
+	    </if>
+	    <if test="realName != null">
+	    	AND real_name = #{realName}
+	    </if>
+	    <if test="mobile != null">
+	    	AND mobile like #{mobile}
+	    </if>
+	    <if test="isSuper != null">
+	    	AND is_super = #{isSuper}
+	    </if>
+    </where>
+  </select>
+  
+  <select id="selectCountBySelective" resultType="int" parameterType="admin" >
+    select count(*) from cf_admin
+    <where>
+    	available_flag = 1 
+    	<if test="loginName != null">
+		    AND login_name = #{loginName}
+	    </if>
+	    <if test="password != null">
+	    	AND password = #{password}
+	    </if>
+	    <if test="realName != null">
+	    	AND real_name = #{realName}
+	    </if>
+	    <if test="mobile != null">
+	    	AND mobile like #{mobile}
+	    </if>
+	    <if test="isSuper != null">
+	    	AND is_super = #{isSuper}
+	    </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from cf_admin
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bupt.flowpackage.mybatis.account.admin.model.Admin" >
+  <insert id="insert" parameterType="admin" >
     insert into cf_admin (id, login_name, password, 
       real_name, sex, mobile, 
       email, create_user_name, create_time, 
       modify_name, update_time, first_login_time, 
-      last_login_time, available_flag, isSuper
+      last_login_time, available_flag, is_super
       )
     values (#{id,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{realName,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{modifyName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{firstLoginTime,jdbcType=TIMESTAMP}, 
-      #{lastLoginTime,jdbcType=TIMESTAMP}, #{availableFlag,jdbcType=BIT}, #{issuper,jdbcType=BIT}
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{availableFlag,jdbcType=BIT}, #{isSuper,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.bupt.flowpackage.mybatis.account.admin.model.Admin" >
+  <insert id="insertSelective" parameterType="admin" >
     insert into cf_admin
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -91,7 +137,7 @@
       <if test="availableFlag != null" >
         available_flag,
       </if>
-      <if test="issuper != null" >
+      <if test="isSuper != null" >
         isSuper,
       </if>
     </trim>
@@ -138,12 +184,12 @@
       <if test="availableFlag != null" >
         #{availableFlag,jdbcType=BIT},
       </if>
-      <if test="issuper != null" >
-        #{issuper,jdbcType=BIT},
+      <if test="isSuper != null" >
+        #{isSuper,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.flowpackage.mybatis.account.admin.model.Admin" >
+  <update id="updateByPrimaryKeySelective" parameterType="admin" >
     update cf_admin
     <set >
       <if test="loginName != null" >
@@ -185,13 +231,13 @@
       <if test="availableFlag != null" >
         available_flag = #{availableFlag,jdbcType=BIT},
       </if>
-      <if test="issuper != null" >
-        isSuper = #{issuper,jdbcType=BIT},
+      <if test="isSuper != null" >
+        is_super = #{isSuper,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bupt.flowpackage.mybatis.account.admin.model.Admin" >
+  <update id="updateByPrimaryKey" parameterType="admin" >
     update cf_admin
     set login_name = #{loginName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
@@ -206,7 +252,7 @@
       first_login_time = #{firstLoginTime,jdbcType=TIMESTAMP},
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       available_flag = #{availableFlag,jdbcType=BIT},
-      isSuper = #{issuper,jdbcType=BIT}
+      is_super = #{isSuper,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
