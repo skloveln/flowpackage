@@ -10,9 +10,9 @@ function checkName(){
 		$('#count-msg').html("用户名不能为空");
 		return false;
 	}
-	var reg = /^\w{3,10}$/;
+	var reg = /^\w{3,20}$/;
 	if(!reg.test(name)){
-		$('#count-msg').html("输入3-10个字母或数字或下划线");
+		$('#count-msg').html("输入3-20个字母或数字或下划线");
 		return false;
 	}
 	$('#count-msg').empty();

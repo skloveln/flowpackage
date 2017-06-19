@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="images/icon.png" rel="shortcut icon" />
 <link rel="stylesheet" href="css/login/reset.css" />
 <link rel="stylesheet" href="css/login/login.css" />
 <script type="text/javascript" src="staticlib/jquery/1.9.1/jquery.min.js"></script>
