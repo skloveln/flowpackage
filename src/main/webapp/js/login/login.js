@@ -1,36 +1,52 @@
 $(function(){
-	$('#username').focus().blur(checkName);
-	$('#password').blur(checkPassword);
+	$('#username').blur(checkLoginForm);
+	$('#password').blur(checkLoginForm);
 });
 
-function checkName(){
+function CheckPassWord(password) {//必须为字母加数字且长度不小于8位
+	   var str = password;
+	    if (str == null || str.length <5) {
+	        return false;
+	    }
+	    var reg1 = new RegExp(/^[0-9A-Za-z]+$/);
+	    if (!reg1.test(str)) {
+	        return false;
+	    }
+	    var reg = new RegExp(/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/);
+	    if (reg.test(str)) {
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
+
+function checkLoginForm() {
 	var name = $('#username').val();
 	if(name == null || name == ""){
 		//提示错误
-		$('#count-msg').html("用户名不能为空");
+		$('#errMsg').html("用户名不能为空");
 		return false;
 	}
-	var reg = /^\w{3,20}$/;
+	
+	var reg = /^\w{4,20}$/;
 	if(!reg.test(name)){
-		$('#count-msg').html("输入3-20个字母或数字或下划线");
+		$('#errMsg').html("用户名必须是4-20个字母或数字或下划线");
 		return false;
 	}
-	$('#count-msg').empty();
-	return true;
-}
-
-function checkPassword(){
+	
 	var password = $('#password').val();
 	if(password == null || password == ""){
 		//提示错误
-		$('#password-msg').html("密码不能为空");
+		$('#errMsg').html("密码不能为空");
 		return false;
 	}
-	var reg = /^\w{3,10}$/;
-	if(!reg.test(password)){
-		$('#password-msg').html("输入3-10个字母或数字或下划线");
+	
+	if(!CheckPassWord(password)){
+		$('#errMsg').html("密码必须为字母加数字且长度不小于5位");
 		return false;
 	}
-	$('#password-msg').empty();
+	$('#errMsg').empty();
 	return true;
 }
+
+

@@ -17,15 +17,16 @@
 			<div class="login_form">
 				<form id="Login" name="Login" method="post" onsubmit="" action="">
 					<ul>
+						<li class="login-error">
+							<div class="error" id="errMsg"></div>
+						</li>
 						<li class="login-item">
 							<span>用户名：</span>
 							<input type="text" id="username" name="UserName" class="login_input" autocomplete="off">
-							<span id="count-msg" class="error"></span>
 						</li>
 						<li class="login-item">
 							<span>密　码：</span>
 							<input type="text" id="password" name="password" onfocus="$(this).attr('type','password');" class="login_input" autocomplete="off">
-							<span id="password-msg" class="error"></span>
 						</li>
 						<!--<li class="login-item verify">
 						<span>验证码：</span>

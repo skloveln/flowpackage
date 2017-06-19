@@ -63,3 +63,9 @@ body{
 	color: #F00;
 	font-family: '微软雅黑','文泉驿正黑','黑体';
 } 
+
+.loginwarrp .login_form .login-error .error{
+	text-align: center;
+	color: #F00;
+	font-family: '微软雅黑','文泉驿正黑','黑体';
+} 
