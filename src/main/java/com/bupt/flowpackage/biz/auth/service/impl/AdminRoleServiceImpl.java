@@ -2,7 +2,6 @@ package com.bupt.flowpackage.biz.auth.service.impl;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
@@ -37,6 +36,6 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		if(count == 0) {
 			BizException.warn(102, "密码不正确，请重新输入!");
 		}
-		return BaseResponse.success();
+		return BaseResponse.success(req);
 	}
 }

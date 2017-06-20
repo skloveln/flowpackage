@@ -6,6 +6,9 @@ $(function(){
 		if(!checkLoginForm()) {
 			return false;
 		}
+		var loading = layer.load(0, {
+			  shade: [0.1,'black'] //0.1透明度的白色背景
+		});
 		
 		$.ajax({
 			url: "login",
@@ -24,6 +27,7 @@ $(function(){
 	        	$('#errMsg').html("系统异常！");
 	        }
 	    });
+		layer.close(loading);
 		return false;
 	});
 });

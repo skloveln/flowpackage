@@ -63,16 +63,18 @@
 			<mvc:exclude-mapping path="/tologin" />
 			<mvc:exclude-mapping path="/login" />
 			<mvc:exclude-mapping path="/api/**" />
-			<mvc:exclude-mapping path="/staticlib/**" />
+			<!-- <mvc:exclude-mapping path="/staticlib/**" /> -->
 			<bean class="com.bupt.flowpackage.common.interceptors.LoginInteceptor"/>
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/staticlib/**" />
+			<!-- <mvc:exclude-mapping path="/staticlib/**" /> -->
 			<bean class="com.bupt.flowpackage.common.interceptors.RequestParameterInteceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- 处理静态资源 -->
 	<mvc:default-servlet-handler/> 
+	
+	<mvc:resources location="/staticlib/" mapping="/staticlib/**"></mvc:resources>
 	
 </beans>

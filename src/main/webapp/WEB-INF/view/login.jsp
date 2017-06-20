@@ -60,7 +60,8 @@
 			CanvasParticle(config);
 		}
 	</script>
-    <script type="text/javascript" src="js/login/login.js"></script>
 	<script type="text/javascript" src="staticlib/canvas-particle/canvas-particle.js"></script>
+	<script type="text/javascript" src="staticlib/layer/2.4/layer.js?v=${flowVersion}"></script>
+	<script type="text/javascript" src="js/login/login.js"></script>
 </body>
 </html>

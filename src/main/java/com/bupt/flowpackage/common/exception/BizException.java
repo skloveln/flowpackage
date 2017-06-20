@@ -13,24 +13,16 @@ public class BizException extends RuntimeException implements IException {
 	
 	private String subMessage;
 	
+	public BizException(IException bizExcep) {
+		this(bizExcep.getCode(), bizExcep.getMsg(), bizExcep.getSubCode(), bizExcep.getSubMessage());
+	}
+	
 	public BizException(ResultCode resultCode, Integer subCode, String subMessage) {
-		super(subMessage);
-		this.code = resultCode.getCode();
-		this.msg = resultCode.getMsg();
-		this.subCode = subCode;
-		this.subMessage = subMessage;
+		this(resultCode.getCode(), resultCode.getMsg(), subCode, subMessage);
 	}
 	
 	public BizException(Integer code, String message, Integer subCode, String subMessage) {
 		super(subMessage);
-		this.code = code;
-		this.msg = message;
-		this.subCode = subCode;
-		this.subMessage = subMessage;
-	}
-	
-	public BizException(Integer code, String message, Integer subCode, String subMessage, Throwable cause) {
-		super(subMessage, cause);
 		this.code = code;
 		this.msg = message;
 		this.subCode = subCode;
