@@ -18,10 +18,37 @@
     <result column="available_flag" property="availableFlag" jdbcType="BIT" />
     <result column="is_super" property="isSuper" jdbcType="BIT" />
   </resultMap>
+  
+  <resultMap id="AdminRoleBaseResultMap" type="adminRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="admin_id" property="adminId" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_name" property="modifyName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="first_login_time" property="firstLoginTime" jdbcType="TIMESTAMP" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="available_flag" property="availableFlag" jdbcType="BIT" />
+    <result column="is_super" property="isSuper" jdbcType="BIT" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, login_name, password, real_name, sex, mobile, email, create_user_name, create_time, 
     modify_name, update_time, first_login_time, last_login_time, available_flag, is_super
   </sql>
+  
+  <sql id="AdminRole_Column_List" >
+    admin_id, role_id, login_name, password, real_name, sex, mobile, email, create_user_name, create_time, 
+    modify_name, update_time, first_login_time, last_login_time, available_flag, is_super
+  </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -52,7 +79,34 @@
 	    </if>
     </where>
   </select>
+  <!-- 获取管理员角色信息 -->
+  <select id="selectAdminRoleInfo" resultMap="AdminRoleBaseResultMap" parameterType="admin" >
+    select 
+    <include refid="AdminRole_Column_List" />
+    from cf_admin admin, cf_role role, cf_adminRole adminRole
+    <where>
+    	admin.id = adminRole.admin_id 
+		and role.id = adminRole.role_id ;
+    	admin.available_flag = 1 
+    	<if test="loginName != null">
+		    AND admin.login_name = #{loginName}
+	    </if>
+	    <if test="password != null">
+	    	AND admin.password = #{password}
+	    </if>
+	    <if test="realName != null">
+	    	AND admin.real_name = #{realName}
+	    </if>
+	    <if test="mobile != null">
+	    	AND admin.mobile like #{mobile}
+	    </if>
+	    <if test="isSuper != null">
+	    	AND admin.is_super = #{isSuper}
+	    </if>
+    </where>
+  </select>
   
+  <!-- 获取管理员数量 -->
   <select id="selectCountBySelective" resultType="int" parameterType="admin" >
     select count(*) from cf_admin
     <where>
@@ -74,6 +128,7 @@
 	    </if>
     </where>
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from cf_admin
     where id = #{id,jdbcType=INTEGER}

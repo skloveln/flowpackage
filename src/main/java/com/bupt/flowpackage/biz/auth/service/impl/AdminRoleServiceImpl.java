@@ -4,12 +4,17 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.bupt.flowpackage.biz.auth.model.AdminVo;
+import com.bupt.flowpackage.biz.auth.model.MenuVo;
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
+import com.bupt.flowpackage.biz.auth.model.WebLoginSuccessResp;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
 import com.bupt.flowpackage.common.domain.BaseResponse;
+import com.bupt.flowpackage.common.domain.SessionVo;
 import com.bupt.flowpackage.common.exception.BizException;
 import com.bupt.flowpackage.mybatis.account.admin.mapper.AdminMapper;
 import com.bupt.flowpackage.mybatis.account.admin.model.Admin;
+import com.bupt.flowpackage.mybatis.account.admin.model.AdminRole;
 
 /**
  * <p>Description:管理员权限角色接口服务</p>
@@ -24,7 +29,7 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 	private AdminMapper adminMapper;
 
 	@Override
-	public BaseResponse<String> checkLoginUserAndPwd(UserLoginWebRequest req){
+	public BaseResponse<String> checkLoginUserAndPwdService(UserLoginWebRequest req){
 		Admin admin = new Admin();
 		admin.setLoginName(req.getLoginName());
 		int count = adminMapper.selectCountBySelective(admin);
@@ -37,5 +42,36 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 			BizException.warn(102, "密码不正确，请重新输入!");
 		}
 		return BaseResponse.success(req);
+	}
+	
+	public BaseResponse<WebLoginSuccessResp> loginWebSuccessService(SessionVo sessionVo) {
+		
+		return null;
+	}
+	
+	private MenuVo getMenuInfoByRoleId(Integer roleId) {
+		
+		return null;
+	}
+	
+	/**
+	 * <p>根据管理员名获取管理员角色信息</p>   
+	 * @param @param loginName
+	 * @param @return      
+	 * @return AdminVo
+	 */
+	private AdminVo getAdminRoleInfoByLoginName(String loginName) {
+		Admin adminReq = new Admin();
+		adminReq.setLoginName(loginName);
+		AdminRole adminRole = adminMapper.selectAdminRoleInfo(adminReq);
+		if(adminRole == null) {
+			BizException.warn(103, "用户登录成功后，用户信息丢失!");
+		}
+		AdminVo adminResp = new AdminVo();
+		adminResp.setAdminId(adminRole.getAdminId());
+		adminResp.setLoginName(adminRole.getLoginName());
+		adminResp.setRoleName(adminRole.getRoleName());
+		adminResp.setRoleId(adminRole.getRoleId());
+		return adminResp;
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bupt.flowpackage.biz.auth.model.AdminVo;
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
 import com.bupt.flowpackage.common.domain.BaseResponse;
@@ -31,8 +32,7 @@ public class WebLoginController {
 	public BaseResponse<String> login(UserLoginWebRequest req, HttpServletRequest request) {
 		BaseResponse<String> baseResp = new BaseResponse<String>();
 		try{
-			Thread.sleep(3000);
-			baseResp = adminRoleService.checkLoginUserAndPwd(req);
+			baseResp = adminRoleService.checkLoginUserAndPwdService(req);
 			if(baseResp.isSuccess()) {
 				SessionVo sessionVo = new SessionVo();
 				sessionVo.setLoginName(req.getLoginName());

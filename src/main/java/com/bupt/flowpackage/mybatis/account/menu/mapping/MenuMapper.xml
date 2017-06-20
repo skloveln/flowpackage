@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bupt.flowpackage.mybatis.account.menu.mapper.MenuMapper" >
-  <resultMap id="BaseResultMap" type="com.bupt.flowpackage.mybatis.account.menu.model.Menu" >
+  <resultMap id="BaseResultMap" type="menu" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="menu_no" property="menuNo" jdbcType="SMALLINT" />
     <result column="application_code" property="applicationCode" jdbcType="SMALLINT" />
     <result column="menu_parent_no" property="menuParentNo" jdbcType="SMALLINT" />
     <result column="menu_order" property="menuOrder" jdbcType="SMALLINT" />
-    <result column="munu_name" property="munuName" jdbcType="VARCHAR" />
-    <result column="munu_url" property="munuUrl" jdbcType="VARCHAR" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="menu_url" property="menuUrl" jdbcType="VARCHAR" />
     <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR" />
     <result column="is_visible" property="isVisible" jdbcType="BIT" />
     <result column="is_leaf" property="isLeaf" jdbcType="BIT" />
   </resultMap>
+  
+  <resultMap id="ApplicationResultMap" type="applicationMenu">
+      <id column="applicationId" property="applicationId" jdbcType="INTEGER"/>
+      <result column="application_code" property="applicationCode" jdbcType="SMALLINT" />
+      <result column="application_name" property="applicationName" jdbcType="VARCHAR" />
+      <collection property="menuList" ofType="menu" column="application_code" select="findMenuByApplication_code"/>
+  </resultMap>
+  
+  <resultMap id="MenuResultMap" type="menu">
+      <id column="id" property="id" jdbcType="INTEGER"/>
+      <result column="menu_no" property="menuNo" jdbcType="SMALLINT" />
+      <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+      <collection property="children" ofType="menu" column="menu_no" select="findMenuByParentMenuNo"/>
+  </resultMap>
+  
   <sql id="Base_Column_List" >
-    id, menu_no, application_code, menu_parent_no, menu_order, munu_name, munu_url, menu_icon, 
+    id, menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, menu_icon, 
     is_visible, is_leaf
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -27,17 +42,17 @@
     delete from sys_menu
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bupt.flowpackage.mybatis.account.menu.model.Menu" >
+  <insert id="insert" parameterType="menu" >
     insert into sys_menu (id, menu_no, application_code, 
-      menu_parent_no, menu_order, munu_name, 
-      munu_url, menu_icon, is_visible, 
+      menu_parent_no, menu_order, menu_name, 
+      menu_url, menu_icon, is_visible, 
       is_leaf)
     values (#{id,jdbcType=INTEGER}, #{menuNo,jdbcType=SMALLINT}, #{applicationCode,jdbcType=SMALLINT}, 
-      #{menuParentNo,jdbcType=SMALLINT}, #{menuOrder,jdbcType=SMALLINT}, #{munuName,jdbcType=VARCHAR}, 
-      #{munuUrl,jdbcType=VARCHAR}, #{menuIcon,jdbcType=VARCHAR}, #{isVisible,jdbcType=BIT}, 
+      #{menuParentNo,jdbcType=SMALLINT}, #{menuOrder,jdbcType=SMALLINT}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{menuIcon,jdbcType=VARCHAR}, #{isVisible,jdbcType=BIT}, 
       #{isLeaf,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.bupt.flowpackage.mybatis.account.menu.model.Menu" >
+  <insert id="insertSelective" parameterType="menu" >
     insert into sys_menu
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -55,11 +70,11 @@
       <if test="menuOrder != null" >
         menu_order,
       </if>
-      <if test="munuName != null" >
-        munu_name,
+      <if test="menuName != null" >
+        menu_name,
       </if>
-      <if test="munuUrl != null" >
-        munu_url,
+      <if test="menuUrl != null" >
+        menu_url,
       </if>
       <if test="menuIcon != null" >
         menu_icon,
@@ -87,11 +102,11 @@
       <if test="menuOrder != null" >
         #{menuOrder,jdbcType=SMALLINT},
       </if>
-      <if test="munuName != null" >
-        #{munuName,jdbcType=VARCHAR},
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
       </if>
-      <if test="munuUrl != null" >
-        #{munuUrl,jdbcType=VARCHAR},
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=VARCHAR},
       </if>
       <if test="menuIcon != null" >
         #{menuIcon,jdbcType=VARCHAR},
@@ -104,7 +119,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.flowpackage.mybatis.account.menu.model.Menu" >
+  <update id="updateByPrimaryKeySelective" parameterType="menu" >
     update sys_menu
     <set >
       <if test="menuNo != null" >
@@ -119,11 +134,11 @@
       <if test="menuOrder != null" >
         menu_order = #{menuOrder,jdbcType=SMALLINT},
       </if>
-      <if test="munuName != null" >
-        munu_name = #{munuName,jdbcType=VARCHAR},
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
       </if>
-      <if test="munuUrl != null" >
-        munu_url = #{munuUrl,jdbcType=VARCHAR},
+      <if test="menuUrl != null" >
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
       </if>
       <if test="menuIcon != null" >
         menu_icon = #{menuIcon,jdbcType=VARCHAR},
@@ -137,14 +152,14 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bupt.flowpackage.mybatis.account.menu.model.Menu" >
+  <update id="updateByPrimaryKey" parameterType="menu" >
     update sys_menu
     set menu_no = #{menuNo,jdbcType=SMALLINT},
       application_code = #{applicationCode,jdbcType=SMALLINT},
       menu_parent_no = #{menuParentNo,jdbcType=SMALLINT},
       menu_order = #{menuOrder,jdbcType=SMALLINT},
-      munu_name = #{munuName,jdbcType=VARCHAR},
-      munu_url = #{munuUrl,jdbcType=VARCHAR},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
       menu_icon = #{menuIcon,jdbcType=VARCHAR},
       is_visible = #{isVisible,jdbcType=BIT},
       is_leaf = #{isLeaf,jdbcType=BIT}

@@ -77,7 +77,7 @@ create table cf_privilege
    master_type          tinyint comment '权限主体  1 角色 2 用户  ',
    master_id            int comment '权限主体id',
    access_type          tinyint comment '权限访问类型  1 菜单 2 按钮 3 模块',
-   access_id            int comment '权限访问id  munuId或者buttonId或者applicationId',
+   access_id            int comment '权限访问id  menuId或者buttonId或者applicationId',
    is_operatation       boolean comment '禁止使用   默认false',
    primary key (id)
 );
@@ -114,8 +114,8 @@ create table sys_menu
    application_code     smallint comment '模块code',
    menu_parent_no       smallint comment '父菜单编码',
    menu_order           smallint comment '菜单顺序',
-   munu_name            varchar(32) comment '菜单名称',
-   munu_url             varchar(256) comment '菜单url',
+   menu_name            varchar(32) comment '菜单名称',
+   menu_url             varchar(256) comment '菜单url',
    menu_icon            varchar(256) comment '菜单icon',
    is_visible           boolean comment '是否可用 1可用 0不可用',
    is_leaf              boolean,

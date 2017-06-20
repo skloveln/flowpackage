@@ -1,21 +1,14 @@
-package com.bupt.flowpackage.common.domain;
+package com.bupt.flowpackage.mybatis.account.admin.model;
 
-/**
-* @Description: 全局session对象
-* @author wangdaojian
-* @company 摩尔科技有限公司版权所有
-* @date 2017年6月19日 上午10:57:12
- */
-public class SessionVo extends BaseBean {
+/**管理员角色信息合集*/
+public class AdminRole extends Admin{
 
 	private static final long serialVersionUID = 1L;
 	/**管理员id*/
 	private Integer adminId;
-	/**登录用户名*/
-	private String loginName;
-	/**用户所属角色id*/
+	/**角色id*/
 	private Integer roleId;
-	/**用户所属角色名*/
+	/**角色名称*/
 	private String roleName;
 	
 	public Integer getAdminId() {
@@ -23,12 +16,6 @@ public class SessionVo extends BaseBean {
 	}
 	public void setAdminId(Integer adminId) {
 		this.adminId = adminId;
-	}
-	public String getLoginName() {
-		return loginName;
-	}
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
 	}
 	public Integer getRoleId() {
 		return roleId;

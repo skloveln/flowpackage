@@ -23,6 +23,12 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 		this(ResultCode.Result_SUCCESS, null);
 	}
 	
+	public BaseResponse(T date, String requestNo){
+		this();
+		this.data = date;
+		this.setRequestNo(requestNo);
+	}
+	
 	public BaseResponse(Integer code,String message, Integer subCode, String subMessage, String requestNo){
 		this.code = code;
 		this.msg = message;

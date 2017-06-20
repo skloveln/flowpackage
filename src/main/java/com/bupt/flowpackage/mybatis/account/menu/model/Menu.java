@@ -1,12 +1,14 @@
 package com.bupt.flowpackage.mybatis.account.menu.model;
 
+import java.util.List;
+
 import com.bupt.flowpackage.common.domain.BaseBean;
 
 public class Menu extends BaseBean{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-
+	
     private Short menuNo;
 
     private Short applicationCode;
@@ -15,17 +17,27 @@ public class Menu extends BaseBean{
 
     private Short menuOrder;
 
-    private String munuName;
+    private String menuName;
 
-    private String munuUrl;
+    private String menuUrl;
 
     private String menuIcon;
 
     private Boolean isVisible;
 
     private Boolean isLeaf;
+    /**子菜单*/
+    private List<Menu> children;
+    
+    public List<Menu> getChildren() {
+		return children;
+	}
 
-    public Integer getId() {
+	public void setChildren(List<Menu> children) {
+		this.children = children;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -65,20 +77,20 @@ public class Menu extends BaseBean{
         this.menuOrder = menuOrder;
     }
 
-    public String getMunuName() {
-        return munuName;
+    public String getmenuName() {
+        return menuName;
     }
 
-    public void setMunuName(String munuName) {
-        this.munuName = munuName == null ? null : munuName.trim();
+    public void setmenuName(String menuName) {
+        this.menuName = menuName == null ? null : menuName.trim();
     }
 
-    public String getMunuUrl() {
-        return munuUrl;
+    public String getmenuUrl() {
+        return menuUrl;
     }
 
-    public void setMunuUrl(String munuUrl) {
-        this.munuUrl = munuUrl == null ? null : munuUrl.trim();
+    public void setmenuUrl(String menuUrl) {
+        this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 
     public String getMenuIcon() {
