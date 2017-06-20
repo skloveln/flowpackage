@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
@@ -33,6 +31,7 @@ public class WebLoginController {
 	public BaseResponse<String> login(UserLoginWebRequest req, HttpServletRequest request) {
 		BaseResponse<String> baseResp = new BaseResponse<String>();
 		try{
+			Thread.sleep(3000);
 			baseResp = adminRoleService.checkLoginUserAndPwd(req);
 			if(baseResp.isSuccess()) {
 				SessionVo sessionVo = new SessionVo();
@@ -45,6 +44,16 @@ public class WebLoginController {
 			logger.info("\nreuqestNo={} login 返回对象resp=[{}]", req.getRequestNo(), baseResp);
 		}
 		return baseResp;
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		try{
+			SessionUtil.clearSessionInfo(request.getSession());
+		}catch(Exception e) {
+			logger.error("退出失败", e);
+		}
+		return LOGIN_PAGE;
 	}
 	
 	@RequestMapping("/tologin")

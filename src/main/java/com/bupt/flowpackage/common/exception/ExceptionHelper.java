@@ -21,4 +21,9 @@ public class ExceptionHelper {
 			return new BaseResponse<T>(ResultCode.Result_ERROR, request.getRequestNo());
 		}
 	}
+	
+	public static <T> BaseResponse<T> createResponse(Throwable e){
+		BaseRequest req = new BaseRequest();
+		return createResponse(e, req);
+	}
 }

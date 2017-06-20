@@ -7,13 +7,11 @@ $(function(){
 			return false;
 		}
 		var loading = layer.load(0, {
-			  shade: [0.1,'black'] //0.1透明度的白色背景
+			  shade: [0.1,'black'] //0.1透明度的黑色背景
 		});
-		
 		$.ajax({
 			url: "login",
 	        type: "POST",
-	        async: false,
 	        data: $('#loginForm').serialize(),
 	        dataType: "json",
 	        success: function (result) {
@@ -25,9 +23,11 @@ $(function(){
 	        },
 	        error: function(data) {
 	        	$('#errMsg').html("系统异常！");
-	        }
+	        },
+	        complete: function () {
+                layer.close(loading);
+            }
 	    });
-		layer.close(loading);
 		return false;
 	});
 });
