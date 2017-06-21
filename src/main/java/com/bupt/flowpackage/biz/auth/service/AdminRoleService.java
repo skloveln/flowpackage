@@ -19,7 +19,7 @@ public interface AdminRoleService {
 	 * @param @return      
 	 * @return BaseResponse<Boolean>
 	 */
-	public BaseResponse<String> checkLoginUserAndPwdService(UserLoginWebRequest req);
+	public SessionVo checkLoginUserAndPwdService(UserLoginWebRequest req);
 	
 	/**
 	 * <p>管理员登录成功后根据会话信息获取用户菜单，角色信息</p>   

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bupt.flowpackage.biz.auth.model.AdminVo;
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
 import com.bupt.flowpackage.common.domain.BaseResponse;
@@ -32,12 +31,8 @@ public class WebLoginController {
 	public BaseResponse<String> login(UserLoginWebRequest req, HttpServletRequest request) {
 		BaseResponse<String> baseResp = new BaseResponse<String>();
 		try{
-			baseResp = adminRoleService.checkLoginUserAndPwdService(req);
-			if(baseResp.isSuccess()) {
-				SessionVo sessionVo = new SessionVo();
-				sessionVo.setLoginName(req.getLoginName());
-				SessionUtil.setSessionInfo(request.getSession(), sessionVo);
-			}
+			SessionVo sessionVo = adminRoleService.checkLoginUserAndPwdService(req);
+			SessionUtil.login(sessionVo);
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);
 		}finally{
@@ -49,7 +44,7 @@ public class WebLoginController {
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		try{
-			SessionUtil.clearSessionInfo(request.getSession());
+			SessionUtil.logout();
 		}catch(Exception e) {
 			logger.error("退出失败", e);
 		}

@@ -29,19 +29,22 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 	private AdminMapper adminMapper;
 
 	@Override
-	public BaseResponse<String> checkLoginUserAndPwdService(UserLoginWebRequest req){
-		Admin admin = new Admin();
-		admin.setLoginName(req.getLoginName());
-		int count = adminMapper.selectCountBySelective(admin);
-		if(count == 0) {
+	public SessionVo checkLoginUserAndPwdService(UserLoginWebRequest req){
+		Admin adminReq = new Admin();
+		adminReq.setLoginName(req.getLoginName());
+		AdminRole adminRole = adminMapper.selectAdminRoleInfo(adminReq);
+		if(adminRole == null) {
 			BizException.warn(101, "用户名不存在!");
-		}
-		admin.setPassword(req.getPassword());
-		count = adminMapper.selectCountBySelective(admin);
-		if(count == 0) {
+		}else if(!(req.getPassword().equals(adminRole.getPassword()))) {
 			BizException.warn(102, "密码不正确，请重新输入!");
 		}
-		return BaseResponse.success(req);
+		SessionVo sessionVo = new SessionVo();
+		sessionVo.setAdminId(adminRole.getAdminId());
+		sessionVo.setLoginName(adminRole.getLoginName());
+		sessionVo.setRoleName(adminRole.getRoleName());
+		sessionVo.setRoleId(adminRole.getRoleId());
+		sessionVo.setSuper(adminRole.getIsSuper());
+		return sessionVo;
 	}
 	
 	public BaseResponse<WebLoginSuccessResp> loginWebSuccessService(SessionVo sessionVo) {

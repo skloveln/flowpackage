@@ -17,7 +17,15 @@ public class SessionVo extends BaseBean {
 	private Integer roleId;
 	/**用户所属角色名*/
 	private String roleName;
+	/**是否为超级管理员*/
+	private boolean isSuper;
 	
+	public boolean isSuper() {
+		return isSuper;
+	}
+	public void setSuper(boolean isSuper) {
+		this.isSuper = isSuper;
+	}
 	public Integer getAdminId() {
 		return adminId;
 	}

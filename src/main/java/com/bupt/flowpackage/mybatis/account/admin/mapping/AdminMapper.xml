@@ -45,8 +45,8 @@
   </sql>
   
   <sql id="AdminRole_Column_List" >
-    admin_id, role_id, login_name, password, real_name, sex, mobile, email, create_user_name, create_time, 
-    modify_name, update_time, first_login_time, last_login_time, available_flag, is_super
+    admin_id, role_id, role_name, login_name, password, real_name, sex, mobile, email, admin.create_user_name, admin.create_time, 
+    admin.modify_name, admin.update_time, first_login_time, last_login_time, available_flag, is_super
   </sql>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -86,8 +86,8 @@
     from cf_admin admin, cf_role role, cf_adminRole adminRole
     <where>
     	admin.id = adminRole.admin_id 
-		and role.id = adminRole.role_id ;
-    	admin.available_flag = 1 
+		and role.id = adminRole.role_id 
+    	and admin.available_flag = 1 
     	<if test="loginName != null">
 		    AND admin.login_name = #{loginName}
 	    </if>

@@ -19,12 +19,15 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 	
 	private T data;
 	
+	public BaseResponse(String requestNo){
+		this(ResultCode.Result_SUCCESS, requestNo);
+	}
+	
 	public BaseResponse(){
 		this(ResultCode.Result_SUCCESS, null);
 	}
 	
 	public BaseResponse(T date, String requestNo){
-		this();
 		this.data = date;
 		this.setRequestNo(requestNo);
 	}
@@ -44,8 +47,7 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 	}
 	
 	public static BaseResponse<String> success(BaseRequest req) {
-		BaseResponse<String> baseResp = new BaseResponse<String>();
-		baseResp.setRequestNo(req.getRequestNo());
+		BaseResponse<String> baseResp = new BaseResponse<String>(req.getRequestNo());
 		return baseResp;
 	}
 	

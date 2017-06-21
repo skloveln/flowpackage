@@ -15,7 +15,7 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 	
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		SessionVo sessionInfo = SessionUtil.getSessionInfo(request.getSession());
+		SessionVo sessionInfo = SessionUtil.getAdminSessionInfo();
 		if(sessionInfo == null) {
 			String uri = request.getRequestURI();
 			logger.info("\n用户访问url={} 因未登陆或session过期, 强制跳转到tologin登陆页", uri);
