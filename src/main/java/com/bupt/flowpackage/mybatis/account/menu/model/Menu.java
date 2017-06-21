@@ -8,6 +8,8 @@ public class Menu extends BaseBean{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	/**权限主体id*/
+	private Integer masterId;
 	
     private Short menuNo;
 
@@ -29,7 +31,15 @@ public class Menu extends BaseBean{
     /**子菜单*/
     private List<Menu> children;
     
-    public List<Menu> getChildren() {
+    public Integer getMasterId() {
+		return masterId;
+	}
+
+	public void setMasterId(Integer masterId) {
+		this.masterId = masterId;
+	}
+
+	public List<Menu> getChildren() {
 		return children;
 	}
 
@@ -77,19 +87,19 @@ public class Menu extends BaseBean{
         this.menuOrder = menuOrder;
     }
 
-    public String getmenuName() {
+    public String getMenuName() {
         return menuName;
     }
 
-    public void setmenuName(String menuName) {
+    public void setMenuName(String menuName) {
         this.menuName = menuName == null ? null : menuName.trim();
     }
 
-    public String getmenuUrl() {
+    public String getMenuUrl() {
         return menuUrl;
     }
 
-    public void setmenuUrl(String menuUrl) {
+    public void setMenuUrl(String menuUrl) {
         this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 

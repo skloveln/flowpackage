@@ -1,9 +1,12 @@
 package com.bupt.flowpackage.biz.auth.service;
 
+import java.util.List;
+
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
-import com.bupt.flowpackage.biz.auth.model.WebLoginSuccessResp;
+import com.bupt.flowpackage.biz.auth.model.WebGlobalVo;
 import com.bupt.flowpackage.common.domain.BaseResponse;
 import com.bupt.flowpackage.common.domain.SessionVo;
+import com.bupt.flowpackage.mybatis.account.application.model.Application;
 
 /**
  * <p>Description:账号角色权限接口</p>
@@ -20,13 +23,17 @@ public interface AdminRoleService {
 	 * @return BaseResponse<Boolean>
 	 */
 	public SessionVo checkLoginUserAndPwdService(UserLoginWebRequest req);
-	
 	/**
-	 * <p>管理员登录成功后根据会话信息获取用户菜单，角色信息</p>   
-	 * @param @param sessionVo
-	 * @param @return      
-	 * @return BaseResponse<WebLoginSuccessResp>
+	* @Description 根据角色获取模块菜单
+	* @param @return
+	* @return List<Application>
 	 */
-	public BaseResponse<WebLoginSuccessResp> loginWebSuccessService(SessionVo sessionVo);
+	public List<Application> getApplicationMenuByRoleId(Integer roleId);
+	/**
+	* @Description 超级管理员获取所有的模块菜单
+	* @param @return
+	* @return List<Application>
+	 */
+	public List<Application> getAllApplicationMenu();
 	
 }

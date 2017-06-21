@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.bupt.flowpackage.mybatis.account.privilege.model.Privilege" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="master_type" property="masterType" jdbcType="TINYINT" />
-    <result column="master_id" property="masterId" jdbcType="INTEGER" />
+    <result column="master_no" property="masterNo" jdbcType="INTEGER" />
     <result column="access_type" property="accessType" jdbcType="TINYINT" />
     <result column="access_id" property="accessId" jdbcType="INTEGER" />
     <result column="is_operatation" property="isOperatation" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, master_type, master_id, access_type, access_id, is_operatation
+    id, master_type, master_no, access_type, access_id, is_operatation
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,10 +23,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.bupt.flowpackage.mybatis.account.privilege.model.Privilege" >
-    insert into cf_privilege (id, master_type, master_id, 
+    insert into cf_privilege (id, master_type, master_no, 
       access_type, access_id, is_operatation
       )
-    values (#{id,jdbcType=INTEGER}, #{masterType,jdbcType=TINYINT}, #{masterId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{masterType,jdbcType=TINYINT}, #{masterNo,jdbcType=INTEGER}, 
       #{accessType,jdbcType=TINYINT}, #{accessId,jdbcType=INTEGER}, #{isOperatation,jdbcType=BIT}
       )
   </insert>
@@ -39,8 +39,8 @@
       <if test="masterType != null" >
         master_type,
       </if>
-      <if test="masterId != null" >
-        master_id,
+      <if test="masterNo != null" >
+        master_no,
       </if>
       <if test="accessType != null" >
         access_type,
@@ -59,8 +59,8 @@
       <if test="masterType != null" >
         #{masterType,jdbcType=TINYINT},
       </if>
-      <if test="masterId != null" >
-        #{masterId,jdbcType=INTEGER},
+      <if test="masterNo != null" >
+        #{masterNo,jdbcType=INTEGER},
       </if>
       <if test="accessType != null" >
         #{accessType,jdbcType=TINYINT},
@@ -79,8 +79,8 @@
       <if test="masterType != null" >
         master_type = #{masterType,jdbcType=TINYINT},
       </if>
-      <if test="masterId != null" >
-        master_id = #{masterId,jdbcType=INTEGER},
+      <if test="masterNo != null" >
+        master_no = #{masterNo,jdbcType=INTEGER},
       </if>
       <if test="accessType != null" >
         access_type = #{accessType,jdbcType=TINYINT},
@@ -97,7 +97,7 @@
   <update id="updateByPrimaryKey" parameterType="com.bupt.flowpackage.mybatis.account.privilege.model.Privilege" >
     update cf_privilege
     set master_type = #{masterType,jdbcType=TINYINT},
-      master_id = #{masterId,jdbcType=INTEGER},
+      master_no = #{masterNo,jdbcType=INTEGER},
       access_type = #{accessType,jdbcType=TINYINT},
       access_id = #{accessId,jdbcType=INTEGER},
       is_operatation = #{isOperatation,jdbcType=BIT}

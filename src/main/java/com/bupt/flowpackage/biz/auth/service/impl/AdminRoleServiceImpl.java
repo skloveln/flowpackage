@@ -1,20 +1,20 @@
 package com.bupt.flowpackage.biz.auth.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.bupt.flowpackage.biz.auth.model.AdminVo;
-import com.bupt.flowpackage.biz.auth.model.MenuVo;
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
-import com.bupt.flowpackage.biz.auth.model.WebLoginSuccessResp;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
-import com.bupt.flowpackage.common.domain.BaseResponse;
 import com.bupt.flowpackage.common.domain.SessionVo;
 import com.bupt.flowpackage.common.exception.BizException;
 import com.bupt.flowpackage.mybatis.account.admin.mapper.AdminMapper;
 import com.bupt.flowpackage.mybatis.account.admin.model.Admin;
 import com.bupt.flowpackage.mybatis.account.admin.model.AdminRole;
+import com.bupt.flowpackage.mybatis.account.application.model.Application;
+import com.bupt.flowpackage.mybatis.account.menu.mapper.MenuMapper;
 
 /**
  * <p>Description:管理员权限角色接口服务</p>
@@ -27,6 +27,8 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 	
 	@Resource
 	private AdminMapper adminMapper;
+	@Resource
+	private MenuMapper menuMapper;
 
 	@Override
 	public SessionVo checkLoginUserAndPwdService(UserLoginWebRequest req){
@@ -46,35 +48,15 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		sessionVo.setSuper(adminRole.getIsSuper());
 		return sessionVo;
 	}
-	
-	public BaseResponse<WebLoginSuccessResp> loginWebSuccessService(SessionVo sessionVo) {
-		
-		return null;
+
+	@Override
+	public List<Application> getApplicationMenuByRoleId(Integer roleId) {
+		return menuMapper.selectApplicationListByRoleId(roleId);
 	}
 	
-	private MenuVo getMenuInfoByRoleId(Integer roleId) {
-		
-		return null;
+	@Override
+	public List<Application> getAllApplicationMenu() {
+		return menuMapper.selectAllApplicationList();
 	}
 	
-	/**
-	 * <p>根据管理员名获取管理员角色信息</p>   
-	 * @param @param loginName
-	 * @param @return      
-	 * @return AdminVo
-	 */
-	private AdminVo getAdminRoleInfoByLoginName(String loginName) {
-		Admin adminReq = new Admin();
-		adminReq.setLoginName(loginName);
-		AdminRole adminRole = adminMapper.selectAdminRoleInfo(adminReq);
-		if(adminRole == null) {
-			BizException.warn(103, "用户登录成功后，用户信息丢失!");
-		}
-		AdminVo adminResp = new AdminVo();
-		adminResp.setAdminId(adminRole.getAdminId());
-		adminResp.setLoginName(adminRole.getLoginName());
-		adminResp.setRoleName(adminRole.getRoleName());
-		adminResp.setRoleId(adminRole.getRoleId());
-		return adminResp;
-	}
 }

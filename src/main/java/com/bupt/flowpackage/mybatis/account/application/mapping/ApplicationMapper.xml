@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bupt.flowpackage.mybatis.account.application.mapper.ApplicationMapper" >
-  <resultMap id="BaseResultMap" type="com.bupt.flowpackage.mybatis.account.application.model.Application" >
+  <resultMap id="BaseResultMap" type="application" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="application_code" property="applicationCode" jdbcType="SMALLINT" />
     <result column="application_name" property="applicationName" jdbcType="VARCHAR" />
@@ -20,13 +20,13 @@
     delete from sys_application
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.bupt.flowpackage.mybatis.account.application.model.Application" >
+  <insert id="insert" parameterType="application" >
     insert into sys_application (id, application_code, application_name, 
       application_desc)
     values (#{id,jdbcType=INTEGER}, #{applicationCode,jdbcType=SMALLINT}, #{applicationName,jdbcType=VARCHAR}, 
       #{applicationDesc,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.bupt.flowpackage.mybatis.account.application.model.Application" >
+  <insert id="insertSelective" parameterType="application" >
     insert into sys_application
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.flowpackage.mybatis.account.application.model.Application" >
+  <update id="updateByPrimaryKeySelective" parameterType="application" >
     update sys_application
     <set >
       <if test="applicationCode != null" >
@@ -72,7 +72,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bupt.flowpackage.mybatis.account.application.model.Application" >
+  <update id="updateByPrimaryKey" parameterType="application" >
     update sys_application
     set application_code = #{applicationCode,jdbcType=SMALLINT},
       application_name = #{applicationName,jdbcType=VARCHAR},

@@ -1,6 +1,7 @@
 package com.bupt.flowpackage.common.session;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.bupt.flowpackage.common.domain.SessionVo;
+import com.bupt.flowpackage.mybatis.account.application.model.Application;
 
 /**
 * @Description: Session工具
@@ -21,12 +23,14 @@ import com.bupt.flowpackage.common.domain.SessionVo;
  */
 public class SessionUtil {
 	
-	public static Logger logger = LoggerFactory.getLogger(SessionUtil.class);
+	private static Logger logger = LoggerFactory.getLogger(SessionUtil.class);
 	
-	public static final String ADMIN_SESSION = "adminSession";
-	public static final String ACTIVE_ADMIN_LISTENER = "activeAdminListener";
+	private static final String ADMIN_SESSION = "adminSession";
+	private static final String ACTIVE_ADMIN_LISTENER = "activeAdminListener";
+	//全局模块菜单信息，根据角色id分组
+	private static Map<Integer, List<Application>> APPLICATION_MAP = new HashMap<Integer, List<Application>>();
 	//用于同个账号只能一台电脑登陆，或者可以主动踢掉用户
-	public static Map<Integer, HttpSession> SESSION_MAP = new HashMap<Integer, HttpSession>();
+	private static Map<Integer, HttpSession> SESSION_MAP = new HashMap<Integer, HttpSession>();
 	
 	public static HttpServletRequest getRequest(){
 		ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -96,4 +100,11 @@ public class SessionUtil {
 		}
 	}
 	
+	public static void setApplicationList(List<Application> applicationList) {
+		APPLICATION_MAP.put(getAdminSessionInfo().getRoleId(), applicationList);
+	}
+	
+	public static List<Application> getApplicationList() {
+		return APPLICATION_MAP.get(getAdminSessionInfo().getRoleId());
+	}
 }

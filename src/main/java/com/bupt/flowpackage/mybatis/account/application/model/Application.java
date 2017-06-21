@@ -1,19 +1,42 @@
 package com.bupt.flowpackage.mybatis.account.application.model;
 
+import java.util.List;
+
 import com.bupt.flowpackage.common.domain.BaseBean;
+import com.bupt.flowpackage.mybatis.account.menu.model.Menu;
 
 public class Application extends BaseBean{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-
+	/**权限主体id*/
+	private Integer masterId;
+	
     private Short applicationCode;
 
     private String applicationName;
 
     private String applicationDesc;
+    /**菜单list*/
+    private List<Menu> menuList;
+    
+    public Integer getMasterId() {
+		return masterId;
+	}
 
-    public Integer getId() {
+	public void setMasterId(Integer masterId) {
+		this.masterId = masterId;
+	}
+
+	public List<Menu> getMenuList() {
+		return menuList;
+	}
+
+	public void setMenuList(List<Menu> menuList) {
+		this.menuList = menuList;
+	}
+
+	public Integer getId() {
         return id;
     }
 

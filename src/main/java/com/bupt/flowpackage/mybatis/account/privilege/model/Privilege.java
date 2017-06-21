@@ -13,7 +13,7 @@ public class Privilege extends BaseBean{
 
     private Byte accessType;
 
-    private Integer accessId;
+    private Integer accessNo;
 
     private Boolean isOperatation;
 
@@ -49,15 +49,15 @@ public class Privilege extends BaseBean{
         this.accessType = accessType;
     }
 
-    public Integer getAccessId() {
-        return accessId;
-    }
+    public Integer getAccessNo() {
+		return accessNo;
+	}
 
-    public void setAccessId(Integer accessId) {
-        this.accessId = accessId;
-    }
+	public void setAccessNo(Integer accessNo) {
+		this.accessNo = accessNo;
+	}
 
-    public Boolean getIsOperatation() {
+	public Boolean getIsOperatation() {
         return isOperatation;
     }
 

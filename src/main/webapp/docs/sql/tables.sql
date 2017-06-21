@@ -77,7 +77,7 @@ create table cf_privilege
    master_type          tinyint comment '权限主体  1 角色 2 用户  ',
    master_id            int comment '权限主体id',
    access_type          tinyint comment '权限访问类型  1 菜单 2 按钮 3 模块',
-   access_id            int comment '权限访问id  menuId或者buttonId或者applicationId',
+   access_no            smallint comment '权限访问no  menuNo或者buttonNo或者applicationCode',
    is_operatation       boolean comment '禁止使用   默认false',
    primary key (id)
 );

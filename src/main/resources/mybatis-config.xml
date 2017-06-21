@@ -19,7 +19,7 @@
 		<typeAlias type="com.bupt.flowpackage.mybatis.account.admin.model.Admin" alias="admin"/>
 		<typeAlias type="com.bupt.flowpackage.mybatis.account.admin.model.AdminRole" alias="adminRole"/>
 		<typeAlias type="com.bupt.flowpackage.mybatis.account.menu.model.Menu" alias="menu"/>
-		<typeAlias type="com.bupt.flowpackage.mybatis.account.menu.model.ApplicationMenu" alias="applicationMenu"/>
+		<typeAlias type="com.bupt.flowpackage.mybatis.account.application.model.Application" alias="application"/>
 	</typeAliases>
 
     <plugins>

@@ -17,7 +17,9 @@ public interface MenuMapper {
 
     int updateByPrimaryKeySelective(Menu record);
     
-    List<Application> getAllMenuList(Integer roleId);
+    List<Application> selectApplicationListByRoleId(Integer roleId);
+    
+    List<Application> selectAllApplicationList();
 
     int updateByPrimaryKey(Menu record);
 }
