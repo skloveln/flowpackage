@@ -17,7 +17,7 @@
 						<ul class="dropDown-menu menu radius box-shadow">
 							<c:forEach var="application" items="${global.applicationList}">
 								<li>
-									<a href="index.html">
+									<a href="${ctx}/${application.applicationUrl}">
 										<i class="Hui-iconfont ${application.applicationIcon}"></i>${application.applicationName} 
 									</a>
 								</li>
