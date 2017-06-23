@@ -4,7 +4,7 @@
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="index.html"><!-- 摩尔科技流量充值管理后台 -->1111111111</a>
+			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="index.html">摩尔科技流量充值管理后台</a>
 			<a class="logo navbar-logo-m f-l mr-10 visible-xs" href="index.html">More</a>
 			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
 			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
@@ -36,7 +36,7 @@
 								<a href="javascript:;" onClick="myselfinfo()">个人信息</a>
 							</li>
 							<li>
-								<a href="logout">退出</a>
+								<a href="${ctx}/logout">退出</a>
 							</li>
 						</ul>
 					</li>

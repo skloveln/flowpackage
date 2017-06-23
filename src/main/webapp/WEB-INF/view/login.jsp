@@ -13,7 +13,7 @@
 <body>
 <div class="page">
 		<div class="loginwarrp">
-			<div class="logo"><!-- 摩尔科技流量充值后台管理系统 -->登录</div>
+			<div class="logo">摩尔科技流量后台管理系统</div>
 			<div class="login_form">
 				<form id="loginForm" name="Login" method="post">
 					<ul>
