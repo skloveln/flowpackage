@@ -32,8 +32,8 @@ http://www.cnblogs.com/leoxie2011/archive/2011/05/19/2050626.html
 设计表，和数据路径位于</br>
 flowpackage/src/main/webapp/docs/sql/
 </br>
-前端使用国内开源的 H-ui-admin</br>
-地址：H-ui.admin  界面清晰友好</br>
+前端使用国内开源的 H-ui-admin 界面清晰友好</br>
+地址：
 http://www.h-ui.net/index.shtml
 </br>
 我把这套通用权限系统开源出来， 希望更多的人可以使用和学习.</br>
