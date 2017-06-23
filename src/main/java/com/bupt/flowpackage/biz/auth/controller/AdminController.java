@@ -2,9 +2,14 @@ package com.bupt.flowpackage.biz.auth.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+/**
+* @Description: 管理员管理
+* @author wangdaojian
+* @company 摩尔科技有限公司版权所有
+* @date 2017年6月23日 下午3:20:32
+ */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/admin")
 public class AdminController {
 	
 	/**

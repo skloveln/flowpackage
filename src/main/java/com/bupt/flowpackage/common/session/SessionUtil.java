@@ -31,6 +31,7 @@ public class SessionUtil {
 	private static final String ACTIVE_ADMIN_LISTENER = "activeAdminListener";
 	//全局模块菜单信息，根据角色id分组
 	private static Map<Integer, List<Application>> APPLICATION_MAP = new HashMap<Integer, List<Application>>();
+	//菜单url
 	private static Map<Integer, List<String>> MENU_URL_MAP = new HashMap<Integer, List<String>>();
 	
 	//用于同个账号只能一台电脑登陆，或者可以主动踢掉用户
@@ -163,11 +164,6 @@ public class SessionUtil {
 	 * @return boolean
 	 */
 	public static boolean checkUrlAuth(String url) {
-		if(url.contains(".")) {
-			url = url.substring(url.lastIndexOf("/") + 1, url.indexOf("."));
-		}else {
-			url = url.substring(url.lastIndexOf("/") + 1);
-		}
 		List<String> menuUrlList = MENU_URL_MAP.get(getAdminSessionInfo().getRoleId());
 		if(menuUrlList != null && menuUrlList.size() > 0 && menuUrlList.contains(url)) {
 			return true;

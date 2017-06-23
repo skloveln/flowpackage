@@ -22,7 +22,23 @@ public class WebGlobalVo extends BaseBean {
 	private List<Application> applicationList;
 	/** 菜单列表 */
 	private List<Menu> menuList;
-	
+	/**当前url*/
+	private String currentUrl;
+	/**当前一级菜单url*/
+	private String currentParentUrl;
+
+	public String getCurrentParentUrl() {
+		return currentParentUrl;
+	}
+	public void setCurrentParentUrl(String currentParentUrl) {
+		this.currentParentUrl = currentParentUrl;
+	}
+	public String getCurrentUrl() {
+		return currentUrl;
+	}
+	public void setCurrentUrl(String currentUrl) {
+		this.currentUrl = currentUrl;
+	}
 	public List<Menu> getMenuList() {
 		return menuList;
 	}

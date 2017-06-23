@@ -6,22 +6,42 @@
 	<div class="menu_dropdown bk_2">
 		<c:forEach var="parent" items="${global.menuList}" >
 			<dl>
-				<dt>
-					<i class="Hui-iconfont ${parent.menuIcon} "></i> ${parent.menuName}
-					<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-				</dt>
-				<dd>
+				<c:choose>
+					<c:when test="${global.currentParentUrl == parent.menuUrl}">
+						<dt class="selected">
+							<i class="Hui-iconfont ${parent.menuIcon} "></i> ${parent.menuName}
+							<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+						</dt>
+						<dd style="display:block;">
+					</c:when>
+					<c:otherwise>
+						<dt>
+							<i class="Hui-iconfont ${parent.menuIcon} "></i> ${parent.menuName}
+							<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+						</dt>
+						<dd>
+					</c:otherwise>
+				</c:choose>
 					<ul>
 						<c:forEach var="leafMenu" items="${parent.children}">
-							<li>
-								<a href="${ctx}/${leafMenu.menuUrl}" title="${leafMenu.menuName}">${leafMenu.menuName}</a>
-							</li>
+							<c:choose>
+    							<c:when test="${global.currentUrl == leafMenu.menuUrl}">
+    								<li  class="current">
+    									<a href="${ctx}${parent.menuUrl}/${leafMenu.menuUrl}" title="${leafMenu.menuName}">${leafMenu.menuName}</a>
+									</li>
+    							</c:when>
+    							<c:otherwise>
+    								<li>
+    									<a href="${ctx}${parent.menuUrl}/${leafMenu.menuUrl}" title="${leafMenu.menuName}">${leafMenu.menuName}</a>
+									</li>
+    							</c:otherwise>
+    						</c:choose>
 						</c:forEach>
 					</ul>
 				</dd>
 			</dl>
 		</c:forEach>
-		<!-- <dl id="menu-picture">
+		<dl id="menu-picture">
 			<dt>
 				<i class="Hui-iconfont">&#xe613;</i> 图片管理
 				<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
@@ -34,7 +54,7 @@
 				</ul>
 			</dd>
 		</dl>
-		<dl id="menu-product">
+		<!-- <dl id="menu-product">
 			<dt>
 				<i class="Hui-iconfont">&#xe620;</i> 产品管理
 				<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
