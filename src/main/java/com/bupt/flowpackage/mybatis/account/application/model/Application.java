@@ -10,12 +10,12 @@ public class Application extends BaseBean{
 	private Integer id;
 	/**权限主体id*/
 	private Integer masterId;
-	/**当前显示哪一个，用于前端样式*/
-	private boolean isShow = false;
 	
     private Short applicationCode;
 
     private String applicationName;
+    
+    private String applicationIcon;
     
     private String applicationUrl;
 
@@ -23,12 +23,12 @@ public class Application extends BaseBean{
     /**菜单list*/
     private List<Menu> menuList;
     
-    public boolean isShow() {
-		return isShow;
+    public String getApplicationIcon() {
+		return applicationIcon;
 	}
 
-	public void setShow(boolean isShow) {
-		this.isShow = isShow;
+	public void setApplicationIcon(String applicationIcon) {
+		this.applicationIcon = applicationIcon;
 	}
 
 	public String getApplicationUrl() {

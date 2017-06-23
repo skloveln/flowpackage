@@ -5,5 +5,3 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="flowVersion" value="v-0.0.1"/>
-<c:set var="adminInfo" value="${global.adminInfo}" scope="request"></c:set>
-<c:set var="menuTree" value="${global.applicationList}" scope="request"></c:set>

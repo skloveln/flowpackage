@@ -19,6 +19,7 @@
       <id column="id" property="id" jdbcType="INTEGER"/>
       <result column="application_code" property="applicationCode" jdbcType="SMALLINT" />
       <result column="application_name" property="applicationName" jdbcType="VARCHAR" />
+      <result column="application_icon" property="applicationIcon" jdbcType="VARCHAR" />
       <result column="application_url" property="applicationUrl" jdbcType="VARCHAR" />
       <result column="application_desc" property="applicationDesc" jdbcType="VARCHAR" />
       <collection property="menuList" ofType="menu" column="application_code" select="selectMenuByApplicationCode"/>
@@ -44,6 +45,7 @@
       <result column="master_id" property="masterId" jdbcType="INTEGER" />
       <result column="application_code" property="applicationCode" jdbcType="SMALLINT" />
       <result column="application_name" property="applicationName" jdbcType="VARCHAR" />
+      <result column="application_icon" property="applicationIcon" jdbcType="VARCHAR" />
       <result column="application_url" property="applicationUrl" jdbcType="VARCHAR" />
       <result column="application_desc" property="applicationDesc" jdbcType="VARCHAR" />
       <collection property="menuList" ofType="menu" column="{applicationCode=application_code, roleId=master_id}" select="selectMenuByApplicationCodeAndRoleId"/>
@@ -55,7 +57,7 @@
   </sql>
   
   <sql id="Application_Column_List" >
-    sys_application.id, application_code, application_name, application_url, application_desc
+    sys_application.id, application_code, application_name, application_icon, application_url, application_desc
   </sql>
   
   <select id="selectByPrimaryKey" resultMap="MenuResultMap" parameterType="java.lang.Integer" >

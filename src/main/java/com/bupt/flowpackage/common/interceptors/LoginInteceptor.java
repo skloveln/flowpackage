@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.bupt.flowpackage.biz.auth.model.WebGlobalVo;
+import com.bupt.flowpackage.common.constants.Constants;
 import com.bupt.flowpackage.common.domain.SessionVo;
 import com.bupt.flowpackage.common.session.SessionUtil;
 import com.bupt.flowpackage.mybatis.account.application.model.Application;
@@ -55,7 +56,8 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 		//检查uri是否有权限
 		String url = request.getRequestURI();
 		if(modelAndView != null && !SessionUtil.checkUrlAuth(url)) {
-			modelAndView.setViewName("errorpages/error-noauth");
+			logger.info("\n用户={} 访问url={} 因无权限, 强制跳转到无权限页面", sessionInfo.getLoginName(), url);
+			modelAndView.setViewName(Constants.PAGE_NOAUTH);
 		}else if(modelAndView != null){
 			modelAndView.addObject(GLOBAL_INFO, webGlobalVo);
 		}

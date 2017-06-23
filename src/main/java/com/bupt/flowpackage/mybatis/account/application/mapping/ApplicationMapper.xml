@@ -5,11 +5,12 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="application_code" property="applicationCode" jdbcType="SMALLINT" />
     <result column="application_name" property="applicationName" jdbcType="VARCHAR" />
+    <result column="application_icon" property="applicationIcon" jdbcType="VARCHAR" />
     <result column="application_url" property="applicationUrl" jdbcType="VARCHAR" />
     <result column="application_desc" property="applicationDesc" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, application_code, application_url, application_name, application_desc
+    id, application_code, application_icon, application_url, application_name, application_desc
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

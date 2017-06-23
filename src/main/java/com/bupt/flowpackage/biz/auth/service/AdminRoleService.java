@@ -3,8 +3,6 @@ package com.bupt.flowpackage.biz.auth.service;
 import java.util.List;
 
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
-import com.bupt.flowpackage.biz.auth.model.WebGlobalVo;
-import com.bupt.flowpackage.common.domain.BaseResponse;
 import com.bupt.flowpackage.common.domain.SessionVo;
 import com.bupt.flowpackage.mybatis.account.application.model.Application;
 

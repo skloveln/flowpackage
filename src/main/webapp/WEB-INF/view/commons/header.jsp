@@ -4,7 +4,7 @@
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
 		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="index.html"><!-- 摩尔科技流量充值管理后台 -->H-uiiiiiiiiiiiiiiii</a>
+			<a class="logo navbar-logo f-l mr-10 hidden-xs" href="index.html">摩尔科技流量充值管理后台</a>
 			<a class="logo navbar-logo-m f-l mr-10 visible-xs" href="index.html">More</a>
 			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
 			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
@@ -18,7 +18,7 @@
 							<c:forEach var="application" items="${global.applicationList}">
 								<li>
 									<a href="index.html">
-										<i class="Hui-iconfont">&#xe620;</i>${application.applicationName} 
+										<i class="Hui-iconfont ${application.applicationIcon}"></i>${application.applicationName} 
 									</a>
 								</li>
 							</c:forEach>
@@ -28,9 +28,9 @@
 			</nav>
 			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 				<ul class="cl">
-					<li>${adminInfo.roleName}</li>
+					<li>${global.adminInfo.roleName}</li>
 					<li class="dropDown dropDown_hover">
-						<a href="#" class="dropDown_A">${adminInfo.loginName} <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<a href="#" class="dropDown_A">${global.adminInfo.loginName} <i class="Hui-iconfont">&#xe6d5;</i></a>
 						<ul class="dropDown-menu menu radius box-shadow">
 							<li>
 								<a href="javascript:;" onClick="myselfinfo()">个人信息</a>

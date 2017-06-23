@@ -10,5 +10,9 @@ public interface Constants {
     public static final Integer EXPIRE_IN_10M = 60*10;               //过期时间10分钟 (60*10 秒)
     public static final Integer EXPIRE_IN_7D = 60*60*24*7;           //过期时间7天 (60*60*24*7 秒)
     
-    
+    static final String INDEX_PAGE ="home";//首页
+	static final String LOGIN_PAGE ="login";//登陆页
+	static final String PAGE_404 ="errorpages/error-404";//404页面
+	static final String PAGE_500 ="errorpages/error-500";//500页面
+	static final String PAGE_NOAUTH ="errorpages/error-noauth";//无权限页面
 }
