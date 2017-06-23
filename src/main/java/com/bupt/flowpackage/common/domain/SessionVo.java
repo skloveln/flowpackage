@@ -19,7 +19,15 @@ public class SessionVo extends BaseBean {
 	private String roleName;
 	/**是否为超级管理员*/
 	private boolean isSuper;
+	/**当前模块code*/
+	private Short applicationCode = 1001;
 	
+	public Short getApplicationCode() {
+		return applicationCode;
+	}
+	public void setApplicationCode(Short applicationCode) {
+		this.applicationCode = applicationCode;
+	}
 	public boolean isSuper() {
 		return isSuper;
 	}

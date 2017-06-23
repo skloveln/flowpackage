@@ -1,5 +1,6 @@
 package com.bupt.flowpackage.common.session;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.bupt.flowpackage.common.domain.SessionVo;
 import com.bupt.flowpackage.mybatis.account.application.model.Application;
+import com.bupt.flowpackage.mybatis.account.menu.model.Menu;
 
 /**
 * @Description: Session工具
@@ -29,6 +31,8 @@ public class SessionUtil {
 	private static final String ACTIVE_ADMIN_LISTENER = "activeAdminListener";
 	//全局模块菜单信息，根据角色id分组
 	private static Map<Integer, List<Application>> APPLICATION_MAP = new HashMap<Integer, List<Application>>();
+	private static Map<Integer, List<String>> MENU_URL_MAP = new HashMap<Integer, List<String>>();
+	
 	//用于同个账号只能一台电脑登陆，或者可以主动踢掉用户
 	private static Map<Integer, HttpSession> SESSION_MAP = new HashMap<Integer, HttpSession>();
 	
@@ -102,9 +106,72 @@ public class SessionUtil {
 	
 	public static void setApplicationList(List<Application> applicationList) {
 		APPLICATION_MAP.put(getAdminSessionInfo().getRoleId(), applicationList);
+		MENU_URL_MAP.put(getAdminSessionInfo().getRoleId(), loadAllMenuUrl(applicationList));
+	}
+	/**
+	 * <p>把权限内的菜单url提取出来</p>   
+	 * @param @param applicationList
+	 * @param @return      
+	 * @return List<String>
+	 */
+	private static List<String> loadAllMenuUrl(List<Application> applicationList) {
+		List<String> menuUrlList = new ArrayList<String>();
+		for(int i=0; i < applicationList.size(); i++) {
+			Application application = applicationList.get(i);
+			String applicationUrl = application.getApplicationUrl();
+			menuUrlList.add(applicationUrl);
+			List<Menu> menuList = application.getMenuList();
+			for(int j=0; j<menuList.size(); j++) {
+				List<Menu> children = menuList.get(j).getChildren();
+				for(int z=0; z<children.size(); z++) {
+					Menu child = children.get(z);
+					String menuUrl = child.getMenuUrl();
+					boolean isLeaf = child.getIsLeaf();
+					if(isLeaf && menuUrl.contains(".html")) {
+						menuUrlList.add(menuUrl.substring(0, menuUrl.indexOf(".html")));
+					}
+				}
+			}
+		}
+		return menuUrlList;
 	}
 	
 	public static List<Application> getApplicationList() {
 		return APPLICATION_MAP.get(getAdminSessionInfo().getRoleId());
+	}
+	/**
+	 * <p>根据applicationCode查询code</p>   
+	 * @param @param code
+	 * @param @return      
+	 * @return Application
+	 */
+	public static Application getApplicationByCode(Short code) {
+		List<Application> appList = getApplicationList();
+		for(int i=0; i < appList.size(); i++) {
+			Application temp = appList.get(i);
+			Short applicationCode = temp.getApplicationCode();
+			if(code.equals(applicationCode)) {
+				return temp;
+			}
+		}
+		return null;
+	}
+	/***
+	 * <p>检查url是否有权限</p>   
+	 * @param @param url
+	 * @param @return      
+	 * @return boolean
+	 */
+	public static boolean checkUrlAuth(String url) {
+		if(url.contains(".")) {
+			url = url.substring(url.lastIndexOf("/") + 1, url.indexOf("."));
+		}else {
+			url = url.substring(url.lastIndexOf("/") + 1);
+		}
+		List<String> menuUrlList = MENU_URL_MAP.get(getAdminSessionInfo().getRoleId());
+		if(menuUrlList != null && menuUrlList.size() > 0 && menuUrlList.contains(url)) {
+			return true;
+		}
+		return false;
 	}
 }

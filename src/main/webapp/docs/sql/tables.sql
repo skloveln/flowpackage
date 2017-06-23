@@ -93,6 +93,7 @@ create table sys_application
 (
    id                   int not null auto_increment comment '主键',
    application_code     smallint comment '模块code',
+   application_url		varchr(256) default 'index.html' comment '模块url',
    application_name     varchar(32) comment '模块名称',
    application_desc     varchar(256) comment '模块描述',
    primary key (id)

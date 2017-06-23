@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
-import com.bupt.flowpackage.biz.auth.model.WebGlobalVo;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
 import com.bupt.flowpackage.common.domain.BaseResponse;
 import com.bupt.flowpackage.common.domain.SessionVo;
@@ -47,6 +46,7 @@ public class WebLoginController {
 					applicationList = adminRoleService.getApplicationMenuByRoleId(sessionVo.getRoleId());
 				}
 				SessionUtil.setApplicationList(applicationList);
+				
 			}
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);

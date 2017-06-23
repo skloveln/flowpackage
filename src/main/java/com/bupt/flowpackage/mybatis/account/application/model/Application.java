@@ -7,20 +7,39 @@ import com.bupt.flowpackage.mybatis.account.menu.model.Menu;
 
 public class Application extends BaseBean{
 	private static final long serialVersionUID = 1L;
-
 	private Integer id;
 	/**权限主体id*/
 	private Integer masterId;
+	/**当前显示哪一个，用于前端样式*/
+	private boolean isShow = false;
 	
     private Short applicationCode;
 
     private String applicationName;
+    
+    private String applicationUrl;
 
     private String applicationDesc;
     /**菜单list*/
     private List<Menu> menuList;
     
-    public Integer getMasterId() {
+    public boolean isShow() {
+		return isShow;
+	}
+
+	public void setShow(boolean isShow) {
+		this.isShow = isShow;
+	}
+
+	public String getApplicationUrl() {
+		return applicationUrl;
+	}
+
+	public void setApplicationUrl(String applicationUrl) {
+		this.applicationUrl = applicationUrl;
+	}
+
+	public Integer getMasterId() {
 		return masterId;
 	}
 

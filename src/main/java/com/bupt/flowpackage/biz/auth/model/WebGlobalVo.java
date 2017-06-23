@@ -5,6 +5,7 @@ import java.util.List;
 import com.bupt.flowpackage.common.domain.BaseBean;
 import com.bupt.flowpackage.common.domain.SessionVo;
 import com.bupt.flowpackage.mybatis.account.application.model.Application;
+import com.bupt.flowpackage.mybatis.account.menu.model.Menu;
 
 /**
  * @Description: 用户登录成功，进入主页返回的信息，包括菜单列表，用户权限组信息等全局信息
@@ -17,9 +18,17 @@ public class WebGlobalVo extends BaseBean {
 	private static final long serialVersionUID = 1L;
 	/** 管理员角色信息 */
 	private SessionVo adminInfo;
-	/** 菜单列表 */
+	/**模块列表*/
 	private List<Application> applicationList;
+	/** 菜单列表 */
+	private List<Menu> menuList;
 	
+	public List<Menu> getMenuList() {
+		return menuList;
+	}
+	public void setMenuList(List<Menu> menuList) {
+		this.menuList = menuList;
+	}
 	public SessionVo getAdminInfo() {
 		return adminInfo;
 	}

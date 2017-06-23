@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StopWatch;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -18,9 +17,9 @@ import com.bupt.flowpackage.mybatis.account.application.model.Application;
 
 public class LoginInteceptor  extends HandlerInterceptorAdapter{
 	public static Logger logger = LoggerFactory.getLogger(LoginInteceptor.class);
+	
 	//web全局信息，访问任何页面都会用到
 	private static final String GLOBAL_INFO = "global";
-	
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		SessionVo sessionInfo = SessionUtil.getAdminSessionInfo();
@@ -38,14 +37,27 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 			ModelAndView modelAndView) throws Exception {
 		WebGlobalVo webGlobalVo = new WebGlobalVo();
 		SessionVo sessionInfo = SessionUtil.getAdminSessionInfo();
+		//添加管理员信息
 		if(sessionInfo != null) {
 			webGlobalVo.setAdminInfo(sessionInfo);
 		}
+		//获取所有模块
 		List<Application> applicationList = SessionUtil.getApplicationList();
 		if(applicationList != null && applicationList.size() > 0) {
 			webGlobalVo.setApplicationList(applicationList);
 		}
-		webGlobalVo.setApplicationList(applicationList);
-		modelAndView.addObject(GLOBAL_INFO, webGlobalVo);
+		//添加菜单list
+		Application application = SessionUtil.getApplicationByCode(sessionInfo.getApplicationCode());
+		if(application != null && application.getMenuList() != null) {
+			webGlobalVo.setMenuList(application.getMenuList());
+		}
+		
+		//检查uri是否有权限
+		String url = request.getRequestURI();
+		if(modelAndView != null && !SessionUtil.checkUrlAuth(url)) {
+			modelAndView.setViewName("errorpages/error-noauth");
+		}else if(modelAndView != null){
+			modelAndView.addObject(GLOBAL_INFO, webGlobalVo);
+		}
 	}
 }
