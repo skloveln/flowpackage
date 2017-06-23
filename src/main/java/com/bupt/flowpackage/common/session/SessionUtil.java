@@ -35,7 +35,7 @@ public class SessionUtil {
 	private static Map<Integer, List<String>> MENU_URL_MAP = new HashMap<Integer, List<String>>();
 	
 	//用于同个账号只能一台电脑登陆，或者可以主动踢掉用户
-	private static Map<Integer, HttpSession> SESSION_MAP = new HashMap<Integer, HttpSession>();
+	public static Map<Integer, HttpSession> SESSION_MAP = new HashMap<Integer, HttpSession>();
 	
 	public static HttpServletRequest getRequest(){
 		ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -68,9 +68,8 @@ public class SessionUtil {
 	public static void login(SessionVo sessionVo) {
 		if (SESSION_MAP.containsKey(sessionVo.getAdminId())) {// 如果已经登录
 			HttpSession session = SESSION_MAP.get(sessionVo.getAdminId());
-			if (session != null) {
-				session.removeAttribute(ADMIN_SESSION);
-				session.invalidate();// 迫使原来 session 失效
+			if (session != null && session.getAttribute(ADMIN_SESSION) != null) {
+				session.invalidate();
 			}
 			SESSION_MAP.remove(sessionVo.getAdminId());
 			logger.info("loginName={}从另一个电脑登陆, 踢掉在线用户!", sessionVo.getLoginName());
@@ -84,7 +83,6 @@ public class SessionUtil {
 	public static void logout() {
 		SessionVo sessionInfo = getAdminSessionInfo();
 		if(sessionInfo != null){
-			SESSION_MAP.remove(sessionInfo.getAdminId());// 该操作在监听器中实现
 			getSession().removeAttribute(ADMIN_SESSION);
 			getSession().removeAttribute(ACTIVE_ADMIN_LISTENER);
 			getSession().invalidate();

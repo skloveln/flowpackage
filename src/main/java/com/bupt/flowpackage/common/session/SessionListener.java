@@ -27,6 +27,7 @@ public class SessionListener implements HttpSessionBindingListener {
 	@Override
 	public void valueUnbound(HttpSessionBindingEvent event) {
 		ACTIVE_ADMIN.remove(adminID);
+		SessionUtil.SESSION_MAP.remove(adminID);
 	}
 
 	public Integer getAdminID() {
