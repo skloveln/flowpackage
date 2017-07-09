@@ -7,7 +7,6 @@
 <link href="images/icon.png" rel="shortcut icon" />
 <link rel="stylesheet" href="css/login/reset.css" />
 <link rel="stylesheet" href="css/login/login.css" />
-<script type="text/javascript" src="staticlib/jquery/1.9.1/jquery.min.js"></script>
 <title>登录页-流量充值后台管理系统-摩尔科技</title>
 </head>
 <body>
@@ -22,11 +21,11 @@
 						</li>
 						<li class="login-item">
 							<span>用户名：</span>
-							<input type="text" id="username" name="loginName" class="login_input" autocomplete="off">
+							<input type="text" id="username" name="loginName" placeholder="请输入用户名" class="login_input" autocomplete="off">
 						</li>
 						<li class="login-item">
 							<span>密　码：</span>
-							<input type="text" id="password" name="password" onfocus="$(this).attr('type','password');" class="login_input" autocomplete="off">
+							<input type="text" id="password" name="password" placeholder="请输入密码"  onfocus="$(this).attr('type','password');" class="login_input" autocomplete="off">
 						</li>
 						<!--<li class="login-item verify">
 						<span>验证码：</span>
@@ -43,8 +42,11 @@
 			</div>
 		</div>
 	</div>
+	<%@include file="/WEB-INF/view/commons/jslib.jsp" %>
+	<script type="text/javascript" src="${ctx}/staticlib/plugs/canvas-particle/canvas-particle.js"></script>
+	<script type="text/javascript" src="${ctx}/staticlib/module/login/login.js"></script>
 	<script type="text/javascript">
-		window.onload = function() {
+		$(function() {
 			var config = {
 				vx: 4,
 				vy: 4,
@@ -58,10 +60,7 @@
 				max_conn: 10
 			}
 			CanvasParticle(config);
-		}
+		})
 	</script>
-	<script type="text/javascript" src="staticlib/canvas-particle/canvas-particle.js"></script>
-	<script type="text/javascript" src="staticlib/layer/2.4/layer.js?v=${flowVersion}"></script>
-	<script type="text/javascript" src="js/login/login.js"></script>
 </body>
 </html>

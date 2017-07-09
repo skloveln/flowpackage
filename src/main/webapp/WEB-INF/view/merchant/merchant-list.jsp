@@ -14,7 +14,7 @@
 	<nav class="breadcrumb"><i class="Hui-iconfont"></i>
 		<a href="#" class="maincolor">商户管理</a>
 		<span class="c-999 en">&gt;</span>
-		<span class="c-666">商家列表</span>
+		<a href="#" class="maincolor">商家列表</a>
 		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="Hui-article">
