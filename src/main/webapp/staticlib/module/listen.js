@@ -140,10 +140,12 @@ layui.use('adminplugs', function(){
             }
         }), {boxShadow: 'none'});
     });
-
+    
     /*! 后台菜单控制初始化 */
-    $.menu.listen();
+    /*$.menu.listen();*/
 
     /*! 表单监听初始化 */
     $.validate.listen(this);
+    
+    
 });

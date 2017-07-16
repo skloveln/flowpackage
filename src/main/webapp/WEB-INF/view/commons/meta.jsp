@@ -12,10 +12,10 @@
 <script type="text/javascript" src="${ctx}/staticlib/plugs/otherjs/html5shiv.js?v=${flowVersion}"></script>
 <script type="text/javascript" src="${ctx}/staticlib/plugs/otherjs/respond.min.js?v=${flowVersion}"></script>
 <![endif]-->
-<%-- <link href="${ctx}/staticlib/plugs/bootstrap/css/bootstrap.min.css?v=${flowVersion}" rel="stylesheet" type="text/css" />
- --%><link href="${ctx}/staticlib/plugs/layui/css/layui.css?v=${flowVersion}" rel="stylesheet" type="text/css" />
 <link href="${ctx}/staticlib/plugs/h-ui/css/H-ui.css?v=${flowVersion}" rel="stylesheet" type="text/css" />
 <link href="${ctx}/staticlib/plugs/h-ui.admin/css/H-ui.admin.css?v=${flowVersion}" rel="stylesheet" type="text/css" />
 <link href="${ctx}/staticlib/plugs/Hui-iconfont/1.0.8/iconfont.css?v=${flowVersion}" rel="stylesheet" type="text/css" />
 <link href="${ctx}/staticlib/plugs/h-ui.admin/skin/default/skin.css?v=${flowVersion}" rel="stylesheet" type="text/css" id="skin"/>
 <link href="${ctx}/staticlib/plugs/h-ui.admin/css/style.css?v=${flowVersion}" rel="stylesheet" type="text/css" />
+<link href="${ctx}/staticlib/plugs/layui/css/layui.css?v=${flowVersion}" rel="stylesheet" type="text/css" />
+

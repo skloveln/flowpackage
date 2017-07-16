@@ -1,6 +1,8 @@
 package com.bupt.flowpackage.common.interceptors;
 
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.alibaba.fastjson.JSONObject;
 
 
 public class RequestParameterInteceptor extends HandlerInterceptorAdapter {
@@ -35,7 +39,7 @@ public class RequestParameterInteceptor extends HandlerInterceptorAdapter {
 		while (en.hasMoreElements()) {
 			String name = en.nextElement();
 			String values[] = request.getParameterValues(name);
-
+			
 			for (int i = 0; i < values.length; i++) {
 				sb.append("\n\t参数名getParameter：" + name + ",参数值：" + values[i]);
 

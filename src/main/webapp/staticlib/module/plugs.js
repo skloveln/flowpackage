@@ -35,7 +35,7 @@ layui.define(['jquery', 'layer', 'form'], function(exports){
         this.shade = [0.02, '#000'];
         this.closeIndexs = {};
     }
-
+    
     /**
      * 关闭消息框
      */
@@ -180,8 +180,7 @@ layui.define(['jquery', 'layer', 'form'], function(exports){
      * 将消息对象挂载到Jq
      */
     $.msg = new msg();
-
-
+    
     /**
      * 表单构造函数
      * @private

@@ -12,3 +12,4 @@
 <script type="text/javascript" src="${ctx}/staticlib/plugs/h-ui.admin/js/H-ui.admin.page.js?v=${flowVersion}"></script> 
 <script type="text/javascript" src="${ctx}/staticlib/module/plugs.js?v=${flowVersion}"></script> 
 <script type="text/javascript" src="${ctx}/staticlib/module/listen.js?v=${flowVersion}"></script>  
+<script type="text/javascript" src="${ctx}/staticlib/module/global.js?v=${flowVersion}"></script>  

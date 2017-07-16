@@ -1,11 +1,10 @@
 package com.bupt.flowpackage.common.domain;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Page<T> implements Serializable  {
+public class Page<T> extends BaseResponse<T>  {
 	
 	private static final long serialVersionUID = 1L;
 	/** 一页显示的记录数 */
