@@ -17,6 +17,7 @@ spring-4.2.6+springmvc-4.2.6+mybatis+mysql+jsp </br>
 日志模块  slf4j+log4j2</br>
 登录拦截器模块 </br>
 参数校验拦截器模块</br>
+单客户端登陆</br>
 
 其中最重要并且最通用的权限模块，表格已全部设计完. 后台代码也基本开发完成。</br>
 
@@ -31,16 +32,17 @@ http://www.cnblogs.com/leoxie2011/archive/2011/05/19/2050626.html
 设计表，和数据路径位于</br>
 flowpackage/src/main/webapp/docs/sql/
 </br>
-前端使用国内开源的 H-ui-admin</br>
-地址：H-ui.admin  界面清晰友好</br>
+前端使用国内开源的 H-ui-admin 界面清晰友好</br>
+地址：
 http://www.h-ui.net/index.shtml
 </br>
 我把这套通用权限系统开源出来， 希望更多的人可以使用和学习.</br>
-</br></br></br></br>
+</br>
 
 
-</br></br></br>
-请勿用于商业行为
-尊重原创，转载请注明
-作者：王道健
-github地址：https://github.com/wangdaojian/flowpackage.git
+</br></br>
+请勿用于商业行为</br>
+尊重原创，转载请注明</br>
+作者：王道健</br>
+github地址：https://github.com/wangdaojian/flowpackage.git</br>
+qq: 419550295
