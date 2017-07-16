@@ -1,7 +1,5 @@
 package com.bupt.flowpackage.common.domain;
 
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 
 import com.bupt.flowpackage.common.enums.ResultCode;

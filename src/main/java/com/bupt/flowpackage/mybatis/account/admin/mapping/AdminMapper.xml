@@ -80,7 +80,34 @@
     </where>
   </select>
   <!-- 获取管理员角色信息 -->
-  <select id="selectAdminRoleInfo" resultMap="AdminRoleBaseResultMap" parameterType="admin" >
+  <select id="selectAdminRoleInfo" resultMap="AdminRoleBaseResultMap" parameterType="adminRole" >
+    select 
+    <include refid="AdminRole_Column_List" />
+    from cf_admin admin, cf_role role, cf_adminRole adminRole
+    <where>
+    	admin.id = adminRole.admin_id 
+		and role.id = adminRole.role_id 
+    	and admin.available_flag = 1 
+    	<if test="loginName != null">
+		    AND admin.login_name = #{loginName}
+	    </if>
+	    <if test="password != null">
+	    	AND admin.password = #{password}
+	    </if>
+	    <if test="realName != null">
+	    	AND admin.real_name = #{realName}
+	    </if>
+	    <if test="mobile != null">
+	    	AND admin.mobile like #{mobile}
+	    </if>
+	    <if test="isSuper != null">
+	    	AND admin.is_super = #{isSuper}
+	    </if>
+    </where>
+  </select>
+  
+  <!-- 获取管理员角色信息 -->
+  <select id="selectAdminRoleInfoPage" resultMap="AdminRoleBaseResultMap" parameterType="adminRole" >
     select 
     <include refid="AdminRole_Column_List" />
     from cf_admin admin, cf_role role, cf_adminRole adminRole

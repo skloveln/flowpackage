@@ -3,7 +3,9 @@ package com.bupt.flowpackage.biz.auth.service;
 import java.util.List;
 
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
+import com.bupt.flowpackage.common.domain.Page;
 import com.bupt.flowpackage.common.domain.SessionVo;
+import com.bupt.flowpackage.mybatis.account.admin.model.AdminRole;
 import com.bupt.flowpackage.mybatis.account.application.model.Application;
 
 /**
@@ -21,6 +23,17 @@ public interface AdminRoleService {
 	 * @return BaseResponse<Boolean>
 	 */
 	public SessionVo checkLoginUserAndPwdService(UserLoginWebRequest req);
+	
+	/**
+	* @Description 获取管理员列表
+	* @param @param adminRoleReq
+	* @param @param pageSize
+	* @param @param pageNum
+	* @param @return
+	* @return Page<AdminRole>
+	 */
+	public Page<AdminRole> getAdminListPage(AdminRole adminRoleReq, Integer pageSize, Integer pageNum);
+	
 	/**
 	* @Description 根据角色获取模块菜单
 	* @param @return
