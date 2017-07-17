@@ -21,7 +21,7 @@ public class AdminController {
 	@RequestMapping("/admin-list")
 	public String adminList() {
 		return "admin/admin-list";
-	}
+	}   
 	
 	
 	
