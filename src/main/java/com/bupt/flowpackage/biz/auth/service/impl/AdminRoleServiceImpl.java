@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
+import com.bupt.flowpackage.common.domain.Page;
 import com.bupt.flowpackage.common.domain.SessionVo;
 import com.bupt.flowpackage.common.exception.BizException;
 import com.bupt.flowpackage.mybatis.account.admin.mapper.AdminMapper;
-import com.bupt.flowpackage.mybatis.account.admin.model.Admin;
 import com.bupt.flowpackage.mybatis.account.admin.model.AdminRole;
 import com.bupt.flowpackage.mybatis.account.application.model.Application;
 import com.bupt.flowpackage.mybatis.account.menu.mapper.MenuMapper;
+import com.github.pagehelper.PageHelper;
 
 /**
  * <p>Description:管理员权限角色接口服务</p>
@@ -32,9 +33,9 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 
 	@Override
 	public SessionVo checkLoginUserAndPwdService(UserLoginWebRequest req){
-		Admin adminReq = new Admin();
-		adminReq.setLoginName(req.getLoginName());
-		AdminRole adminRole = adminMapper.selectAdminRoleInfo(adminReq);
+		AdminRole adminRoleReq = new AdminRole();
+		adminRoleReq.setLoginName(req.getLoginName());
+		AdminRole adminRole = adminMapper.selectAdminRoleInfo(adminRoleReq);
 		if(adminRole == null) {
 			BizException.warn(101, "用户名不存在!");
 		}else if(!(req.getPassword().equals(adminRole.getPassword()))) {
@@ -59,4 +60,14 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		return menuMapper.selectAllApplicationList();
 	}
 	
+	public Page<AdminRole> getAdminListPage(AdminRole adminRoleReq, Integer pageNum, Integer pageSize){
+		Page<AdminRole> pageInfo = new Page<AdminRole>();
+		PageHelper.startPage(pageNum, pageSize);
+		List<AdminRole> adminRoleResp = adminMapper.selectAdminRoleInfoPage(adminRoleReq);
+		pageInfo.setRows(adminRoleResp);
+		if(adminRoleResp != null) {
+			pageInfo.setTotal(adminRoleResp.size());
+		}
+		return pageInfo;
+	}
 }

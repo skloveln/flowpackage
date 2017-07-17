@@ -1,5 +1,7 @@
 package com.bupt.flowpackage.mybatis.account.admin.mapper;
 
+import java.util.List;
+
 import com.bupt.flowpackage.common.annotation.MyBatisRepository;
 import com.bupt.flowpackage.mybatis.account.admin.model.Admin;
 import com.bupt.flowpackage.mybatis.account.admin.model.AdminRole;
@@ -20,7 +22,9 @@ public interface AdminMapper {
      * @param @return      
      * @return AdminRole
      */
-    AdminRole selectAdminRoleInfo(Admin admin);
+    AdminRole selectAdminRoleInfo(AdminRole adminRole);
+    
+    List<AdminRole> selectAdminRoleInfoPage(AdminRole adminRole);
     
     int selectCountBySelective(Admin admin);
 

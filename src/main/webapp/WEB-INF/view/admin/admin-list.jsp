@@ -88,6 +88,9 @@
 <script type="text/javascript">
 layui.use(['laypage', 'layer'], function(){
 	var laypage = layui.laypage;
+	
+	
+	
 	laypage({
 		curr:$.getUrlParam('pageNumber'),
 		cont: 'page',
