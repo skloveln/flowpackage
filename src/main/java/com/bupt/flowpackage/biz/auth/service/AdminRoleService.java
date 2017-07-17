@@ -2,6 +2,7 @@ package com.bupt.flowpackage.biz.auth.service;
 
 import java.util.List;
 
+import com.bupt.flowpackage.biz.auth.model.AdminRoleListReq;
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
 import com.bupt.flowpackage.common.domain.Page;
 import com.bupt.flowpackage.common.domain.SessionVo;
@@ -32,7 +33,7 @@ public interface AdminRoleService {
 	* @param @return
 	* @return Page<AdminRole>
 	 */
-	public Page<AdminRole> getAdminListPage(AdminRole adminRoleReq, Integer pageSize, Integer pageNum);
+	public Page<AdminRole> getAdminListPage(AdminRoleListReq bizReq);
 	
 	/**
 	* @Description 根据角色获取模块菜单

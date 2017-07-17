@@ -7,12 +7,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Page<T> extends BaseResponse<T>  {
 	
 	private static final long serialVersionUID = 1L;
+	public static final int DEFAULT_PAGE_SIZE = 20; 
+	
 	/** 一页显示的记录数 */
-	private int pageSize = 20;
+	private int pageSize = DEFAULT_PAGE_SIZE;
 	/** 记录总数 */
-	private long total;
+	private long total = -1;
 	/** 当前页码 */
-	private int pageNum;
+	private int pageNum = 1;
 	/** 结果集存放List */
 	private List<T> rows;
 

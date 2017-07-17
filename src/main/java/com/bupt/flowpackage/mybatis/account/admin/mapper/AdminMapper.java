@@ -23,7 +23,12 @@ public interface AdminMapper {
      * @return AdminRole
      */
     AdminRole selectAdminRoleInfo(AdminRole adminRole);
-    
+    /**
+     * <p>获取管理员列表</p>   
+     * @param @param adminRole
+     * @param @return      
+     * @return List<AdminRole>
+     */
     List<AdminRole> selectAdminRoleInfoPage(AdminRole adminRole);
     
     int selectCountBySelective(Admin admin);

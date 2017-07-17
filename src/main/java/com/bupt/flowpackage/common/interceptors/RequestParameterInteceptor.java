@@ -1,8 +1,6 @@
 package com.bupt.flowpackage.common.interceptors;
 
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import com.alibaba.fastjson.JSONObject;
 
 
 public class RequestParameterInteceptor extends HandlerInterceptorAdapter {
