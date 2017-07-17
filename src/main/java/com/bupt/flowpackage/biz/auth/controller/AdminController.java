@@ -23,6 +23,8 @@ public class AdminController {
 		return "admin/admin-list";
 	}
 	
+	
+	
 	/**
 	 * <p>权限管理</p>   
 	 * @param @param request
