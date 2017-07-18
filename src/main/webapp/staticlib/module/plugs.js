@@ -1,4 +1,5 @@
-layui.define(['jquery', 'layer', 'form'], function(exports){
+layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
+	var laypage = layui.laypage; 
     /*!
      * jQuery placeholder, fix for IE6,7,8,9
      */
@@ -786,5 +787,45 @@ layui.define(['jquery', 'layer', 'form'], function(exports){
     /*! 实例并加载到jQ对象上 */
     $.menu = new menu();
     
-    exports('adminplugs', $.menu);
+    var table = function(){
+    	this.version = '1.0';
+    }
+    
+    table.prototype.show = function(_self, curr, url, data) {
+    	var loading = layer.load(0, {
+			  shade: [0.1,'black'] //0.1透明度的黑色背景
+		});
+		$.ajax({
+			url: url,
+			type: "POST",
+			data: data,
+			dataType: "json",
+			success: function(resp) {
+				var respData = eval(resp);
+				_self.list = respData.rows; //给 json 赋值
+				_self.loaded=true;
+				//显示分页
+				laypage({
+					cont: 'page', 
+					pages: respData.totalPages, //通过后台拿到的总页数
+					curr: curr || 1, //当前页
+					jump: function(obj, first) { //触发分页后的回调
+						if(!first) { //点击跳页触发函数自身，并传递当前页：obj.curr
+							_self.showData(obj.curr, url, data);
+						}
+					}
+				});
+			},
+			error: function(er) {
+				layer.msg("服务器出错，请重试！" + console.log(er));
+			},
+	        complete: function () {
+              layer.close(loading);
+          }
+		});
+    }
+    
+    $.table = new table();
+    
+    exports('adminplugs', {});
 });

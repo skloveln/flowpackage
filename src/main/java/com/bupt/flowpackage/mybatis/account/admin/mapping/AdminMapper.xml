@@ -115,19 +115,19 @@
     	admin.id = adminRole.admin_id 
 		and role.id = adminRole.role_id 
     	and admin.available_flag = 1 
-    	<if test="loginName != null">
+    	<if test="loginName != null and loginName != ''">
 		    AND admin.login_name = #{loginName}
 	    </if>
-	    <if test="password != null">
+	    <if test="password != null and password != ''">
 	    	AND admin.password = #{password}
 	    </if>
-	    <if test="realName != null">
+	    <if test="realName != null and realName != ''">
 	    	AND admin.real_name = #{realName}
 	    </if>
-	    <if test="mobile != null">
+	    <if test="mobile != null and mobile != ''">
 	    	AND admin.mobile like #{mobile}
 	    </if>
-	    <if test="isSuper != null">
+	    <if test="isSuper != null and isSuper != ''">
 	    	AND admin.is_super = #{isSuper}
 	    </if>
     </where>

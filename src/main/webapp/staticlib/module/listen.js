@@ -147,5 +147,4 @@ layui.use('adminplugs', function(){
     /*! 表单监听初始化 */
     $.validate.listen(this);
     
-    
 });

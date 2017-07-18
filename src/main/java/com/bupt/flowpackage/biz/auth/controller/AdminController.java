@@ -33,10 +33,22 @@ public class AdminController {
 	 * @param @return      
 	 * @return String
 	 */
-	@RequestMapping("/admin-list")
+	/*@RequestMapping("/admin-list")
 	public String adminList() {
 		return "admin/admin-list";
+	} */
+	
+	@RequestMapping("/admin-list")
+	public String adminList() {
+		return "admin/admin-list2";
+	} 
+	
+	@RequestMapping("/admin-delete")
+	public String adminDelete() {
+		System.out.println("xxxxxxxx");
+		return "admin/admin-list";
 	}   
+	
 	
 	@ResponseBody
 	@RequestMapping("/api/getAdminRoleList")
