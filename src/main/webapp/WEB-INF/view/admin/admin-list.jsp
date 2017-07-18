@@ -27,7 +27,7 @@
 						<button data-update="" data-field="delete" data-action="/admin/user/del.html" class="layui-btn layui-btn-small layui-btn-danger"><i class="fa fa-remove"></i> 删除用户
 					    </button>
 					</div> -->
-					<form class="layui-form layui-form-pane" action="${ctx}/admin/admin-list.html">
+					<form class="layui-form layui-form-pane" id="searchForm">
 						<div class="layui-form-item">
 							<label class="layui-form-label">姓名:</label>
 							<div class="layui-input-inline">
@@ -38,7 +38,7 @@
 								<input type="text" value="${param.mobile}" name="mobile" placeholder="根据手机号过滤" class="layui-input">
 							</div>
 							<input type="hidden" value="1" name="pageNumber">
-							<button class="layui-btn" lay-submit="">查询</button>
+							<button class="layui-btn" >查询</button>
 							<button  class="layui-btn" data-modal="/admin/user/add.html" data-title="添加用户"><i class="fa fa-plus"></i> 添加用户
 						    </button>
 						</div>
@@ -47,29 +47,27 @@
 						<thead>
 							<tr>
 								<th>序号</th>
-								<th>项目名称</th>
-								<th>是否公开</th>
-								<th>权限</th>
-								<th>创建人</th>
-								<th>创建时间</th>
+								<th>账号</th>
+								<th>姓名</th>
+								<th>手机号</th>
+								<th>邮箱</th>
+								<th>最后登录</th>
+								<th>状态</th>
 								<th>操作</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>撒大声地chen</td>
-								<td>是</td>
-								<td>读写</td>
-								<td>demo</td>
-								<td>2017-07-04 11:10:06</td>
+						<tbody id="table-body">
+							<tr v-for="item in list">
+								<td>{{item.id}}</td>
+								<td>{{item.loginName}}</td>
+								<td>{{item.realName}}</td>
+								<td>{{value.mobile}}</td>
+								<td>{{value.email}}</td>
+								<td>{{item.lastLoginTime}}</td>
+								<td>{{value.availableFlag}}</td>
 								<td>
-									<button onclick="window.location.href='methodList.html?projectId=138'" class="layui-btn layui-btn-mini"><i class="fa fa-th-list"></i>接口</button>
-									<button onclick="window.location.href='paramList.html?projectId=138'" class="layui-btn layui-btn-mini"><i class="fa fa-th-list"></i>参数</button>
-									<button onclick="window.location.href='projectDocList.html?projectId=138'" class="layui-btn layui-btn-mini"><i class="fa fa-file-text-o"></i>文档</button>
-									<button onclick="window.location.href='helpList.html?projectId=138'" class="layui-btn layui-btn-mini"><i class="fa fa-th-list"></i>协作</button>
-									<button onclick="window.location.href='addOrEdit?projectId=138'" class="layui-btn layui-btn-warm layui-btn-mini"><i class="fa fa-edit"></i>编辑</button>
-									<button onclick="confirm('delete.html?projectId=138','确定要删除吗？')" class="layui-btn layui-btn-danger layui-btn-mini"><i class="icon-trash"></i>删除</button>
+									<button v-on:onclick="vmupdate(item)"><i class="fa fa-edit"></i>编辑</button>
+									<button v-on:onclick="vmdelete(item.id)" class="layui-btn layui-btn-danger layui-btn-mini"><i class="icon-trash"></i>删除</button>
 								</td>
 							</tr>
 						</tbody>
@@ -89,7 +87,52 @@
 layui.use(['laypage', 'layer'], function(){
 	var laypage = layui.laypage;
 	
-	
+	var vm = new Vue({  
+        el: '#table-body',  
+        data: {  
+        	list: data  
+        }, 
+        beforeCreate: function() {
+        	var reqData = $.extend({"pageNum":curr || 1}, $('#searchForm').serialize());
+        	_self.showData(curr, url, reqData);
+        },
+        methods: {
+        	showData: function(curr, url, data) { //列表
+	     		$.ajax({
+    				url: url,
+    				type: "POST",
+    				data: data,
+    				dataType: "json",
+    				success: function(resp) {
+    					var respData = eval(resp);
+    					vm.list = respData.rows; //给 json 赋值
+    					//显示分页
+    					laypage({
+    						cont: 'page', 
+    						pages: respData.totalPages, //通过后台拿到的总页数
+    						curr: curr || 1, //当前页
+    						jump: function(obj, first) { //触发分页后的回调
+    							if(!first) { //点击跳页触发函数自身，并传递当前页：obj.curr
+    								_self.showData(obj.curr, url, data);
+    							}
+    						}
+    					});
+    				},
+    				error: function(er) {
+    					layer.msg("服务器出错，请重试！" + console.log(er));
+    				}
+    			});
+        	},
+        	vmdelete: function (_id) //删除  
+            {  
+            	alert("删除");
+            },  
+            vmupdate: function (item) //更新  
+            {  
+            	alert("更新");
+            }  
+        }  
+    });
 	
 	laypage({
 		curr:$.getUrlParam('pageNumber'),
