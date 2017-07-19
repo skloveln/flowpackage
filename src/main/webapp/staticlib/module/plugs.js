@@ -791,30 +791,34 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
     	this.version = '1.0';
     }
     
-    table.prototype.show = function(_self, curr, url, data) {
+    table.prototype.show = function(url, params, curr, templateStr, tbodyName) {
     	var loading = layer.load(0, {
 			  shade: [0.1,'black'] //0.1透明度的黑色背景
 		});
+    	templateStr = templateStr || "main-template";
+    	tbodyName = tbodyName || "table-body";
 		$.ajax({
 			url: url,
 			type: "POST",
-			data: data,
+			data: params,
 			dataType: "json",
 			success: function(resp) {
 				var respData = eval(resp);
-				_self.list = respData.rows; //给 json 赋值
-				_self.loaded=true;
-				//显示分页
-				laypage({
-					cont: 'page', 
-					pages: respData.totalPages, //通过后台拿到的总页数
-					curr: curr || 1, //当前页
-					jump: function(obj, first) { //触发分页后的回调
-						if(!first) { //点击跳页触发函数自身，并传递当前页：obj.curr
-							_self.showData(obj.curr, url, data);
+				if(respData.code == 200) {
+					var tableData = template(templateStr, respData);  
+			    	$("#" + tbodyName).html(tableData);
+					//显示分页
+					laypage({
+						cont: 'page', 
+						pages: respData.totalPages, //通过后台拿到的总页数
+						curr: curr || 1, //当前页
+						jump: function(obj, first) { //触发分页后的回调
+							if(!first) { //点击跳页触发函数自身，并传递当前页：obj.curr
+								_self.showData(obj.curr, url, data);
+							}
 						}
-					}
-				});
+					});
+				}
 			},
 			error: function(er) {
 				layer.msg("服务器出错，请重试！" + console.log(er));

@@ -57,7 +57,7 @@
 							</tr>
 						</thead>
 						<tbody id="table-body">
-							<tr v-for="item in list">
+							<%-- <tr v-for="item in list">
 								<td>{{item.adminId}}</td>
 								<td>{{item.loginName}}</td>
 								<td>{{item.realName}}</td>
@@ -72,7 +72,7 @@
 							</tr>
 							<tr v-if="loaded==true && list.length == 0">
 								<td colspan="8" style="text-align: center">暂无数据</td>
-							</tr>
+							</tr> --%>
 						</tbody>
 					</table>
 				</div>
@@ -85,35 +85,37 @@
 	</div>
 </section>
 <%@include file="/WEB-INF/view/commons/jslib.jsp" %>
+<script id="main-template"  type="text/html"> 
+	{{if rows}} 
+		{{each rows as item}}
+			<tr>
+				<td>{{item.adminId}}</td>
+				<td>{{item.loginName}}</td>
+				<td>{{item.realName}}</td>
+				<td>{{item.mobile}}</td>
+				<td>{{item.email}}</td>
+				<td>{{item.lastLoginTime}}</td>
+				<td>{{item.availableFlag}}</td>
+				<td>
+					<a class="layui-btn layui-btn-mini">修改</a>
+					<a data-update="1" data-field='delete' data-action='${ctx}/admin/delete' class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+				</td>
+			</tr>
+		{{/each}} 
+	{{else}}
+		<tr><td colspan="8" style="text-align: center">暂无数据</td></tr>
+	{{/if}}
+</script>
+
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript">
  layui.use('adminplugs', function(){
-	var laypage = layui.laypage; 
+	var url = "${ctx}/admin/api/getAdminRoleList";
+	var params = $('#searchForm').serialize();
+	$.table.show(url, params);
 	
-	var vm = new Vue({  
-        el: '#table-body',  
-        data: {  
-        	list: [],
-        	loaded: false
-        },
-        methods: {
-        	showData: function() { //列表
-        		var url = "${ctx}/admin/api/getAdminRoleList";
-        		var reqData = $('#searchForm').serialize();
-        		$.table.show(this, 1, url, reqData);
-        	},
-        	vmdelete: function (_id) //删除  
-            {  
-            	alert("删除");
-            },  
-            vmupdate: function (item) //更新  
-            {  
-            	alert("更新");
-            }  
-        }  
-	});
 	
-	vm.showData();
+	//vm.showData();
 	
 	
 	/* laypage({
