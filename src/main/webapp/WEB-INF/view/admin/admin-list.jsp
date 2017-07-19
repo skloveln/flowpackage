@@ -15,7 +15,7 @@
 		<a href="#" class="maincolor">管理员管理</a>
 		<span class="c-999 en">&gt;</span>
 		<a href="#" class="maincolor">管理员列表</a>
-		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.reload();" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
@@ -25,11 +25,11 @@
 						<div class="layui-form-item">
 							<label class="layui-form-label">姓名:</label>
 							<div class="layui-input-inline">
-								<input type="text" name="loginName" placeholder="根据姓名过滤" class="layui-input">
+								<input type="text" name="loginName" value="${param.loginName}"  placeholder="根据姓名过滤" class="layui-input">
 							</div>
 							<label class="layui-form-label">手机号:</label>
 							<div class="layui-input-inline">
-								<input type="text" name="mobile" placeholder="根据手机号过滤" class="layui-input">
+								<input type="text" name="mobile" value="${param.mobile}"  placeholder="根据手机号过滤" class="layui-input">
 							</div>
 							<input type="hidden" value="1" name="pageNumber">
 							<button class="layui-btn" >查询</button>
