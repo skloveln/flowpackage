@@ -21,12 +21,6 @@
 		<article class="cl pd-20">
 			<div class="admin-main">
 				<div class="layui-field-box layui-form">
-					<!-- <div style="float:right; margin:0 15px 10px">
-						<button data-modal="/admin/user/add.html" data-title="添加用户" class="layui-btn layui-btn-small"><i class="fa fa-plus"></i> 添加用户
-					    </button>
-						<button data-update="" data-field="delete" data-action="/admin/user/del.html" class="layui-btn layui-btn-small layui-btn-danger"><i class="fa fa-remove"></i> 删除用户
-					    </button>
-					</div> -->
 					<form class="layui-form layui-form-pane" id="searchForm">
 						<div class="layui-form-item">
 							<label class="layui-form-label">姓名:</label>
@@ -57,22 +51,6 @@
 							</tr>
 						</thead>
 						<tbody id="table-body">
-							<%-- <tr v-for="item in list">
-								<td>{{item.adminId}}</td>
-								<td>{{item.loginName}}</td>
-								<td>{{item.realName}}</td>
-								<td>{{item.mobile}}</td>
-								<td>{{item.email}}</td>
-								<td>{{item.lastLoginTime}}</td>
-								<td>{{item.availableFlag}}</td>
-								<td>
-									<a class="layui-btn layui-btn-mini">修改</a>
-									<a data-update="1" data-field='delete' data-action='${ctx}/admin/delete' class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
-								</td>
-							</tr>
-							<tr v-if="loaded==true && list.length == 0">
-								<td colspan="8" style="text-align: center">暂无数据</td>
-							</tr> --%>
 						</tbody>
 					</table>
 				</div>
@@ -87,7 +65,7 @@
 <%@include file="/WEB-INF/view/commons/jslib.jsp" %>
 <script id="main-template"  type="text/html"> 
 	{{if rows}} 
-		{{each rows as item}}
+		{{each rows item}}
 			<tr>
 				<td>{{item.adminId}}</td>
 				<td>{{item.loginName}}</td>
