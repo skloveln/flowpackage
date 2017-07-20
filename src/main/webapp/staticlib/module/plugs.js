@@ -842,7 +842,7 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
 			},
 	        complete: function () {
               layer.close(loading);
-          }
+	        }
 		});
     }
     

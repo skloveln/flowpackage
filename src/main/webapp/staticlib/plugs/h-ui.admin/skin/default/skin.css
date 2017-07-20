@@ -1,8 +1,8 @@
 @charset "utf-8";
-/* 默认 黑色 */	
+/* 绿色 */
 /*全站默认字体颜色*/
 a{color:#333}a:hover,a:focus,.maincolor,.maincolor a{color:#06c}
-.navbar{ background:#222}/*顶部导航*/
+.navbar{ background:#19a97b}/*顶部导航*/
 	.navbar-logo,.navbar-logo-m,.navbar-slogan,.navbar-userbar{color:#fff}/*logo 及 用户信息文字颜色*/
 	.navbar-logo:hover,.navbar-logo-m:hover{color:#fff;text-decoration: none}
 	
@@ -19,3 +19,5 @@ a{color:#333}a:hover,a:focus,.maincolor,.maincolor a{color:#06c}
 	/* .Hui-aside .menu_dropdown dt .Hui-iconfont{ color:#a0a7b1} */
 	.Hui-aside .menu_dropdown dt .menu_dropdown-arrow{ color:#b6b7b8}	
 	.dislpayArrow a{background:url(icon_arrow.png) no-repeat 0 0}
+.tabBar {border-bottom: 2px solid #19a97b}
+.tabBar span.current{background-color:#19a97b}
