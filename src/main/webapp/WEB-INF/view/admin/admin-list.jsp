@@ -88,42 +88,8 @@
 <script type="text/javascript">
  layui.use('adminplugs', function(){
 	var url = "${ctx}/admin/api/getAdminRoleList";
-	//var params = $('#searchForm').serialize();
 	var params = $('#searchForm').serializeObject();
 	$.table.show(url, params);
-	
-	
-	//vm.showData();
-	
-	
-	/* laypage({
-		curr:$.getUrlParam('pageNumber'),
-		cont: 'page',
-		pages: 100,
-		prev:false,
-		next:false,
-		groups: 3,
-		skip: true,
-		jump: function(obj,first){
-			if(obj.curr != $.getUrlParam('pageNumber')) {
-				var url = location.href;
-				var page = $.getUrlParam('pageNumber');
-				if(url.indexOf("?") == -1) {
-					if(page) {
-						location.href = url+"?pageNumber=1";
-					}else if(obj.curr > 1) {
-						location.href = url+"?pageNumber="+obj.curr;
-					}
-				} else {
-					if(page) {
-						location.href = url.replace("pageNumber="+page,"pageNumber="+obj.curr);
-					} else {
-						location.href = url.replace("?","?pageNumber="+obj.curr+"&");
-					}
-				}
-			}
-		}
-	}); */
 });
 </script>
 </body>
