@@ -14,7 +14,7 @@
 	<nav class="breadcrumb"><i class="Hui-iconfont"></i>
 		<a href="#" class="maincolor">管理员管理</a>
 		<span class="c-999 en">&gt;</span>
-		<a href="#" class="maincolor">管理员列表</a>
+		<a href="${ctx}/admin/admin-list.html" class="maincolor">管理员列表</a>
 		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.reload();" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="Hui-article">
