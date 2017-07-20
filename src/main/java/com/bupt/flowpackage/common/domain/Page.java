@@ -4,11 +4,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Page<T> extends BaseResponse<T>  {
-	
+public class Page<T> extends BaseBean{
 	private static final long serialVersionUID = 1L;
-	public static final int DEFAULT_PAGE_SIZE = 20; 
 	
+	public static final int DEFAULT_PAGE_SIZE = 10; 
 	/** 一页显示的记录数 */
 	private int pageSize = DEFAULT_PAGE_SIZE;
 	/** 记录总数 */

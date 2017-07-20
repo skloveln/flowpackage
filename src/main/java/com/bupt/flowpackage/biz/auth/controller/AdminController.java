@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bupt.flowpackage.biz.auth.model.AdminRoleListReq;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
 import com.bupt.flowpackage.common.domain.BaseResponse;
+import com.bupt.flowpackage.common.domain.Page;
 import com.bupt.flowpackage.common.exception.ExceptionHelper;
 import com.bupt.flowpackage.mybatis.account.admin.model.AdminRole;
 /**
@@ -48,7 +49,8 @@ public class AdminController {
 	public BaseResponse<AdminRole> getAdminRoleList(AdminRoleListReq req, HttpServletRequest request) {
 		BaseResponse<AdminRole> baseResp = new BaseResponse<AdminRole>();
 		try{
-			baseResp = adminRoleService.getAdminListPage(req);
+			Page<AdminRole> pages = adminRoleService.getAdminListPage(req);
+			baseResp.setPages(pages);
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);
 		}finally{

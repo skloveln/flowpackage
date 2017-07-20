@@ -12,6 +12,7 @@ public class BaseRequest extends BaseBean {
 	private int pageSize = Page.DEFAULT_PAGE_SIZE;
 	/** 当前页码 */
 	private int pageNum = 1;
+	
 	public int getPageSize() {
 		return pageSize;
 	}

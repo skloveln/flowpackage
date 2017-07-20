@@ -787,16 +787,33 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
     /*! 实例并加载到jQ对象上 */
     $.menu = new menu();
     
+    $.fn.serializeObject = function()  
+    {  
+       var o = {};  
+       var a = this.serializeArray();  
+       $.each(a, function() {  
+           if (o[this.name]) {  
+               if (!o[this.name].push) {  
+                   o[this.name] = [o[this.name]];  
+               }  
+               o[this.name].push(this.value || '');  
+           } else {  
+               o[this.name] = this.value || '';  
+           }  
+       });  
+       return o;  
+    };
+    
     var table = function(){
     	this.version = '1.0';
     }
     
     table.prototype.show = function(url, params, curr, templateStr, tbodyName) {
+    	curr = curr || 1,templateStr = templateStr || "main-template",tbodyName = tbodyName || "table-body"
+    	$.extend(params, {'pageNum' : curr});
     	var loading = layer.load(0, {
 			  shade: [0.1,'black'] //0.1透明度的黑色背景
 		});
-    	templateStr = templateStr || "main-template";
-    	tbodyName = tbodyName || "table-body";
 		$.ajax({
 			url: url,
 			type: "POST",
@@ -805,16 +822,16 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
 			success: function(resp) {
 				var respData = eval(resp);
 				if(respData.code == 200) {
-					var tableData = template(templateStr, respData);  
+					var tableData = template(templateStr, respData.pages);  
 			    	$("#" + tbodyName).html(tableData);
 					//显示分页
 					laypage({
 						cont: 'page', 
-						pages: respData.totalPages, //通过后台拿到的总页数
-						curr: curr || 1, //当前页
+						pages: respData.pages.totalPages, //通过后台拿到的总页数
+						curr: curr, //当前页
 						jump: function(obj, first) { //触发分页后的回调
 							if(!first) { //点击跳页触发函数自身，并传递当前页：obj.curr
-								_self.showData(obj.curr, url, data);
+								$.table.show(url, params, obj.curr, templateStr, tbodyName);
 							}
 						}
 					});

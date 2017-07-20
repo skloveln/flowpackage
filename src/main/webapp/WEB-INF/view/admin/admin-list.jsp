@@ -31,7 +31,6 @@
 							<div class="layui-input-inline">
 								<input type="text" name="mobile" value="${param.mobile}"  placeholder="根据手机号过滤" class="layui-input">
 							</div>
-							<input type="hidden" value="1" name="pageNumber">
 							<button class="layui-btn" >查询</button>
 							<button  class="layui-btn" data-modal="/admin/user/add.html" data-title="添加用户"><i class="fa fa-plus"></i> 添加用户
 						    </button>
@@ -64,7 +63,7 @@
 </section>
 <%@include file="/WEB-INF/view/commons/jslib.jsp" %>
 <script id="main-template"  type="text/html"> 
-	{{if rows}} 
+	{{if rows.length > 0}} 
 		{{each rows item}}
 			<tr>
 				<td>{{item.adminId}}</td>
@@ -89,7 +88,8 @@
 <script type="text/javascript">
  layui.use('adminplugs', function(){
 	var url = "${ctx}/admin/api/getAdminRoleList";
-	var params = $('#searchForm').serialize();
+	//var params = $('#searchForm').serialize();
+	var params = $('#searchForm').serializeObject();
 	$.table.show(url, params);
 	
 	

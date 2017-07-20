@@ -19,6 +19,16 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 	
 	private T data;
 	
+	private Page<T> pages;
+	
+	public Page<T> getPages() {
+		return pages;
+	}
+
+	public void setPages(Page<T> pages) {
+		this.pages = pages;
+	}
+
 	public BaseResponse(String requestNo){
 		this(ResultCode.Result_SUCCESS, requestNo);
 	}
