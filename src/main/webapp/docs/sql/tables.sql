@@ -118,6 +118,7 @@ create table sys_menu
    menu_order           smallint comment '菜单顺序',
    menu_name            varchar(32) comment '菜单名称',
    menu_url             varchar(256) comment '菜单url',
+   menu_type			smallint default 1 comment '类型   1菜单  2 按钮或链接',
    menu_icon            varchar(256) comment '菜单icon',
    is_visible           boolean comment '是否可用 1可用 0不可用',
    is_leaf              boolean,

@@ -42,7 +42,10 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		AdminRole adminRole = adminMapper.selectAdminRoleInfo(adminRoleReq);
 		if(adminRole == null) {
 			BizException.warn(101, "用户名不存在!");
-		}else if(!(req.getPassword().equals(adminRole.getPassword()))) {
+		}
+		adminRoleReq.setPassword(req.getPassword());
+		adminRole = adminMapper.selectAdminRoleInfo(adminRoleReq);
+		if(adminRole == null) {
 			BizException.warn(102, "密码不正确，请重新输入!");
 		}
 		SessionVo sessionVo = new SessionVo();

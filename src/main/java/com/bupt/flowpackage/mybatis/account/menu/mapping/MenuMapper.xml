@@ -12,6 +12,7 @@
     <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR" />
     <result column="is_visible" property="isVisible" jdbcType="BIT" />
     <result column="is_leaf" property="isLeaf" jdbcType="BIT" />
+    <result column="menu_type" property="menuType" jdbcType="SMALLINT" />
     <collection property="children" ofType="menu" column="menu_no" select="findMenuByParentMenuNo"/>
   </resultMap>
   
@@ -37,6 +38,7 @@
     <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR" />
     <result column="is_visible" property="isVisible" jdbcType="BIT" />
     <result column="is_leaf" property="isLeaf" jdbcType="BIT" />
+    <result column="menu_type" property="menuType" jdbcType="SMALLINT" />
     <collection property="children" ofType="menu" column="{menuNo=menu_no, roleId=master_id}" select="findMenuByParentMenuNoAndRoleId"/>
   </resultMap>
   
@@ -53,7 +55,7 @@
   
   <sql id="Menu_Column_List" >
     sys_menu.id, menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, menu_icon, 
-    is_visible, is_leaf
+    is_visible, is_leaf, menu_type 
   </sql>
   
   <sql id="Application_Column_List" >
@@ -94,7 +96,7 @@
     cf_privilege.access_type = 1 
     order by menu_order 
   </select>
-  <!-- 查询某模块下的父菜单 -->
+  <!-- 查询父菜单下的子菜单 -->
   <select id="findMenuByParentMenuNoAndRoleId" resultMap="MenuResultMap" parameterType="map" >
     select 
     <include refid="Menu_Column_List" />
@@ -125,13 +127,15 @@
      and application_code = #{applicationCode,jdbcType=SMALLINT} 
      order by menu_order 
   </select>
-  <!-- 查询某模块下的父菜单 -->
+  <!-- 查询某菜单下的子菜单 -->
   <select id="findMenuByParentMenuNo" resultMap="MenuResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Menu_Column_List" />
-    from sys_menu where is_leaf is true and is_visible=1
-     and menu_parent_no = #{menu_no, jdbcType=SMALLINT}
-     order by menu_order 
+    from sys_menu where 
+    is_leaf is true and 
+    is_visible=1 and 
+    menu_parent_no = #{menu_no, jdbcType=SMALLINT}
+    order by menu_order 
   </select>
   <!-- 查询所有的模块菜单 end -->
   

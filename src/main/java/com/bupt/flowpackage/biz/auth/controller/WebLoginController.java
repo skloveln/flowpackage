@@ -46,7 +46,6 @@ public class WebLoginController {
 					applicationList = adminRoleService.getApplicationMenuByRoleId(sessionVo.getRoleId());
 				}
 				SessionUtil.setApplicationList(applicationList);
-				
 			}
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);

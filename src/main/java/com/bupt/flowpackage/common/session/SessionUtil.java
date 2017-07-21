@@ -29,10 +29,10 @@ public class SessionUtil {
 	
 	private static final String ADMIN_SESSION = "adminSession";
 	private static final String ACTIVE_ADMIN_LISTENER = "activeAdminListener";
-	//全局模块菜单信息，根据角色id分组
+	/**全局模块菜单信息，根据角色id分组*/
 	private static Map<Integer, List<Application>> APPLICATION_MAP = new HashMap<Integer, List<Application>>();
-	//菜单url
-	private static Map<Integer, List<String>> MENU_URL_MAP = new HashMap<Integer, List<String>>();
+	/**权限*/
+	private static Map<Integer, List<String>> AUTH_URL_MAP = new HashMap<Integer, List<String>>();
 	
 	//用于同个账号只能一台电脑登陆，或者可以主动踢掉用户
 	public static Map<Integer, HttpSession> SESSION_MAP = new HashMap<Integer, HttpSession>();
@@ -105,10 +105,10 @@ public class SessionUtil {
 	
 	public static void setApplicationList(List<Application> applicationList) {
 		APPLICATION_MAP.put(getAdminSessionInfo().getRoleId(), applicationList);
-		MENU_URL_MAP.put(getAdminSessionInfo().getRoleId(), loadAllMenuUrl(applicationList));
+		AUTH_URL_MAP.put(getAdminSessionInfo().getRoleId(), loadAllMenuUrl(applicationList));
 	}
 	/**
-	 * <p>把权限内的菜单url提取出来</p>   
+	 * <p>把权限内的菜单url提取出来,包括菜单和按钮, 链接</p>   
 	 * @param @param applicationList
 	 * @param @return      
 	 * @return List<String>
@@ -122,12 +122,23 @@ public class SessionUtil {
 			List<Menu> menuList = application.getMenuList();
 			for(int j=0; j<menuList.size(); j++) {
 				List<Menu> children = menuList.get(j).getChildren();
-				for(int z=0; z<children.size(); z++) {
-					Menu child = children.get(z);
+				for(int x=0; x<children.size(); x++) {
+					Menu child = children.get(x);
 					String menuUrl = child.getMenuUrl();
 					boolean isLeaf = child.getIsLeaf();
-					if(isLeaf && menuUrl.contains(".html")) {
+					Short menuType = child.getMenuType();
+					if(isLeaf && menuType == 1 && menuUrl.contains(".html")) {
 						menuUrlList.add(menuUrl.substring(0, menuUrl.indexOf(".html")));
+						List<Menu> buttonList = child.getChildren();
+						if(buttonList != null && buttonList.size()>0) {
+							for(int y=0; y<buttonList.size(); y++) {
+								Menu button = buttonList.get(y);
+								String buttonUrl = button.getMenuUrl();
+								if(button.getMenuType() == 2 && buttonUrl.contains(".html")) {
+									menuUrlList.add(buttonUrl.substring(0, buttonUrl.indexOf(".html")));
+								}
+							}
+						}
 					}
 				}
 			}
@@ -162,7 +173,7 @@ public class SessionUtil {
 	 * @return boolean
 	 */
 	public static boolean checkUrlAuth(String url) {
-		List<String> menuUrlList = MENU_URL_MAP.get(getAdminSessionInfo().getRoleId());
+		List<String> menuUrlList = AUTH_URL_MAP.get(getAdminSessionInfo().getRoleId());
 		if(menuUrlList != null && menuUrlList.size() > 0 && menuUrlList.contains(url)) {
 			return true;
 		}

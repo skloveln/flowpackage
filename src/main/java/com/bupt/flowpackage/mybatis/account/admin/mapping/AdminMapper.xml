@@ -40,12 +40,12 @@
     <result column="is_super" property="isSuper" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, login_name, password, real_name, sex, mobile, email, create_user_name, create_time, 
+    id, login_name, real_name, sex, mobile, email, create_user_name, create_time, 
     modify_name, update_time, first_login_time, last_login_time, available_flag, is_super
   </sql>
   
   <sql id="AdminRole_Column_List" >
-    admin_id, role_id, role_name, login_name, password, real_name, sex, mobile, email, admin.create_user_name, admin.create_time, 
+    admin_id, role_id, role_name, login_name, real_name, sex, mobile, email, admin.create_user_name, admin.create_time, 
     admin.modify_name, admin.update_time, first_login_time, last_login_time, available_flag, is_super
   </sql>
   
@@ -114,18 +114,17 @@
     <where>
     	admin.id = adminRole.admin_id 
 		and role.id = adminRole.role_id 
-    	and admin.available_flag = 1 
+		<if test="availableFlag != null and availableFlag != ''">
+			and admin.available_flag = #{availableFlag} 
+		</if>
     	<if test="loginName != null and loginName != ''">
-		    AND admin.login_name = #{loginName}
-	    </if>
-	    <if test="password != null and password != ''">
-	    	AND admin.password = #{password}
+		    AND admin.login_name like '%${loginName}%'
 	    </if>
 	    <if test="realName != null and realName != ''">
-	    	AND admin.real_name = #{realName}
+	    	AND admin.real_name like '%${realName}%' 
 	    </if>
 	    <if test="mobile != null and mobile != ''">
-	    	AND admin.mobile like #{mobile}
+	    	AND admin.mobile like '%${mobile}%'
 	    </if>
 	    <if test="isSuper != null and isSuper != ''">
 	    	AND admin.is_super = #{isSuper}

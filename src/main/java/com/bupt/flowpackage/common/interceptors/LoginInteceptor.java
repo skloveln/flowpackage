@@ -52,7 +52,6 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 				webGlobalVo.setMenuList(application.getMenuList());
 			}
 			
-			
 			//检查uri是否有权限
 			String url = request.getRequestURI();
 			//----/flowpackage/index

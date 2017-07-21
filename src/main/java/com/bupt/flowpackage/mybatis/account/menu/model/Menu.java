@@ -28,10 +28,20 @@ public class Menu extends BaseBean{
     private Boolean isVisible;
 
     private Boolean isLeaf;
-    /**子菜单*/
-    private List<Menu> children;
     
-    public Integer getMasterId() {
+    private Short menuType;
+    /**子菜单或页面中的按钮*/
+    private List<Menu> children;
+
+	public Short getMenuType() {
+		return menuType;
+	}
+
+	public void setMenuType(Short menuType) {
+		this.menuType = menuType;
+	}
+
+	public Integer getMasterId() {
 		return masterId;
 	}
 

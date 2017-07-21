@@ -23,7 +23,7 @@
 				<div class="layui-field-box layui-form">
 					<form class="layui-form layui-form-pane" id="searchForm">
 						<div class="layui-form-item">
-							<label class="layui-form-label">姓名:</label>
+							<label class="layui-form-label">账号:</label>
 							<div class="layui-input-inline">
 								<input type="text" name="loginName" value="${param.loginName}"  placeholder="根据姓名过滤" class="layui-input">
 							</div>
@@ -31,9 +31,8 @@
 							<div class="layui-input-inline">
 								<input type="text" name="mobile" value="${param.mobile}"  placeholder="根据手机号过滤" class="layui-input">
 							</div>
-							<button class="layui-btn" >查询</button>
-							<button  class="layui-btn" data-modal="/admin/user/add.html" data-title="添加用户"><i class="fa fa-plus"></i> 添加用户
-						    </button>
+							<button type="submit" class="layui-btn">查询</button>
+							<button class="layui-btn" onClick="return false;" data-title="添加用户" data-modal='${ctx}/admin/admin-add'>添加用户 </button>
 						</div>
 					</form>
 					<table class="layui-table" lay-even="" lay-skin="row">
@@ -41,10 +40,11 @@
 							<tr>
 								<th>序号</th>
 								<th>账号</th>
-								<th>姓名</th>
 								<th>手机号</th>
+								<th>姓名</th>
 								<th>邮箱</th>
 								<th>最后登录</th>
+								<th>角色组</th>
 								<th>状态</th>
 								<th>操作</th>
 							</tr>
@@ -68,11 +68,18 @@
 			<tr>
 				<td>{{item.adminId}}</td>
 				<td>{{item.loginName}}</td>
-				<td>{{item.realName}}</td>
 				<td>{{item.mobile}}</td>
+				<td>{{item.realName}}</td>
 				<td>{{item.email}}</td>
 				<td>{{item.lastLoginTime}}</td>
-				<td>{{item.availableFlag}}</td>
+				<td>{{item.roleName}}</td>
+				<td>
+					{{if item.availableFlag}}
+						可用
+					{{else}}
+						<font color='red'>禁用</font>
+					{{/if}}
+				</td>
 				<td>
 					<a class="layui-btn layui-btn-mini">修改</a>
 					<a data-update="1" data-field='delete' data-action='${ctx}/admin/delete' class="layui-btn layui-btn-danger layui-btn-mini">删除</a>

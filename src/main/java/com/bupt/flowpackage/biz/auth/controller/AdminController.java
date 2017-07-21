@@ -39,6 +39,11 @@ public class AdminController {
 		return "admin/admin-list";
 	} 
 	
+	@RequestMapping("/admin-add")
+	public String adminAdd() {
+		return "admin/admin-form";
+	} 
+	
 	@RequestMapping("/admin-delete")
 	public String adminDelete() {
 		return "admin/admin-list";

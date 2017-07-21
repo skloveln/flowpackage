@@ -10,7 +10,7 @@ public class Admin extends BaseBean{
 	private Integer id;
 
     private String loginName;
-
+    
     private String password;
 
     private String realName;
@@ -30,7 +30,7 @@ public class Admin extends BaseBean{
     private Date updateTime;
 
     private Date firstLoginTime;
-
+    
     private Date lastLoginTime;
 
     private Boolean availableFlag;
@@ -132,7 +132,7 @@ public class Admin extends BaseBean{
     public void setFirstLoginTime(Date firstLoginTime) {
         this.firstLoginTime = firstLoginTime;
     }
-
+    
     public Date getLastLoginTime() {
         return lastLoginTime;
     }
