@@ -32,10 +32,10 @@
 								<input type="text" name="mobile" value="${param.mobile}"  placeholder="根据手机号过滤" class="layui-input">
 							</div>
 							<button type="submit" class="layui-btn">查询</button>
-							<button class="layui-btn" onClick="return false;" data-title="添加用户" data-modal='${ctx}/admin/admin-add'>添加用户 </button>
+							<button class="layui-btn" onClick="return false;" data-title="添加管理员" data-modal='${ctx}/admin/admin-add'>添加用户 </button>
 						</div>
 					</form>
-					<table class="layui-table" lay-even="" lay-skin="row">
+					<table class="layui-table" lay-skin="line">
 						<thead>
 							<tr>
 								<th>序号</th>

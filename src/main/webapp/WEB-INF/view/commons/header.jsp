@@ -51,7 +51,7 @@
 							<i class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
 						<ul class="dropDown-menu menu radius box-shadow">
 							<li>
-								<a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a>
+								<a href="javascript:;" data-val="default" title="默认（黑色）">默认（绿色）</a>
 							</li>
 							<li>
 								<a href="javascript:;" data-val="blue" title="蓝色">蓝色</a>

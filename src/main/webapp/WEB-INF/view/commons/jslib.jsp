@@ -6,7 +6,6 @@
 <script type="text/javascript" src="${ctx}/staticlib/plugs/jquery/1.9.1/jquery.min.js?v=${flowVersion}"></script> 
 <script type="text/javascript" src="${ctx}/staticlib/plugs/layui/layui.js?v=${flowVersion}"></script>
 <script type="text/javascript" src="${ctx}/staticlib/plugs/arttemplate/template-web.js?v=${flowVersion}"></script> 
-<script type="text/javascript" src="${ctx}/staticlib/plugs/vue/vue.js?v=${flowVersion}"></script>
 <script type="text/javascript" src="${ctx}/staticlib/plugs/jquery.validation/1.14.0/jquery.validate.js?v=${flowVersion}"></script>  
 <script type="text/javascript" src="${ctx}/staticlib/plugs/jquery.validation/1.14.0/validate-methods.js?v=${flowVersion}"></script>
 <script type="text/javascript" src="${ctx}/staticlib/plugs/jquery.validation/1.14.0/messages_zh.js?v=${flowVersion}"></script>
