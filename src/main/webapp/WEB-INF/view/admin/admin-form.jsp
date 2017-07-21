@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/view/commons/taglib.jsp"%>
-<form class="layui-form layui-box" style='padding:25px 30px 20px 0' action="${ctx}/admin/admin" data-auto="true" method="post">
+<form class="layui-form layui-box" style='padding:25px 30px 20px 0' action="${ctx}/admin/api/admin-add" data-auto="true" method="post">
     <div class="layui-form-item">
         <label class="layui-form-label">用户账号</label>
         <div class="layui-input-block">
@@ -59,6 +59,7 @@
         </div>
     </div>
     <div class="layui-form-item text-c">
+    	<input type='hidden' value='${resp.admin.id}' name='id'/>
         <button class="layui-btn" type='submit'>保存数据</button>
         <button class="layui-btn layui-btn-danger" type='button' data-close>取消编辑</button>
     </div>
