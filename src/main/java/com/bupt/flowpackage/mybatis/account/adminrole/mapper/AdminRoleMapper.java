@@ -15,6 +15,8 @@ public interface AdminRoleMapper {
     AdminRole selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(AdminRole record);
+    
+    int updateRoleByAdminId(AdminRole record);
 
     int updateByPrimaryKey(AdminRole record);
 }

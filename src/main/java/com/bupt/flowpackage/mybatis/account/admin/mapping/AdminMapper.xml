@@ -87,20 +87,22 @@
     <where>
     	admin.id = adminRole.admin_id 
 		and role.id = adminRole.role_id 
-    	and admin.available_flag = 1 
-    	<if test="loginName != null">
+    	<if test="loginName != null and loginName != null">
 		    AND admin.login_name = #{loginName}
 	    </if>
-	    <if test="password != null">
+	    <if test="password != null and password != null">
 	    	AND admin.password = #{password}
 	    </if>
-	    <if test="realName != null">
+	    <if test="realName != null and realName != null">
 	    	AND admin.real_name = #{realName}
 	    </if>
-	    <if test="mobile != null">
+	    <if test="mobile != null and mobile != null">
 	    	AND admin.mobile like #{mobile}
 	    </if>
-	    <if test="isSuper != null">
+	    <if test="availableFlag != null and availableFlag != null">
+	    	AND admin.available_flag = #{availableFlag}
+	    </if>
+	    <if test="isSuper != null and isSuper != null">
 	    	AND admin.is_super = #{isSuper}
 	    </if>
     </where>
@@ -268,46 +270,44 @@
   <update id="updateByPrimaryKeySelective" parameterType="admin" >
     update cf_admin
     <set >
-      <if test="loginName != null" >
+      <if test="loginName != null and loginName != ''" >
         login_name = #{loginName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null and password != ''" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="realName != null" >
+      <if test="realName != null and realName != ''" >
         real_name = #{realName,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
+      <if test="sex != null and sex != ''" >
         sex = #{sex,jdbcType=CHAR},
       </if>
-      <if test="mobile != null" >
+      <if test="mobile != null and mobile != ''" >
         mobile = #{mobile,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null and email != ''" >
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="createUserName != null" >
+      <if test="createUserName != null and createUserName != ''" >
         create_user_name = #{createUserName,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null and createTime != ''" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="modifyName != null" >
+      <if test="modifyName != null and modifyName != ''" >
         modify_name = #{modifyName,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="firstLoginTime != null" >
+       update_time = now(),
+      <if test="firstLoginTime != null and firstLoginTime != ''" >
         first_login_time = #{firstLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="lastLoginTime != null" >
+      <if test="lastLoginTime != null and lastLoginTime != ''" >
         last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="availableFlag != null" >
+      <if test="availableFlag != null and availableFlag != ''" >
         available_flag = #{availableFlag,jdbcType=BIT},
       </if>
-      <if test="isSuper != null" >
+      <if test="isSuper != null and isSuper != ''" >
         is_super = #{isSuper,jdbcType=BIT},
       </if>
     </set>

@@ -2,8 +2,9 @@ package com.bupt.flowpackage.biz.auth.service;
 
 import java.util.List;
 
-import com.bupt.flowpackage.biz.auth.model.AdminAddOrEditReq;
+import com.bupt.flowpackage.biz.auth.model.AdminAddReq;
 import com.bupt.flowpackage.biz.auth.model.AdminRoleListReq;
+import com.bupt.flowpackage.biz.auth.model.AdminUpdateReq;
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
 import com.bupt.flowpackage.common.domain.Page;
 import com.bupt.flowpackage.common.domain.SessionVo;
@@ -50,14 +51,14 @@ public interface AdminRoleService {
 	 * @param @return      
 	 * @return int adminId
 	 */
-	public int adminAdd(AdminAddOrEditReq req);
+	public int adminAdd(AdminAddReq req);
 	/**
 	 * <p>管理员修改</p>   
 	 * @param @param req
 	 * @param @return      
 	 * @return boolean
 	 */
-	public boolean adminUpdate(AdminAddOrEditReq req); 
+	public boolean adminUpdate(AdminUpdateReq req); 
 	
 	/**
 	* @Description 根据角色获取模块菜单

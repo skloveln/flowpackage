@@ -62,6 +62,13 @@
       </if>
     </trim>
   </insert>
+  
+  <update id="updateRoleByAdminId" parameterType="adminRole">
+    update cf_adminRole 
+    set role_id = #{roleId,jdbcType=INTEGER}
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  
   <update id="updateByPrimaryKeySelective" parameterType="adminRole">
     update cf_adminRole
     <set>

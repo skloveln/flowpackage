@@ -1,18 +1,24 @@
 package com.bupt.flowpackage.biz.auth.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.bupt.flowpackage.common.domain.BaseRequest;
 
-public class AdminAddOrEditReq extends BaseRequest{
-
+public class AdminUpdateReq  extends BaseRequest{
 	private static final long serialVersionUID = 1L;
-	private String loginName;
 	/**管理员id*/
+	@NotNull
 	private Integer adminId;
 	/**角色id*/
+	@NotNull
 	private Integer roleId;
 	/**密码*/
 	private String password;
 	/**重复密码*/
+	@NotBlank
 	private String rePassword;
 	/**真实姓名*/
     private String realName;
@@ -26,15 +32,7 @@ public class AdminAddOrEditReq extends BaseRequest{
 	public String getAdminDesc() {
 		return adminDesc;
 	}
-	public void setAdminDesc(String adminDesc) {
-		this.adminDesc = adminDesc;
-	}
-	public String getLoginName() {
-		return loginName;
-	}
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
+    
 	public Integer getAdminId() {
 		return adminId;
 	}

@@ -9,8 +9,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bupt.flowpackage.biz.auth.model.AdminAddOrEditReq;
+import com.bupt.flowpackage.biz.auth.model.AdminAddReq;
 import com.bupt.flowpackage.biz.auth.model.AdminRoleListReq;
+import com.bupt.flowpackage.biz.auth.model.AdminUpdateReq;
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
 import com.bupt.flowpackage.common.domain.Page;
@@ -51,6 +52,7 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 	public SessionVo checkLoginUserAndPwdService(UserLoginWebRequest req){
 		AdminRole adminRoleReq = new AdminRole();
 		adminRoleReq.setLoginName(req.getLoginName());
+		adminRoleReq.setAvailableFlag(true);
 		AdminRole adminRole = adminMapper.selectAdminRoleInfo(adminRoleReq);
 		if(adminRole == null) {
 			BizException.warn(101, "用户名不存在!");
@@ -94,7 +96,7 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		return roleMapper.selectRoleList();
 	}
 	@Transactional("account")
-	public int adminAdd(AdminAddOrEditReq req){
+	public int adminAdd(AdminAddReq req){
 		String pwd = req.getPassword();
 		String rePwd = req.getRePassword();
 		if(!StringUtils.equals(pwd, rePwd)) {
@@ -119,15 +121,39 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		adminMapper.insert(admin);
 		
 		AdminRole adminRole = new AdminRole();
-		adminRole.setRoleId(req.getRoleId());
 		adminRole.setAdminId(admin.getId());
 		adminRoleMapper.deleteSelective(adminRole);
 		adminRoleMapper.insert(adminRole);
+		
 		return admin.getId();
 	}
 	
-	public boolean adminUpdate(AdminAddOrEditReq req) {
+	@Transactional("account")
+	public boolean adminUpdate(AdminUpdateReq req) {
+		SessionVo sessionVo = SessionUtil.getAdminSessionInfo();
+		if(sessionVo == null) {
+			BizException.warn("会话超时，请重新登录！");
+		}
 		
+		if(sessionVo.isSuper() || req.getAdminId() == sessionVo.getAdminId()){
+			Admin admin = adminMapper.selectByPrimaryKey(req.getAdminId());
+			if(admin == null) {
+				BizException.warn("用户不存在!");
+			}else {
+				//更新管理员信息
+				Admin adminInfo = new Admin();
+				BeanUtils.copyProperties(req, adminInfo);
+				adminInfo.setId(req.getAdminId());
+				adminMapper.updateByPrimaryKeySelective(adminInfo);
+				//更新管理员角色信息
+				AdminRole adminRole = new AdminRole();
+				adminRole.setAdminId(req.getAdminId());
+				adminRole.setRoleId(req.getRoleId());
+				adminRoleMapper.updateRoleByAdminId(adminRole);
+			}
+		}else {
+			BizException.warn("你无权限修改该用户信息！");
+		}
 		return true;
 	}
 }

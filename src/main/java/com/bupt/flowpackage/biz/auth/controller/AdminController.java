@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bupt.flowpackage.biz.auth.model.AdminAddOrEditReq;
 import com.bupt.flowpackage.biz.auth.model.AdminAddOrEditResp;
+import com.bupt.flowpackage.biz.auth.model.AdminAddReq;
 import com.bupt.flowpackage.biz.auth.model.AdminRoleListReq;
+import com.bupt.flowpackage.biz.auth.model.AdminUpdateReq;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
 import com.bupt.flowpackage.common.domain.BaseResponse;
 import com.bupt.flowpackage.common.domain.Page;
@@ -94,9 +97,13 @@ public class AdminController {
 		BaseResponse<String> baseResp = new BaseResponse<String>();
 		try{
 			if(req.getAdminId() != null && req.getAdminId() > 0) {
-				adminRoleService.adminUpdate(req);
+				AdminUpdateReq adminUpdateReq = new AdminUpdateReq();
+				BeanUtils.copyProperties(req, adminUpdateReq);
+				adminRoleService.adminUpdate(adminUpdateReq);
 			}else {
-				adminRoleService.adminAdd(req);
+				AdminAddReq adminAddReq = new AdminAddReq();
+				BeanUtils.copyProperties(req, adminAddReq);
+				adminRoleService.adminAdd(adminAddReq);
 			}
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);

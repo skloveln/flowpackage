@@ -1,19 +1,27 @@
 package com.bupt.flowpackage.biz.auth.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.bupt.flowpackage.common.domain.BaseRequest;
 
-public class AdminAddOrEditReq extends BaseRequest{
-
+public class AdminAddReq extends BaseRequest{
 	private static final long serialVersionUID = 1L;
+	/**账号*/
+	@NotBlank
+	@Pattern(regexp="^\\w{4,20}$", message="账号必须是4-20个字母或数字或下划线")
 	private String loginName;
-	/**管理员id*/
-	private Integer adminId;
-	/**角色id*/
-	private Integer roleId;
-	/**密码*/
+	@NotBlank
+	@Pattern(regexp="^\\w{5,20}$", message="密码必须是5-20个字母或数字或下划线")
 	private String password;
 	/**重复密码*/
+	@NotBlank
 	private String rePassword;
+	/**角色id*/
+	@NotNull
+	private Integer roleId;
 	/**真实姓名*/
     private String realName;
     /**手机号*/
@@ -26,26 +34,11 @@ public class AdminAddOrEditReq extends BaseRequest{
 	public String getAdminDesc() {
 		return adminDesc;
 	}
-	public void setAdminDesc(String adminDesc) {
-		this.adminDesc = adminDesc;
-	}
 	public String getLoginName() {
 		return loginName;
 	}
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
-	}
-	public Integer getAdminId() {
-		return adminId;
-	}
-	public void setAdminId(Integer adminId) {
-		this.adminId = adminId;
-	}
-	public Integer getRoleId() {
-		return roleId;
-	}
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
 	}
 	public String getPassword() {
 		return password;
@@ -58,6 +51,12 @@ public class AdminAddOrEditReq extends BaseRequest{
 	}
 	public void setRePassword(String rePassword) {
 		this.rePassword = rePassword;
+	}
+	public Integer getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
 	}
 	public String getRealName() {
 		return realName;
