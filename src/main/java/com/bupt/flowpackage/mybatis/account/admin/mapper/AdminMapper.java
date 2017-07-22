@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.bupt.flowpackage.common.annotation.MyBatisRepository;
 import com.bupt.flowpackage.mybatis.account.admin.model.Admin;
-import com.bupt.flowpackage.mybatis.account.admin.model.AdminRole;
+import com.bupt.flowpackage.mybatis.account.adminrole.model.AdminRole;
 @MyBatisRepository
 public interface AdminMapper {
     int deleteByPrimaryKey(Integer id);

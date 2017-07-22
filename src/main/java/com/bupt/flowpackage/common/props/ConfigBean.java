@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ConfigBean {
-
+	
     @Value("#{propertyFactory['config1']}")
     private String config1;
 

@@ -141,7 +141,7 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
         this.close();
         return this.index = msg
                 ? layer.msg(msg, {icon: 16, scrollbar: false, shade: this.shade, time: 0, end: callback})
-                : layer.load(2, {time: 0, scrollbar: false, shade: this.shade, end: callback});
+                : layer.load(0, {time: 0, scrollbar: false, shade: this.shade, end: callback});
     };
 
     /**

@@ -130,6 +130,7 @@
 	    	AND admin.is_super = #{isSuper}
 	    </if>
     </where>
+	order by admin.id
   </select>
   
   <!-- 获取管理员数量 -->
@@ -159,113 +160,107 @@
     delete from cf_admin
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="admin" >
-    insert into cf_admin (id, login_name, password, 
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="admin">
+    insert into cf_admin (login_name, password, 
       real_name, sex, mobile, 
       email, create_user_name, create_time, 
       modify_name, update_time, first_login_time, 
       last_login_time, available_flag, is_super
       )
-    values (#{id,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{realName,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{email,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, now(), 
       #{modifyName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{firstLoginTime,jdbcType=TIMESTAMP}, 
-      #{lastLoginTime,jdbcType=TIMESTAMP}, #{availableFlag,jdbcType=BIT}, #{isSuper,jdbcType=BIT}
+      #{lastLoginTime,jdbcType=TIMESTAMP}, 1, false 
       )
   </insert>
   <insert id="insertSelective" parameterType="admin" >
     insert into cf_admin
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="loginName != null" >
+      <if test="loginName != null and loginName !=''" >
         login_name,
       </if>
-      <if test="password != null" >
+      <if test="password != null and password !=''" >
         password,
       </if>
-      <if test="realName != null" >
+      <if test="realName != null and realName !=''" >
         real_name,
       </if>
-      <if test="sex != null" >
+      <if test="sex != null and sex !=''" >
         sex,
       </if>
-      <if test="mobile != null" >
+      <if test="mobile != null and mobile !=''" >
         mobile,
       </if>
-      <if test="email != null" >
+      <if test="email != null and email !=''" >
         email,
       </if>
-      <if test="createUserName != null" >
+      <if test="createUserName != null and createUserName !=''" >
         create_user_name,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null and createTime !=''" >
         create_time,
       </if>
-      <if test="modifyName != null" >
+      <if test="modifyName != null and modifyName !=''" >
         modify_name,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null and updateTime !=''" >
         update_time,
       </if>
-      <if test="firstLoginTime != null" >
+      <if test="firstLoginTime != null and firstLoginTime !=''" >
         first_login_time,
       </if>
-      <if test="lastLoginTime != null" >
+      <if test="lastLoginTime != null and lastLoginTime !=''" >
         last_login_time,
       </if>
-      <if test="availableFlag != null" >
+      <if test="availableFlag != null and availableFlag !=''" >
         available_flag,
       </if>
-      <if test="isSuper != null" >
+      <if test="isSuper != null and isSuper !=''" >
         isSuper,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="loginName != null" >
+      <if test="loginName != null and loginName !=''" >
         #{loginName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null and password !=''" >
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="realName != null" >
+      <if test="realName != null and realName !=''" >
         #{realName,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null" >
+      <if test="sex != null and sex !=''" >
         #{sex,jdbcType=CHAR},
       </if>
-      <if test="mobile != null" >
+      <if test="mobile != null and mobile !=''" >
         #{mobile,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null and email !=''" >
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="createUserName != null" >
+      <if test="createUserName != null and createUserName !=''" >
         #{createUserName,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null and createTime !=''" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="modifyName != null" >
+      <if test="modifyName != null and modifyName !=''" >
         #{modifyName,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null and updateTime !=''" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="firstLoginTime != null" >
+      <if test="firstLoginTime != null and firstLoginTime !=''" >
         #{firstLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="lastLoginTime != null" >
+      <if test="lastLoginTime != null and lastLoginTime !=''" >
         #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="availableFlag != null" >
+      <if test="availableFlag != null and availableFlag !=''" >
         #{availableFlag,jdbcType=BIT},
       </if>
-      <if test="isSuper != null" >
+      <if test="isSuper != null and isSuper !=''" >
         #{isSuper,jdbcType=BIT},
       </if>
     </trim>

@@ -47,6 +47,11 @@ public class SessionUtil {
 		return req == null ? null : req.getSession();
 	}
 	
+	public static String getRequestURI() {
+		HttpServletRequest req = getRequest();
+		return req == null ? null : req.getRequestURI();
+	}
+	
 	/**
 	 * <p>获取当前session</p>   
 	 * @param @return      

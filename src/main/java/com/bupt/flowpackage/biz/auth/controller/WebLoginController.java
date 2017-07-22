@@ -50,7 +50,7 @@ public class WebLoginController {
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);
 		}finally{
-			logger.info("\nreuqestNo={} login 返回对象resp=[{}]", req.getRequestNo(), baseResp);
+			logger.info("\n用户登录--reuqestNo={} 返回对象resp=[{}]", req.getRequestNo(), baseResp);
 		}
 		return baseResp;
 	}

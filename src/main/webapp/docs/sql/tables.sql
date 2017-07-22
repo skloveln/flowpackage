@@ -6,8 +6,8 @@ drop table if exists cf_admin;
 create table cf_admin
 (
    id                   int not null auto_increment comment '主键',
-   login_name           varchar(32) comment '账号',
-   password             varchar(48) comment '密码',
+   login_name           varchar(32) not null comment '账号',
+   password             varchar(48) not null comment '密码',
    real_name            varchar(32) comment '真实姓名',
    sex                  char(1) default '1' comment '性别 1男　2女',
    mobile               varchar(16) comment '手机号',

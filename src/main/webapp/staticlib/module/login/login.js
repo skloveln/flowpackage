@@ -59,7 +59,7 @@ layui.use('layer', function(){
 		
 		var reg = /^\w{4,20}$/;
 		if(!reg.test(name)){
-			$('#errMsg').html("用户名必须是5-20个字母或数字或下划线");
+			$('#errMsg').html("用户名必须是4-20个字母或数字或下划线");
 			return false;
 		}
 		

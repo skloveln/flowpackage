@@ -49,6 +49,7 @@
 
 	<bean id="accountTxManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="accountDataSource" />
+		<qualifier value="account" />
 	</bean>
     
 	<!-- 支持通过注解添加事务 -->

@@ -19,6 +19,13 @@
     from cf_role
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectRoleList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cf_role
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from cf_role
     where id = #{id,jdbcType=INTEGER}

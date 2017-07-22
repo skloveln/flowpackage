@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/view/commons/taglib.jsp"%>
-<form class="layui-form layui-box" style='padding:25px 30px 20px 0' action="${ctx}/admin/api/admin-add" data-auto="true" method="post">
+<form class="layui-form layui-box" style='padding:25px 30px 20px 0' action="${ctx}/admin/api/update" data-auto="true" method="post">
     <div class="layui-form-item">
         <label class="layui-form-label">用户账号</label>
         <div class="layui-input-block">
@@ -41,11 +41,11 @@
         <div class="layui-input-block">
         	<c:forEach var="item" items="${resp.roleList}">
         		<c:choose>
-        			<c:when test="${item.roleId} == ${resp.admin.roleId}">
-        				<input type="radio" checked name="roleId" value="${item.roleId}" title="${item.roleName}">
+        			<c:when test="${item.id} == ${global.adminInfo.roleId}">
+        				<input type="radio" checked name="roleId" value="${item.id}" title="${item.roleName}">
         			</c:when>
         			<c:otherwise>
-        				<input type="radio" name="roleId" value="${item.roleId}" title="${item.roleName}">
+        				<input type="radio" name="roleId" value="${item.id}" title="${item.roleName}">
         			</c:otherwise>
         		</c:choose>
         	</c:forEach>
@@ -64,5 +64,10 @@
         <button class="layui-btn layui-btn-danger" type='button' data-close>取消编辑</button>
     </div>
 
-    <!-- <script>window.form.render();</script> -->
+    <script>
+	    layui.use('form', function(){
+	    	var form = layui.form();
+	    	form.render();
+	    });
+    </script>
 </form>
