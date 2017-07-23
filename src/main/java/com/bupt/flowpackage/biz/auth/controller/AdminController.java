@@ -21,7 +21,10 @@ import com.bupt.flowpackage.biz.auth.model.AdminUpdateReq;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
 import com.bupt.flowpackage.common.domain.BaseResponse;
 import com.bupt.flowpackage.common.domain.Page;
+import com.bupt.flowpackage.common.domain.SessionVo;
+import com.bupt.flowpackage.common.exception.BizException;
 import com.bupt.flowpackage.common.exception.ExceptionHelper;
+import com.bupt.flowpackage.common.session.SessionUtil;
 import com.bupt.flowpackage.mybatis.account.adminrole.model.AdminRole;
 import com.bupt.flowpackage.mybatis.account.role.model.Role;
 /**
@@ -81,6 +84,23 @@ public class AdminController {
 			baseResp = ExceptionHelper.createResponse(e, req);
 		}finally{
 			logger.info("\n获取管理员角色列表; reuqestNo={} 返回对象resp=[{}]", req.getRequestNo(), baseResp);
+		}
+		return baseResp;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/api/checkSession")
+	public BaseResponse<String> checkSession() {
+		BaseResponse<String> baseResp = new BaseResponse<String>();
+		try{
+			SessionVo sessionVo = SessionUtil.getAdminSessionInfo();
+			if(sessionVo == null) {
+				BizException.warn(101, "会话超时，请重新登陆!");
+			}
+		}catch(Exception e) {
+			baseResp = ExceptionHelper.createResponse(e);
+		}finally{
+			logger.info("\n检查session; 返回对象resp=[{}]", baseResp);
 		}
 		return baseResp;
 	}

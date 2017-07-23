@@ -162,11 +162,13 @@ public class SessionUtil {
 	 */
 	public static Application getApplicationByCode(Short code) {
 		List<Application> appList = getApplicationList();
-		for(int i=0; i < appList.size(); i++) {
-			Application temp = appList.get(i);
-			Short applicationCode = temp.getApplicationCode();
-			if(code.equals(applicationCode)) {
-				return temp;
+		if(appList != null) {
+			for(int i=0; i < appList.size(); i++) {
+				Application temp = appList.get(i);
+				Short applicationCode = temp.getApplicationCode();
+				if(code.equals(applicationCode)) {
+					return temp;
+				}
 			}
 		}
 		return null;

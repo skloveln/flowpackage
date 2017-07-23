@@ -42,7 +42,7 @@
     <!-- 账号角色权限库 -->
     <import resource="spring-account-datasource.xml"/>
     <!-- 订单商户库 -->
-    <import resource="spring-order-datasource.xml"/>
+    <!-- <import resource="spring-order-datasource.xml"/> -->
     
     <!--<import resource="spring-dubbo.xml"/>
     <import resource="spring-redis.xml"/> -->

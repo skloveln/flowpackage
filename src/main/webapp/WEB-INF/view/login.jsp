@@ -46,7 +46,8 @@
 	<script type="text/javascript" src="${ctx}/staticlib/plugs/canvas-particle/canvas-particle.js"></script>
 	<script type="text/javascript" src="${ctx}/staticlib/module/login/login.js"></script>
 	<script type="text/javascript">
-		$(function() {
+	//layui.use('adminplugs', function(){
+		$(function(){
 			var config = {
 				vx: 4,
 				vy: 4,
@@ -60,7 +61,8 @@
 				max_conn: 10
 			}
 			CanvasParticle(config);
-		})
+		});
+		
 	</script>
 </body>
 </html>

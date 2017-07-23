@@ -27,6 +27,32 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
         }
     };
     JPlaceHolder.init();
+    
+    var checkSession = function()  
+    {  
+    	var hasSession = false;
+    	$.ajax({
+			url: baseUrl + "/admin/api/checkSession",
+			type: "get",
+			async : false,
+			success: function(resp) {
+				var respData = $.parseJSON(resp);
+				if(respData.code == 200) {
+					hasSession = true;
+				}else {
+					$.msg.error(respData.subMessage, 3, function () {
+						location.reload();
+			        });
+				}
+			},
+			error: function(er) {
+				$.msg.error("服务器出错，请重新登陆！", 3, function () {
+					location.reload();
+		        });
+			},
+		});
+    	return hasSession;
+    };
 
     /**
      * 定义消息处理构造方法
@@ -283,6 +309,11 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
      * @param tips
      */
     _form.prototype.modal = function (url, data, title, callback, loading, tips) {
+    	var sessionValidate = checkSession();
+    	if(!sessionValidate) {
+    		return;
+    	}
+    	
         this.load(url, data, 'GET', function (res) {
             if (typeof (res) === 'object') {
                 return $.msg.auto(res);
