@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="role_name" property="roleName" jdbcType="VARCHAR" />
     <result column="role_desc" property="roleDesc" jdbcType="VARCHAR" />
+    <result column="role_level" property="roleLvel" jdbcType="SMALLINT" />
     <result column="create_name" property="createName" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="modify_name" property="modifyName" jdbcType="VARCHAR" />

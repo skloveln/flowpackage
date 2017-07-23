@@ -31,7 +31,8 @@ insert into sys_menu (id, menu_no, application_code, menu_parent_no, menu_order,
 	
 --添加角色
 insert into cf_role (id, role_name, role_desc, create_name, create_time) values (1, '超级管理员', '超级管理员权限组', 'admin', now());
-insert into cf_role (id, role_name, role_desc, create_name, create_time) values (2, '普通管理员', '普通管理员权限组', 'admin', now());
+insert into cf_role (id, role_name, role_desc, create_name, create_time) values (2, '普通管理员', '普通管理员权限组，只能查看订单', 'admin', now());
+insert into cf_role (id, role_name, role_desc, create_name, create_time) values (3, '运营人员', '运营人员权限组，只能查看权限，不能修改权限', 'admin', now());
 
 --添加管理员
 insert into cf_admin (id, login_name, password, real_name, mobile, email, 
@@ -47,13 +48,22 @@ insert into cf_admin (id, login_name, password, real_name, mobile, email,
 insert into cf_adminRole (id, admin_id, role_id) values (1, 1, 1);
 insert into cf_adminRole (id, admin_id, role_id) values (2, 2, 2);
 
---添加角色权限关联
-insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (1, 2, 2, 3, 1001, false);
-insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (2, 2, 2, 1, 2, false);
-insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (3, 2, 2, 1, 201, false);
-insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (4, 2, 2, 1, 3, false);
-insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (5, 2, 2, 1, 301, false);
-insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (6, 2, 2, 1, 302, false);
-
-
+--添加角色权限关联--
+--普通管理员
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (1, 1, 3, 3, 1001, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (2, 1, 3, 1, 2, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (3, 1, 3, 1, 201, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (4, 1, 3, 1, 3, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (5, 1, 3, 1, 301, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (6, 1, 3, 1, 302, false);
+--运营人员
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (7, 1, 2, 3, 1001, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (8, 1, 2, 1, 1, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (9, 1, 2, 1, 101, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (10, 1, 2, 1, 102, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (11, 1, 2, 1, 2, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (12, 1, 2, 1, 201, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (13, 1, 2, 1, 3, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (14, 1, 2, 1, 301, false);
+insert into cf_privilege (id, master_type, master_id, access_type, access_no, is_operatation) values (15, 1, 2, 1, 302, false);
 

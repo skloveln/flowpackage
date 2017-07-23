@@ -115,9 +115,16 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 			BizException.warn(105, "用户已存在!");
 		}
 		
+		boolean isSuper = false;
+		Role role = roleMapper.selectByPrimaryKey(req.getRoleId());
+		if(role != null && role.getRoleLevel() == 1) {
+			isSuper = true;
+		}
+		
 		Admin admin = new Admin();
 		BeanUtils.copyProperties(req, admin);
 		admin.setCreateUserName(sessionVo.getLoginName());
+		admin.setIsSuper(isSuper);
 		adminMapper.insert(admin);
 		
 		AdminRole adminRole = new AdminRole();
@@ -135,7 +142,7 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 			BizException.warn("会话超时，请重新登录！");
 		}
 		
-		if(sessionVo.isSuper() || req.getAdminId() == sessionVo.getAdminId()){
+		if(sessionVo.isSuper() || SessionUtil.checkUrlAuth("admin-edit") || req.getAdminId() == sessionVo.getAdminId()){
 			Admin admin = adminMapper.selectByPrimaryKey(req.getAdminId());
 			if(admin == null) {
 				BizException.warn("用户不存在!");

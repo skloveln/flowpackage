@@ -76,7 +76,7 @@
     from sys_application, cf_privilege 
     where sys_application.application_code = cf_privilege.access_no and 
     cf_privilege.is_operatation is false and 
-    cf_privilege.master_type = 2 and
+    cf_privilege.master_type = 1 and
     cf_privilege.master_id = #{roleId,jdbcType=INTEGER} and
     cf_privilege.access_type = 3 
   </select>
@@ -91,22 +91,22 @@
     sys_menu.is_visible = 1  and 
     sys_menu.application_code = #{applicationCode,jdbcType=SMALLINT} and 
     cf_privilege.is_operatation is false and 
-    cf_privilege.master_type = 2 and 
+    cf_privilege.master_type = 1 and 
     cf_privilege.master_id = #{roleId,jdbcType=INTEGER} and
     cf_privilege.access_type = 1 
     order by menu_order 
   </select>
   <!-- 查询父菜单下的子菜单 -->
-  <select id="findMenuByParentMenuNoAndRoleId" resultMap="MenuResultMap" parameterType="map" >
+  <select id="findMenuByParentMenuNoAndRoleId" resultMap="MenuRoleResultMap" parameterType="map" >
     select 
-    <include refid="Menu_Column_List" />
+    <include refid="Menu_Column_List" />, cf_privilege.master_id 
     from sys_menu, cf_privilege 
      where sys_menu.menu_no = cf_privilege.access_no and 
      sys_menu.is_leaf is true and 
      sys_menu.is_visible = 1  and 
      sys_menu.menu_parent_no = #{menuNo, jdbcType=SMALLINT} and 
      cf_privilege.is_operatation is false and 
-     cf_privilege.master_type = 2 and 
+     cf_privilege.master_type = 1 and 
      cf_privilege.master_id = #{roleId,jdbcType=INTEGER} and
      cf_privilege.access_type = 1 
      order by menu_order 
@@ -134,6 +134,7 @@
     from sys_menu where 
     is_leaf is true and 
     is_visible=1 and 
+    
     menu_parent_no = #{menu_no, jdbcType=SMALLINT}
     order by menu_order 
   </select>

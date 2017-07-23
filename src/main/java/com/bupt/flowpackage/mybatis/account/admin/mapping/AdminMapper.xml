@@ -46,7 +46,7 @@
   
   <sql id="AdminRole_Column_List" >
     admin_id, role_id, role_name, login_name, real_name, sex, mobile, email, admin.create_user_name, admin.create_time, 
-    admin.modify_name, admin.update_time, first_login_time, last_login_time, available_flag, is_super
+    admin.modify_name, admin.update_time, first_login_time, last_login_time, available_flag, role_level, is_super
   </sql>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -89,6 +89,9 @@
 		and role.id = adminRole.role_id 
     	<if test="loginName != null and loginName != null">
 		    AND admin.login_name = #{loginName}
+	    </if>
+	    <if test="roleId != null and roleId != null">
+		    AND role.id = #{roleId}
 	    </if>
 	    <if test="password != null and password != null">
 	    	AND admin.password = #{password}

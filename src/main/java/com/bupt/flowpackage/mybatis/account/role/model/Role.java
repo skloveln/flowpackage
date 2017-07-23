@@ -10,18 +10,28 @@ public class Role {
     private String roleDesc;
 
     private String createName;
+    
+    private Short roleLevel;
 
     private Date createTime;
 
     private String modifyName;
 
     private Date modifyTime;
-
+    
     public Integer getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Integer id) {
+	public Short getRoleLevel() {
+		return roleLevel;
+	}
+
+	public void setRoleLevel(Short roleLevel) {
+		this.roleLevel = roleLevel;
+	}
+
+	public void setId(Integer id) {
         this.id = id;
     }
 

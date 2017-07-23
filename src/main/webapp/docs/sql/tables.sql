@@ -38,6 +38,7 @@ create table cf_role
    role_desc            varchar(256) comment '角色描述',
    create_name          varchar(32) comment '创建人',
    create_time          datetime comment '创建时间',
+   role_level			tinyint default 3 comment '角色等级 1 超级  2 高级  3 普通',	
    modify_name          varchar(32) comment '修改人',
    modify_time          datetime comment '修改时间',
    primary key (id)
