@@ -35,12 +35,12 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
 			url: baseUrl + "/admin/api/checkSession",
 			type: "get",
 			async : false,
+			dataType: "json",
 			success: function(resp) {
-				var respData = $.parseJSON(resp);
-				if(respData.code == 200) {
+				if(resp.code == 200) {
 					hasSession = true;
 				}else {
-					$.msg.error(respData.subMessage, 3, function () {
+					$.msg.error(resp.subMessage, 3, function () {
 						location.reload();
 			        });
 				}
@@ -178,7 +178,7 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
      */
     msg.prototype.auto = function (data, time) {
         var self = this;
-        if (parseInt(data.code) === 1) {
+        if (parseInt(data.code) === 200) {
             return self.success(data.msg, time, function () {
                 !!data.url ? (window.location.href = data.url) : $.form.reload();
                 if (self.autoSuccessCloseIndexs && self.autoSuccessCloseIndexs.length > 0) {
@@ -189,7 +189,7 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
                 }
             });
         }
-        self.error(data.msg, 3, function () {
+        self.error(data.subMessage, 3, function () {
             !!data.url && (window.location.href = data.url);
         });
     };
@@ -248,6 +248,9 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
             },
             success: function (res) {
                 $.msg.close(dialogIndex);
+                if (res.match("^\{(.+:.+,*){1,}\}$")){
+                	res = $.parseJSON(res);
+                }
                 if (typeof callback === 'function' && callback.call(self, res) === false) {
                     return false;
                 }
@@ -313,7 +316,6 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
     	if(!sessionValidate) {
     		return;
     	}
-    	
         this.load(url, data, 'GET', function (res) {
             if (typeof (res) === 'object') {
                 return $.msg.auto(res);
@@ -351,11 +353,11 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
      * @param html
      */
     _form.prototype.show = function (html) {
-        var $container = $('.layer-main-container').html(html);
+        /*var $container = $('.layer-main-container').html(html);
         reinit.call(this), setTimeout(reinit, 500), setTimeout(reinit, 1000);
         function reinit() {
             $.form.reInit($container);
-        }
+        }*/
     };
 
     /**
@@ -379,7 +381,8 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
      * 刷新当前页面
      */
     _form.prototype.reload = function () {
-        window.onhashchange.call(this);
+    	$.table.show();
+        //window.onhashchange.call(this);
     };
 
     /*!表单实例挂载*/
@@ -840,8 +843,14 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
     }
     
     table.prototype.show = function(url, params, curr, templateStr, tbodyName) {
-    	curr = curr || 1,templateStr = templateStr || "main-template",tbodyName = tbodyName || "table-body"
+    	curr = curr || 1,templateStr = templateStr || "main-template",
+    	tbodyName = tbodyName || "table-body",
+    	url = url || $('form.form-search').attr('load-action'),
+    	params = params || $('#searchForm').serializeObject();
     	$.extend(params, {'pageNum' : curr});
+    	if(!url) {
+    		return;
+    	}
     	var loading = layer.load(0, {
 			  shade: [0.1,'black'] //0.1透明度的黑色背景
 		});

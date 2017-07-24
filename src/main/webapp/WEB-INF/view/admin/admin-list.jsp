@@ -21,7 +21,7 @@
 		<article class="cl pd-20">
 			<div class="admin-main">
 				<div class="layui-field-box layui-form">
-					<form class="layui-form layui-form-pane" id="searchForm">
+					<form class="form-search layui-form layui-form-pane" id="searchForm" load-action="${ctx}/admin/api/getAdminRoleList">
 						<div class="layui-form-item">
 							<label class="layui-form-label">账号:</label>
 							<div class="layui-input-inline">
@@ -89,15 +89,6 @@
 	{{else}}
 		<tr><td colspan="8" style="text-align: center">暂无数据</td></tr>
 	{{/if}}
-</script>
-
-<!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript">
- layui.use('adminplugs', function(){
-	var url = "${ctx}/admin/api/getAdminRoleList";
-	var params = $('#searchForm').serializeObject();
-	$.table.show(url, params);
-});
 </script>
 </body>
 </html>

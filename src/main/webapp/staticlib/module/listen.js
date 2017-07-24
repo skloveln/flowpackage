@@ -17,9 +17,9 @@ layui.use('adminplugs', function(){
         }
         return _goLoad.call(this);
     });
-
+    
     /*! 注册 data-serach 表单搜索行为 */
-    this.$body.on('submit', 'form.form-search', function () {
+    /*this.$body.on('submit', 'form.form-search', function () {
         var url = $(this).attr('action');
         var split = url.indexOf('?') === -1 ? '?' : '&';
         if ((this.method || 'get').toLowerCase() === 'get') {
@@ -27,7 +27,7 @@ layui.use('adminplugs', function(){
         } else {
             $.form.load(url, this, 'post');
         }
-    });
+    });*/
 
     /*! 注册 data-modal 事件行为 */
     this.$body.on('click', '[data-modal]', function () {
@@ -123,11 +123,11 @@ layui.use('adminplugs', function(){
     });
 
     /*! 注册 data-tips-text 事件行为 */
-    this.$body.on('mouseenter', '[data-tips-text]', function () {
+    /*this.$body.on('mouseenter', '[data-tips-text]', function () {
         var text = $(this).attr('data-tips-text');
         var placement = $(this).attr('data-tips-placement') || 'auto';
         $(this).tooltip({title: text, placement: placement}).tooltip('show');
-    });
+    });*/
 
     /*! 注册 data-phone-view 事件行为 */
     this.$body.on('click', '[data-phone-view]', function () {
@@ -146,5 +146,7 @@ layui.use('adminplugs', function(){
 
     /*! 表单监听初始化 */
     $.validate.listen(this);
+    
+	$.table.show();
     
 });

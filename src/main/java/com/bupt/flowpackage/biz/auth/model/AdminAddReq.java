@@ -13,12 +13,11 @@ public class AdminAddReq extends BaseRequest{
 	@NotBlank
 	@Pattern(regexp="^\\w{4,20}$", message="账号必须是4-20个字母或数字或下划线")
 	private String loginName;
-	@NotBlank
+	/*@NotBlank
 	@Pattern(regexp="^\\w{5,20}$", message="密码必须是5-20个字母或数字或下划线")
 	private String password;
-	/**重复密码*/
-	@NotBlank
-	private String rePassword;
+	@NotBlank(message="重复密码不能为空")
+	private String rePassword;*/
 	/**角色id*/
 	@NotNull
 	private Integer roleId;
@@ -40,7 +39,7 @@ public class AdminAddReq extends BaseRequest{
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
-	public String getPassword() {
+	/*public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
@@ -51,7 +50,7 @@ public class AdminAddReq extends BaseRequest{
 	}
 	public void setRePassword(String rePassword) {
 		this.rePassword = rePassword;
-	}
+	}*/
 	public Integer getRoleId() {
 		return roleId;
 	}

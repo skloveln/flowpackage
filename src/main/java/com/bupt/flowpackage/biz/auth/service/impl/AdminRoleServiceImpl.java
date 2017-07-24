@@ -27,6 +27,7 @@ import com.bupt.flowpackage.mybatis.account.menu.mapper.MenuMapper;
 import com.bupt.flowpackage.mybatis.account.role.mapper.RoleMapper;
 import com.bupt.flowpackage.mybatis.account.role.model.Role;
 import com.bupt.flowpackage.utils.PageRespUtil;
+import com.bupt.flowpackage.utils.RandomUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -97,41 +98,45 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 	}
 	@Transactional("account")
 	public int adminAdd(AdminAddReq req){
-		String pwd = req.getPassword();
-		String rePwd = req.getRePassword();
-		if(!StringUtils.equals(pwd, rePwd)) {
-			BizException.warn(103, "密码和重复密码必须相同！");
-		}
-		
 		SessionVo sessionVo = SessionUtil.getAdminSessionInfo();
 		if(sessionVo == null) {
 			BizException.warn("会话超时，请重新登录！");
 		}
-		
-		AdminRole adminRoleReq = new AdminRole();
-		adminRoleReq.setLoginName(req.getLoginName());
-		AdminRole adminRoleResp = adminMapper.selectAdminRoleInfo(adminRoleReq);
-		if(adminRoleResp != null) {
-			BizException.warn(105, "用户已存在!");
-		}
-		
-		boolean isSuper = false;
-		Role role = roleMapper.selectByPrimaryKey(req.getRoleId());
-		if(role != null && role.getRoleLevel() == 1) {
-			isSuper = true;
-		}
-		
 		Admin admin = new Admin();
-		BeanUtils.copyProperties(req, admin);
-		admin.setCreateUserName(sessionVo.getLoginName());
-		admin.setIsSuper(isSuper);
-		adminMapper.insert(admin);
-		
-		AdminRole adminRole = new AdminRole();
-		adminRole.setAdminId(admin.getId());
-		adminRoleMapper.deleteSelective(adminRole);
-		adminRoleMapper.insert(adminRole);
-		
+		if(sessionVo.isSuper() || SessionUtil.checkUrlAuth("admin-add")) {
+			/*String pwd = req.getPassword();
+			String rePwd = req.getRePassword();
+			if(!StringUtils.equals(pwd, rePwd)) {
+				BizException.warn(103, "密码和重复密码必须相同！");
+			}*/
+			
+			AdminRole adminRoleReq = new AdminRole();
+			adminRoleReq.setLoginName(req.getLoginName());
+			AdminRole adminRoleResp = adminMapper.selectAdminRoleInfo(adminRoleReq);
+			if(adminRoleResp != null) {
+				BizException.warn(105, "用户已存在!");
+			}
+			
+			boolean isSuper = false;
+			Role role = roleMapper.selectByPrimaryKey(req.getRoleId());
+			if(role != null && role.getRoleLevel() == 1) {
+				isSuper = true;
+			}
+			
+			BeanUtils.copyProperties(req, admin);
+			admin.setCreateUserName(sessionVo.getLoginName());
+			admin.setIsSuper(isSuper);
+			admin.setPassword(RandomUtil.getRandomStr(6));
+			adminMapper.insert(admin);
+			
+			AdminRole adminRole = new AdminRole();
+			adminRole.setAdminId(admin.getId());
+			adminRoleMapper.deleteSelective(adminRole);
+			adminRole.setRoleId(req.getRoleId());
+			adminRoleMapper.insert(adminRole);
+		}else {
+			BizException.warn("你无权限添加用户！");
+		}
 		return admin.getId();
 	}
 	

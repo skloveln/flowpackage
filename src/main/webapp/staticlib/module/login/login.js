@@ -22,7 +22,7 @@ layui.use('layer', function(){
 	        		$('#errMsg').html(result.subMessage);
 	        	}
 	        },
-	        error: function(data) {
+	        error: function(XMLHttpRequest, textStatus, errorThrown) {
 	        	$('#errMsg').html("系统异常！");
 	        },
 	        complete: function () {

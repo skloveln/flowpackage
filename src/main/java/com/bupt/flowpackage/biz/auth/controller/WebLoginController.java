@@ -1,9 +1,11 @@
 package com.bupt.flowpackage.biz.auth.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +33,8 @@ public class WebLoginController {
 	
 	@ResponseBody
 	@RequestMapping("/login")
-	public BaseResponse<String> login(UserLoginWebRequest req, HttpServletRequest request) {
+	public BaseResponse<String> login(UserLoginWebRequest req, HttpServletRequest request, 
+			HttpServletResponse resp) throws Exception{
 		BaseResponse<String> baseResp = new BaseResponse<String>();
 		try{
 			SessionVo sessionVo = adminRoleService.checkLoginUserAndPwdService(req);

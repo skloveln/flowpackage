@@ -3,7 +3,6 @@ package com.bupt.flowpackage.biz.auth.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,7 +74,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping("/api/getAdminRoleList")
-	public BaseResponse<AdminRole> getAdminRoleList(AdminRoleListReq req, HttpServletRequest request) {
+	public BaseResponse<AdminRole> getAdminRoleList(AdminRoleListReq req) {
 		BaseResponse<AdminRole> baseResp = new BaseResponse<AdminRole>();
 		try{
 			Page<AdminRole> pages = adminRoleService.getAdminListPage(req);
@@ -120,10 +119,12 @@ public class AdminController {
 				AdminUpdateReq adminUpdateReq = new AdminUpdateReq();
 				BeanUtils.copyProperties(req, adminUpdateReq);
 				adminRoleService.adminUpdate(adminUpdateReq);
+				baseResp.setMsg("管理员修改成功");
 			}else {
 				AdminAddReq adminAddReq = new AdminAddReq();
 				BeanUtils.copyProperties(req, adminAddReq);
 				adminRoleService.adminAdd(adminAddReq);
+				baseResp.setMsg("管理员添加成功");
 			}
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);
