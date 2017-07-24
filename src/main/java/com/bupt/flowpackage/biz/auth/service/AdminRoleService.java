@@ -72,5 +72,12 @@ public interface AdminRoleService {
 	* @return List<Application>
 	 */
 	public List<Application> getAllApplicationMenu();
+	/***
+	 * <p>获取管理员详细信息</p>   
+	 * @param @param adminId
+	 * @param @return      
+	 * @return AdminRole
+	 */
+	public AdminRole getAdminRoleByKey(Integer adminId);
 	
 }

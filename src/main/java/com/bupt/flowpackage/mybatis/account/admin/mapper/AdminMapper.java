@@ -13,7 +13,7 @@ public interface AdminMapper {
 
     int insertSelective(Admin record);
 
-    Admin selectByPrimaryKey(Integer id);
+    AdminRole selectByPrimaryKey(Integer id);
     
     Admin selectBySelective(Admin admin);
     /**

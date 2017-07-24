@@ -19,7 +19,7 @@ public class AdminAddReq extends BaseRequest{
 	@NotBlank(message="重复密码不能为空")
 	private String rePassword;*/
 	/**角色id*/
-	@NotNull
+	@NotNull(message="请选择访问权限组")
 	private Integer roleId;
 	/**真实姓名*/
     private String realName;

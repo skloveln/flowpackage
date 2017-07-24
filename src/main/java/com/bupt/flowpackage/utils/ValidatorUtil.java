@@ -33,9 +33,8 @@ public class ValidatorUtil {
 		StringBuffer desc = new StringBuffer();
 		while (iterator.hasNext()) {
 			ConstraintViolation<Object> constraintViolation = iterator.next();
-			String attr = constraintViolation.getPropertyPath().toString();
 			String msg = constraintViolation.getMessage();
-			desc.append(attr + msg);
+			desc.append(msg);
 			break;
 		}
 		if (constraintViolations.size() > 0) {

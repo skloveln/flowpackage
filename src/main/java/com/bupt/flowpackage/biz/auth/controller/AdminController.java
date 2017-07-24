@@ -4,12 +4,15 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.logging.log4j.core.config.plugins.validation.constraints.Required;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bupt.flowpackage.biz.auth.model.AdminAddOrEditReq;
@@ -56,6 +59,27 @@ public class AdminController {
 		try{
 			List<Role> roleList = adminRoleService.getRoleList();
 			resp.setRoleList(roleList);
+			modelMap.addAttribute("resp", resp);
+		}catch(Exception e) {
+			logger.error("管理员添加页面访问失败!", e);
+			throw e;
+		}finally{
+			logger.info("管理员添加页面返回resp={}", resp);
+		}
+		return "admin/admin-form";
+	} 
+	
+	@RequestMapping("/admin-edit")
+	public String adminEdit(@RequestParam(required=true)Integer id, ModelMap modelMap) {
+		AdminAddOrEditResp resp = new AdminAddOrEditResp();
+		try{
+			
+			List<Role> roleList = adminRoleService.getRoleList();
+			resp.setRoleList(roleList);
+			AdminRole adminRole = adminRoleService.getAdminRoleByKey(id);
+			if(adminRole != null) {
+				resp.setAdmin(adminRole);
+			}
 			modelMap.addAttribute("resp", resp);
 		}catch(Exception e) {
 			logger.error("管理员添加页面访问失败!", e);

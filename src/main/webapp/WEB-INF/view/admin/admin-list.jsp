@@ -18,7 +18,7 @@
 		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.reload();" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="Hui-article">
-		<article class="cl pd-20">
+		<article class="cl pd-20" style="min-height:500px;">
 			<div class="admin-main">
 				<div class="layui-field-box layui-form">
 					<form class="form-search layui-form layui-form-pane" id="searchForm" load-action="${ctx}/admin/api/getAdminRoleList">
@@ -81,7 +81,7 @@
 					{{/if}}
 				</td>
 				<td>
-					<a class="layui-btn layui-btn-mini">修改</a>
+					<a class="layui-btn layui-btn-mini" data-modal="${ctx}/admin/admin-edit?id={{item.adminId}}">修改</a>
 					<a data-update="1" data-field='delete' data-action='${ctx}/admin/delete' class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 				</td>
 			</tr>

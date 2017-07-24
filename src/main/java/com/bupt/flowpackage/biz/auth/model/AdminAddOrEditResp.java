@@ -3,7 +3,7 @@ package com.bupt.flowpackage.biz.auth.model;
 import java.util.List;
 
 import com.bupt.flowpackage.common.domain.BaseBean;
-import com.bupt.flowpackage.mybatis.account.admin.model.Admin;
+import com.bupt.flowpackage.mybatis.account.adminrole.model.AdminRole;
 import com.bupt.flowpackage.mybatis.account.role.model.Role;
 /**
 * @Description: 管理员信息修改响应
@@ -14,14 +14,15 @@ import com.bupt.flowpackage.mybatis.account.role.model.Role;
 public class AdminAddOrEditResp extends BaseBean{
 	private static final long serialVersionUID = 1L;
 
-	private Admin admin;
+	private AdminRole admin;
 	
 	private List<Role> roleList;
-	
-	public Admin getAdmin() {
+
+	public AdminRole getAdmin() {
 		return admin;
 	}
-	public void setAdmin(Admin admin) {
+
+	public void setAdmin(AdminRole admin) {
 		this.admin = admin;
 	}
 

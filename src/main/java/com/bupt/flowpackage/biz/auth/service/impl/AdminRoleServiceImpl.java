@@ -71,6 +71,10 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		sessionVo.setSuper(adminRole.getIsSuper());
 		return sessionVo;
 	}
+	
+	public AdminRole getAdminRoleByKey(Integer adminId) {
+		return adminMapper.selectByPrimaryKey(adminId);
+	}
 
 	@Override
 	public List<Application> getApplicationMenuByRoleId(Integer roleId) {

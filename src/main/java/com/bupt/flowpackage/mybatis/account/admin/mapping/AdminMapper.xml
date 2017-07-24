@@ -51,9 +51,10 @@
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
-    from cf_admin
-    where id = #{id,jdbcType=INTEGER}
+    <include refid="AdminRole_Column_List" />
+    from  cf_admin admin, cf_role role, cf_adminRole adminRole
+    where admin.id = adminRole.admin_id and role.id = adminRole.role_id 
+    and admin.id = #{id,jdbcType=INTEGER}
   </select>
   
   <select id="selectBySelective" resultMap="BaseResultMap" parameterType="admin" >
