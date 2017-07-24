@@ -6,7 +6,7 @@
         <div class="layui-input-block">
         	<c:choose>
         		<c:when test="${empty resp.admin.loginName}">
-        			<input type="text" name=loginName value='' required="required" title="请输入用户账号" placeholder="请输入用户账号" class="layui-input">
+        			<input type="text" name=loginName value='' pattern="\w{4,20}$" required="required" title="账号必须是4-20个字母或数字或下划线" placeholder="账号必须是4-20个字母或数字或下划线" class="layui-input">
         		</c:when>
         		<c:otherwise>
         			<input type="text" readonly name="loginName" value='${resp.admin.loginName}' required="required" title="请输入用户账号" placeholder="请输入用户账号" class="layui-input">
@@ -32,7 +32,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">联系邮箱</label>
         <div class="layui-input-block">
-            <input type="text" name="email" pattern="^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$" value='${vo.email}' title="请输入联系邮箱" placeholder="请输入联系邮箱" class="layui-input">
+            <input type="text" name="email" pattern="^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$" value='${resp.admin.email}' title="请输入联系邮箱" placeholder="请输入联系邮箱" class="layui-input">
         </div>
     </div>
     
@@ -41,7 +41,7 @@
         <div class="layui-input-block">
         	<c:forEach var="item" items="${resp.roleList}">
         		<c:choose>
-        			<c:when test="${item.id} == ${global.adminInfo.roleId}">
+        			<c:when test="${item.id == resp.admin.roleId}">
         				<input type="radio" checked name="roleId" value="${item.id}" title="${item.roleName}">
         			</c:when>
         			<c:otherwise>
@@ -59,7 +59,7 @@
         </div>
     </div>
     <div class="layui-form-item text-c">
-    	<input type='hidden' value='${resp.admin.id}' name='id'/>
+    	<input type='hidden' value='${resp.admin.adminId}' name='adminId'/>
         <button class="layui-btn" type='submit'>保存数据</button>
         <button class="layui-btn layui-btn-danger" type='button' data-close>取消编辑</button>
     </div>

@@ -36,8 +36,18 @@ public class Admin extends BaseBean{
     private Boolean availableFlag;
 
     private Boolean isSuper;
+    
+    private String adminDesc;
+    
+    public String getAdminDesc() {
+		return adminDesc;
+	}
 
-    public Integer getId() {
+	public void setAdminDesc(String adminDesc) {
+		this.adminDesc = adminDesc;
+	}
+
+	public Integer getId() {
         return id;
     }
 

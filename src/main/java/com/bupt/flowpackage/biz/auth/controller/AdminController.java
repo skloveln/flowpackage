@@ -73,7 +73,6 @@ public class AdminController {
 	public String adminEdit(@RequestParam(required=true)Integer id, ModelMap modelMap) {
 		AdminAddOrEditResp resp = new AdminAddOrEditResp();
 		try{
-			
 			List<Role> roleList = adminRoleService.getRoleList();
 			resp.setRoleList(roleList);
 			AdminRole adminRole = adminRoleService.getAdminRoleByKey(id);

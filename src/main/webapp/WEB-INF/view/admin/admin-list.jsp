@@ -18,7 +18,7 @@
 		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.reload();" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 	</nav>
 	<div class="Hui-article">
-		<article class="cl pd-20" style="min-height:500px;">
+		<article class="cl pd-20" style="min-height:650px;">
 			<div class="admin-main">
 				<div class="layui-field-box layui-form">
 					<form class="form-search layui-form layui-form-pane" id="searchForm" load-action="${ctx}/admin/api/getAdminRoleList">

@@ -17,6 +17,7 @@
     <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
     <result column="available_flag" property="availableFlag" jdbcType="BIT" />
     <result column="is_super" property="isSuper" jdbcType="BIT" />
+    <result column="admin_desc" property="adminDesc" jdbcType="VARCHAR" />
   </resultMap>
   
   <resultMap id="AdminRoleBaseResultMap" type="adminRole" >
@@ -38,18 +39,19 @@
     <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
     <result column="available_flag" property="availableFlag" jdbcType="BIT" />
     <result column="is_super" property="isSuper" jdbcType="BIT" />
+    <result column="admin_desc" property="adminDesc" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, login_name, real_name, sex, mobile, email, create_user_name, create_time, 
-    modify_name, update_time, first_login_time, last_login_time, available_flag, is_super
+    modify_name, update_time, first_login_time, last_login_time, available_flag, is_super, admin_desc 
   </sql>
   
   <sql id="AdminRole_Column_List" >
     admin_id, role_id, role_name, login_name, real_name, sex, mobile, email, admin.create_user_name, admin.create_time, 
-    admin.modify_name, admin.update_time, first_login_time, last_login_time, available_flag, role_level, is_super
+    admin.modify_name, admin.update_time, first_login_time, last_login_time, available_flag, role_level, is_super, admin_desc
   </sql>
   
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="AdminRoleBaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="AdminRole_Column_List" />
     from  cf_admin admin, cf_role role, cf_adminRole adminRole
@@ -300,6 +302,9 @@
       </if>
       <if test="modifyName != null and modifyName != ''" >
         modify_name = #{modifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminDesc != null and adminDesc != ''" >
+        admin_desc = #{adminDesc,jdbcType=VARCHAR},
       </if>
        update_time = now(),
       <if test="firstLoginTime != null and firstLoginTime != ''" >

@@ -9,15 +9,14 @@ import com.bupt.flowpackage.common.domain.BaseRequest;
 public class AdminUpdateReq  extends BaseRequest{
 	private static final long serialVersionUID = 1L;
 	/**管理员id*/
-	@NotNull
+	@NotNull(message="管理员id不能为空")
 	private Integer adminId;
 	/**角色id*/
-	@NotNull
+	@NotNull(message="请选择权限组")
 	private Integer roleId;
 	/**密码*/
 	private String password;
 	/**重复密码*/
-	@NotBlank
 	private String rePassword;
 	/**真实姓名*/
     private String realName;
@@ -32,6 +31,12 @@ public class AdminUpdateReq  extends BaseRequest{
 		return adminDesc;
 	}
     
+	public void setAdminDesc(String adminDesc) {
+		this.adminDesc = adminDesc;
+	}
+
+
+
 	public Integer getAdminId() {
 		return adminId;
 	}
