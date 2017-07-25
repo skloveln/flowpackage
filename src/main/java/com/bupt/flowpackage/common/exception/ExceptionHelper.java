@@ -15,15 +15,14 @@ public class ExceptionHelper {
 		if (e instanceof IException) {
 			IException ex = (IException) e;
 			//logger.info("\n requestNo={} 请求业务失败! error={}, errMsg={}", request.getRequestNo(), ex.getSubCode(), ex.getSubMessage());
-			return new BaseResponse<T>(ex.getCode(), ex.getMsg(), ex.getSubCode(), ex.getSubMessage(), request.getRequestNo());
+			return new BaseResponse<T>(ex.getCode(), ex.getMsg(), ex.getSubCode(), ex.getSubMessage());
 		}else {
 			logger.error("\n requestNo={} 请求系统异常!", request.getRequestNo(), e);
-			return new BaseResponse<T>(ResultCode.Result_ERROR, request.getRequestNo());
+			return new BaseResponse<T>(ResultCode.Result_ERROR);
 		}
 	}
 	
 	public static <T> BaseResponse<T> createResponse(Throwable e){
-		BaseRequest req = new BaseRequest();
-		return createResponse(e, req);
+		return createResponse(e);
 	}
 }

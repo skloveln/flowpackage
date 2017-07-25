@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -103,9 +102,6 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 	@Transactional("account")
 	public int adminAdd(AdminAddReq req){
 		SessionVo sessionVo = SessionUtil.getAdminSessionInfo();
-		if(sessionVo == null) {
-			BizException.warn("会话超时，请重新登录！");
-		}
 		Admin admin = new Admin();
 		if(sessionVo.isSuper() || SessionUtil.checkUrlAuth("admin-add")) {
 			/*String pwd = req.getPassword();
@@ -147,9 +143,6 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 	@Transactional("account")
 	public boolean adminUpdate(AdminUpdateReq req) {
 		SessionVo sessionVo = SessionUtil.getAdminSessionInfo();
-		if(sessionVo == null) {
-			BizException.warn("会话超时，请重新登录！");
-		}
 		
 		if(sessionVo.isSuper() || SessionUtil.checkUrlAuth("admin-edit") || req.getAdminId() == sessionVo.getAdminId()){
 			Admin admin = adminMapper.selectByPrimaryKey(req.getAdminId());

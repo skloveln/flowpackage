@@ -1,6 +1,5 @@
 package com.bupt.flowpackage.biz.auth.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -52,8 +51,6 @@ public class WebLoginController {
 			}
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);
-		}finally{
-			logger.info("\n用户登录--reuqestNo={} 返回对象resp=[{}]", req.getRequestNo(), baseResp);
 		}
 		return baseResp;
 	}

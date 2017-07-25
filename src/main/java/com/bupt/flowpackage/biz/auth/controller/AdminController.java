@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.logging.log4j.core.config.plugins.validation.constraints.Required;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -63,8 +61,6 @@ public class AdminController {
 		}catch(Exception e) {
 			logger.error("管理员添加页面访问失败!", e);
 			throw e;
-		}finally{
-			logger.info("管理员添加页面返回resp={}", resp);
 		}
 		return "admin/admin-form";
 	} 
@@ -83,15 +79,12 @@ public class AdminController {
 		}catch(Exception e) {
 			logger.error("管理员添加页面访问失败!", e);
 			throw e;
-		}finally{
-			logger.info("管理员添加页面返回resp={}", resp);
 		}
 		return "admin/admin-form";
 	} 
 	
 	@RequestMapping("/admin-delete")
 	public String adminDelete() {
-		
 		return "admin/admin-list";
 	}   
 	
@@ -104,8 +97,6 @@ public class AdminController {
 			baseResp.setPages(pages);
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);
-		}finally{
-			logger.info("\n获取管理员角色列表; reuqestNo={} 返回对象resp=[{}]", req.getRequestNo(), baseResp);
 		}
 		return baseResp;
 	}
@@ -121,8 +112,6 @@ public class AdminController {
 			}
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e);
-		}finally{
-			logger.info("\n检查session; 返回对象resp=[{}]", baseResp);
 		}
 		return baseResp;
 	}
@@ -151,8 +140,6 @@ public class AdminController {
 			}
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e, req);
-		}finally{
-			logger.info("\n管理员新增或更新; reuqestNo={} 返回对象resp=[{}]", req.getRequestNo(), baseResp);
 		}
 		return baseResp;
 	}

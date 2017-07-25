@@ -2,8 +2,6 @@ package com.bupt.flowpackage.biz.auth.model;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import com.bupt.flowpackage.common.domain.BaseRequest;
 
 public class AdminUpdateReq  extends BaseRequest{

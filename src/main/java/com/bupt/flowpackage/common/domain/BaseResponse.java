@@ -1,7 +1,5 @@
 package com.bupt.flowpackage.common.domain;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.bupt.flowpackage.common.enums.ResultCode;
 import com.bupt.flowpackage.common.exception.IException;
 
@@ -28,18 +26,13 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 	public void setPages(Page<T> pages) {
 		this.pages = pages;
 	}
-
-	public BaseResponse(String requestNo){
-		this(ResultCode.Result_SUCCESS, requestNo);
-	}
 	
 	public BaseResponse(){
-		this(ResultCode.Result_SUCCESS, null);
+		this(ResultCode.Result_SUCCESS);
 	}
 	
-	public BaseResponse(T date, String requestNo){
+	public BaseResponse(T date){
 		this.data = date;
-		this.setRequestNo(requestNo);
 	}
 	
 	public void setCode(Integer code) {
@@ -58,23 +51,15 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 		this.subMessage = subMessage;
 	}
 
-	public BaseResponse(Integer code,String message, Integer subCode, String subMessage, String requestNo){
+	public BaseResponse(Integer code,String message, Integer subCode, String subMessage){
 		this.code = code;
 		this.msg = message;
 		this.subCode = subCode;
 		this.subMessage = subMessage;
-		if(StringUtils.isNotBlank(requestNo)) {
-			this.setRequestNo(requestNo);
-		}
 	}
 	
-	public BaseResponse(ResultCode result, String requestNo){
-		this(result.getCode(), result.getMsg(), result.getCode(), result.getMsg(), requestNo);
-	}
-	
-	public static BaseResponse<String> success(BaseRequest req) {
-		BaseResponse<String> baseResp = new BaseResponse<String>(req.getRequestNo());
-		return baseResp;
+	public BaseResponse(ResultCode result){
+		this(result.getCode(), result.getMsg(), result.getCode(), result.getMsg());
 	}
 	
 	public T getData() {
