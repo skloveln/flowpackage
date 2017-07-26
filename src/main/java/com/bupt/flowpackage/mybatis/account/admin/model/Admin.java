@@ -37,7 +37,15 @@ public class Admin extends BaseBean{
 
     private Boolean isSuper;
     
-    private String adminDesc;
+	public Boolean getIsSuper() {
+		return isSuper;
+	}
+
+	public void setIsSuper(Boolean isSuper) {
+		this.isSuper = isSuper;
+	}
+
+	private String adminDesc;
     
     public String getAdminDesc() {
 		return adminDesc;
@@ -158,12 +166,4 @@ public class Admin extends BaseBean{
     public void setAvailableFlag(Boolean availableFlag) {
         this.availableFlag = availableFlag;
     }
-
-	public Boolean getIsSuper() {
-		return isSuper;
-	}
-
-	public void setIsSuper(Boolean isSuper) {
-		this.isSuper = isSuper;
-	}
 }

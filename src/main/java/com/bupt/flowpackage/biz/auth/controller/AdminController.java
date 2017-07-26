@@ -84,7 +84,7 @@ public class AdminController {
 	} 
 	
 	@ResponseBody
-	@RequestMapping("/api/admin-delete")
+	@RequestMapping("/admin-delete")
 	public BaseResponse<String> adminDelete(@RequestParam(required=true)Integer id) {
 		BaseResponse<String> baseResp = new BaseResponse<String>();
 		try{

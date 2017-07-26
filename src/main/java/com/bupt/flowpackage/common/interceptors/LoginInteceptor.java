@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -31,9 +33,12 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 			throws Exception {
 		SessionVo sessionInfo = SessionUtil.getAdminSessionInfo();
 		String uri = request.getRequestURI();
+		
+		HandlerMethod handlerMethod = (HandlerMethod) handler; 
+		ResponseBody hasResponseBody = handlerMethod.getMethodAnnotation(ResponseBody.class);
+		
 		if(sessionInfo == null) {
-			PathMatcher matcher = new AntPathMatcher();
-			if(matcher.match(API_PATH, uri)) {
+			if(hasResponseBody != null) {
 				BaseResponse<String> baseResp = new BaseResponse<String>(ResultCode.Result_NO_SESSION);
 				logger.info("\n用户访问url={} 因未登陆或session过期, 返回超时错误信息:{}", uri, baseResp);
 				
@@ -46,7 +51,7 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 				response.sendRedirect(request.getContextPath() + "/tologin");
 			}	
 			return false;
-		}
+		}		
 		return true;
 	}
 	
@@ -90,11 +95,23 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 			webGlobalVo.setCurrentParentUrl(parentUrl);
 			
 			webGlobalVo.setCurrentUrl(currentUrl + ".html");
-			if(modelAndView != null && !SessionUtil.checkUrlAuth(currentUrl)) {
-				logger.info("\n用户={} 访问url={} 因无权限, 强制跳转到无权限页面", sessionInfo.getLoginName(), url);
-				modelAndView.setViewName(Constants.PAGE_NOAUTH);
-			}else if(modelAndView != null){
-				modelAndView.addObject(GLOBAL_INFO, webGlobalVo);
+			if(modelAndView != null) {
+				if(!SessionUtil.checkUrlAuth(currentUrl)) {
+					logger.info("\n用户={} 访问url={} 因无权限, 强制跳转到无权限页面", sessionInfo.getLoginName(), url);
+					modelAndView.setViewName(Constants.PAGE_NOAUTH);
+				} else {
+					modelAndView.addObject(GLOBAL_INFO, webGlobalVo);
+				}
+			}else {
+				PathMatcher matcher = new AntPathMatcher();
+				if(!matcher.match(API_PATH, url) && !SessionUtil.checkUrlAuth(currentUrl)){
+					BaseResponse<String> baseResp = new BaseResponse<String>(ResultCode.Result_NO_AUTH);
+					logger.info("\n用户访问url={} 该用户loginName={}无权限，返回提示信息！", url, sessionInfo.getLoginName());
+					response.setCharacterEncoding("UTF-8");
+					response.setHeader("Content-type","text/html;charset=UTF-8");
+					PrintWriter writer = response.getWriter();
+					writer.write(baseResp.toString());
+				}
 			}
 		}
 	}

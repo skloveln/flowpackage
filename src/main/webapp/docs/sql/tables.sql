@@ -19,7 +19,7 @@ create table cf_admin
    first_login_time     datetime comment '第一次登录时间',
    last_login_time      datetime comment '最后一次登录时间',
    available_flag       boolean default true comment '是否可用',
-   is_super             boolean default false comment '是否为超级管理员',
+   super_admin          boolean default false comment '是否为超级管理员',
    admin_desc 			tinytext COMMENT '描述',
    primary key (id)
 );

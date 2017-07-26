@@ -306,7 +306,9 @@
       <if test="adminDesc != null and adminDesc != ''" >
         admin_desc = #{adminDesc,jdbcType=VARCHAR},
       </if>
-       update_time = now(),
+      <if test="isSuper != null" >
+        is_super = #{isSuper,jdbcType=BIT},
+      </if>
       <if test="firstLoginTime != null and firstLoginTime != ''" >
         first_login_time = #{firstLoginTime,jdbcType=TIMESTAMP},
       </if>
@@ -316,9 +318,7 @@
       <if test="availableFlag != null and availableFlag != ''" >
         available_flag = #{availableFlag,jdbcType=BIT},
       </if>
-      <if test="isSuper != null and isSuper != ''" >
-        is_super = #{isSuper,jdbcType=BIT},
-      </if>
+      update_time = now() 
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>

@@ -104,12 +104,6 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		SessionVo sessionVo = SessionUtil.getAdminSessionInfo();
 		Admin admin = new Admin();
 		if(sessionVo.isSuper() || SessionUtil.checkUrlAuth("admin-add")) {
-			/*String pwd = req.getPassword();
-			String rePwd = req.getRePassword();
-			if(!StringUtils.equals(pwd, rePwd)) {
-				BizException.warn(103, "密码和重复密码必须相同！");
-			}*/
-			
 			AdminRole adminRoleReq = new AdminRole();
 			adminRoleReq.setLoginName(req.getLoginName());
 			AdminRole adminRoleResp = adminMapper.selectAdminRoleInfo(adminRoleReq);
@@ -143,7 +137,6 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 	@Transactional("account")
 	public boolean adminUpdate(AdminUpdateReq req) {
 		SessionVo sessionVo = SessionUtil.getAdminSessionInfo();
-		
 		if(sessionVo.isSuper() || SessionUtil.checkUrlAuth("admin-edit") || req.getAdminId() == sessionVo.getAdminId()){
 			Admin admin = adminMapper.selectByPrimaryKey(req.getAdminId());
 			if(admin == null) {
@@ -154,7 +147,7 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 				BeanUtils.copyProperties(req, adminInfo);
 				adminInfo.setId(req.getAdminId());
 				//是否为超级管理员
-				boolean isSuper = false;
+				Boolean isSuper = false;
 				Role role = roleMapper.selectByPrimaryKey(req.getRoleId());
 				if(role != null && role.getRoleLevel() == 1) {
 					isSuper = true;
@@ -174,8 +167,14 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 	}
 
 	@Override
+	@Transactional("account")
 	public int adminDelete(Integer adminId) {
-		BizException.warn("管理员删除失败!");
+		AdminRole adminRole = adminMapper.selectByPrimaryKey(adminId);
+		if(adminRole == null) {
+			BizException.warn("用户不存在!");
+		}else {
+			
+		}
 		return 0;
 	}
 }
