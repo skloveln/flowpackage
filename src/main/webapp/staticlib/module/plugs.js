@@ -40,13 +40,13 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
 				if(resp.code == 200) {
 					hasSession = true;
 				}else {
-					$.msg.error(resp.subMessage, 3, function () {
+					$.msg.error(resp.subMessage, 2, function () {
 						location.reload();
 			        });
 				}
 			},
 			error: function(er) {
-				$.msg.error("服务器出错，请重新登陆！", 5, function () {
+				$.msg.error("服务器出错，请重新登陆！", 2, function () {
 					location.reload();
 		        });
 			},
