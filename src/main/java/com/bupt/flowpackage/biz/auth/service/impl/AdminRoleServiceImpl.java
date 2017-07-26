@@ -153,6 +153,13 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 				Admin adminInfo = new Admin();
 				BeanUtils.copyProperties(req, adminInfo);
 				adminInfo.setId(req.getAdminId());
+				//是否为超级管理员
+				boolean isSuper = false;
+				Role role = roleMapper.selectByPrimaryKey(req.getRoleId());
+				if(role != null && role.getRoleLevel() == 1) {
+					isSuper = true;
+				}
+				adminInfo.setIsSuper(isSuper);
 				adminMapper.updateByPrimaryKeySelective(adminInfo);
 				//更新管理员角色信息
 				AdminRole adminRole = new AdminRole();
@@ -164,5 +171,11 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 			BizException.warn("你无权限修改该用户信息！");
 		}
 		return true;
+	}
+
+	@Override
+	public int adminDelete(Integer adminId) {
+		BizException.warn("管理员删除失败!");
+		return 0;
 	}
 }

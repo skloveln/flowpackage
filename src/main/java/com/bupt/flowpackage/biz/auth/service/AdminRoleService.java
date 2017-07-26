@@ -52,6 +52,14 @@ public interface AdminRoleService {
 	 * @return int adminId
 	 */
 	public int adminAdd(AdminAddReq req);
+	
+	/**
+	 * <p>删除管理员</p>   
+	 * @param @param adminId
+	 * @param @return      
+	 * @return int
+	 */
+	public int adminDelete(Integer adminId);
 	/**
 	 * <p>管理员修改</p>   
 	 * @param @param req

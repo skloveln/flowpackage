@@ -81,8 +81,8 @@
 					{{/if}}
 				</td>
 				<td>
-					<a class="layui-btn layui-btn-mini" data-modal="${ctx}/admin/admin-edit?id={{item.adminId}}">修改</a>
-					<a data-update="1" data-field='delete' data-action='${ctx}/admin/delete' class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+					<a class="layui-btn layui-btn-mini" data-modal="${ctx}/admin/admin-edit?id={{item.adminId}}" data-title="编辑管理员" >修改</a>
+					<a data-update="{{item.adminId}}" data-action='${ctx}/admin/api/admin-delete' class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 				</td>
 			</tr>
 		{{/each}} 

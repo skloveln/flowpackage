@@ -3,7 +3,7 @@ package com.bupt.flowpackage.common.enums;
 public enum ResultCode {
 	
 	Result_SUCCESS(200,"请求成功!"),
-	Result_NO_SESSION(201,"会话超时!"),
+	Result_NO_SESSION(201,"会话超时,请重新登录!"),
 	Result_WARN(400,"温馨提示!"),	
 	Result_ERROR(500,"系统后台异常,请联系厂家!"),	
 	Result_501(501,"请求参数错误!");

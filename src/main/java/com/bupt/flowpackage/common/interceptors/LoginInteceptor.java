@@ -23,7 +23,7 @@ import com.bupt.flowpackage.mybatis.account.application.model.Application;
 
 public class LoginInteceptor  extends HandlerInterceptorAdapter{
 	public static Logger logger = LoggerFactory.getLogger(LoginInteceptor.class);
-	private static String API_PATH = "/*/api/**";
+	private static String API_PATH = "/**/api/**";
 	
 	//web全局信息，访问任何页面都会用到
 	private static final String GLOBAL_INFO = "global";
@@ -41,7 +41,7 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 				response.setHeader("Content-type","text/html;charset=UTF-8");
 				PrintWriter writer = response.getWriter();
 				writer.write(baseResp.toString());
-			}else {
+			} else {
 				logger.info("\n用户访问url={} 因未登陆或session过期, 强制跳转到tologin登陆页", uri);
 				response.sendRedirect(request.getContextPath() + "/tologin");
 			}	

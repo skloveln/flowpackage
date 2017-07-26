@@ -46,7 +46,7 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
 				}
 			},
 			error: function(er) {
-				$.msg.error("服务器出错，请重新登陆！", 3, function () {
+				$.msg.error("服务器出错，请重新登陆！", 5, function () {
 					location.reload();
 		        });
 			},
@@ -94,8 +94,8 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
     msg.prototype.confirm = function (msg, ok, no) {
         var self = this;
         return this.index = layer.confirm(msg, {btn: ['确认', '取消']}, function () {
+        	self.close();
             typeof ok === 'function' && ok.call(this);
-            self.close();
         }, function () {
             typeof no === 'function' && no.call(this);
             self.close();
@@ -188,10 +188,15 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
                     self.autoSuccessCloseIndexs = [];
                 }
             });
+        }else if(parseInt(data.code) === 201) {
+        	$.msg.error(data.subMessage, 3, function () {
+				location.reload();
+	        });
+        }else {
+        	self.error(data.subMessage, 3, function () {
+                !!data.url && (window.location.href = data.url);
+            });
         }
-        self.error(data.subMessage, 3, function () {
-            !!data.url && (window.location.href = data.url);
-        });
     };
 
     /**
@@ -228,7 +233,11 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
      * @param time 消息提示时间
      */
     _form.prototype.load = function (url, data, type, callback, loading, tips, time) {
-        var self = this, dialogIndex = 0;
+    	var sessionValidate = checkSession();
+    	if(!sessionValidate) {
+    		return;
+    	}
+    	var self = this, dialogIndex = 0;
         (loading !== false) && (dialogIndex = $.msg.loading(tips));
         (typeof Pace === 'object') && Pace.restart();
         $.ajax({
@@ -312,10 +321,6 @@ layui.define(['jquery', 'layer', 'form','laypage'], function(exports){
      * @param tips
      */
     _form.prototype.modal = function (url, data, title, callback, loading, tips) {
-    	var sessionValidate = checkSession();
-    	if(!sessionValidate) {
-    		return;
-    	}
         this.load(url, data, 'GET', function (res) {
             if (typeof (res) === 'object') {
                 return $.msg.auto(res);

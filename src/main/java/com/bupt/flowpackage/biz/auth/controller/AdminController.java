@@ -83,9 +83,17 @@ public class AdminController {
 		return "admin/admin-form";
 	} 
 	
-	@RequestMapping("/admin-delete")
-	public String adminDelete() {
-		return "admin/admin-list";
+	@ResponseBody
+	@RequestMapping("/api/admin-delete")
+	public BaseResponse<String> adminDelete(@RequestParam(required=true)Integer id) {
+		BaseResponse<String> baseResp = new BaseResponse<String>();
+		try{
+			adminRoleService.adminDelete(id);
+			baseResp.setMsg("管理员删除成功");
+		}catch(Exception e) {
+			baseResp = ExceptionHelper.createResponse(e);
+		}
+		return baseResp;
 	}   
 	
 	@ResponseBody

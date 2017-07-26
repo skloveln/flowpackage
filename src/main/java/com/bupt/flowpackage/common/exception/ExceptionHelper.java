@@ -23,6 +23,7 @@ public class ExceptionHelper {
 	}
 	
 	public static <T> BaseResponse<T> createResponse(Throwable e){
-		return createResponse(e);
+		BaseRequest request = new BaseRequest();
+		return createResponse(e, request);
 	}
 }

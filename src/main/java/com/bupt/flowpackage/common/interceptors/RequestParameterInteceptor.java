@@ -45,9 +45,9 @@ public class RequestParameterInteceptor extends HandlerInterceptorAdapter {
 			}
 		}
 		String method = request.getMethod();
-		StringBuilder sb = new StringBuilder("\n********来自地址fromUrl=" + referer + "; toUri=" + uri + "**********");
-		sb.append("\n**********本次" + method + "请求的参数如下************");
+		StringBuilder sb = new StringBuilder("\n********toUri=" + uri + "; fromUrl=" + referer + "**********");
 		if(!hasBaseRequest) {
+			sb.append("\n**********本次" + method + "请求的参数如下************");
 			Enumeration<String> en = request.getParameterNames();
 			while (en.hasMoreElements()) {
 				String name = en.nextElement();
