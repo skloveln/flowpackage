@@ -1,7 +1,7 @@
 package com.bupt.flowpackage.common.session;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSessionBindingListener;
 import com.bupt.flowpackage.common.domain.SessionVo;
 
 public class SessionListener implements HttpSessionBindingListener {
-	public static Map<Integer,SessionVo> ACTIVE_ADMIN = new HashMap<Integer,SessionVo>();//记录在线用户
+	public static Map<Integer,SessionVo> ACTIVE_ADMIN = new ConcurrentHashMap<Integer,SessionVo>();//记录在线用户
 	
 	private Integer adminID;
 	private SessionVo sessionVo;

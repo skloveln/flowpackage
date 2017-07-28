@@ -1,9 +1,9 @@
 package com.bupt.flowpackage.common.session;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,12 +30,12 @@ public class SessionUtil {
 	private static final String ADMIN_SESSION = "adminSession";
 	private static final String ACTIVE_ADMIN_LISTENER = "activeAdminListener";
 	/**全局模块菜单信息，根据角色id分组*/
-	private static Map<Integer, List<Application>> APPLICATION_MAP = new HashMap<Integer, List<Application>>();
+	private static Map<Integer, List<Application>> APPLICATION_MAP = new ConcurrentHashMap<Integer, List<Application>>();
 	/**权限*/
-	private static Map<Integer, List<String>> AUTH_URL_MAP = new HashMap<Integer, List<String>>();
+	private static Map<Integer, List<String>> AUTH_URL_MAP = new ConcurrentHashMap<Integer, List<String>>();
 	
 	//用于同个账号只能一台电脑登陆，或者可以主动踢掉用户
-	public static Map<Integer, HttpSession> SESSION_MAP = new HashMap<Integer, HttpSession>();
+	public static Map<Integer, HttpSession> SESSION_MAP = new ConcurrentHashMap<Integer, HttpSession>();
 	
 	public static HttpServletRequest getRequest(){
 		ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
