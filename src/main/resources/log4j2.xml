@@ -64,7 +64,7 @@
     <Loggers>
         <!-- 配置日志的根节点 -->
         <root level="info">
-        	<appender-ref ref="Console"/>
+        	<!-- <appender-ref ref="Console"/> -->
         	<appender-ref ref="Infolog"/>
             <appender-ref ref="Errorlog"/>
         </root>
@@ -73,9 +73,9 @@
         	<appender-ref ref="Infolog"/>
         </logger> -->
         
-        <logger name="com.bupt.test.Helloxx" level="debug" includeLocation="true" additivity="false">
+        <!-- <logger name="com.bupt.test.Helloxx" level="debug" includeLocation="true" additivity="false">
         	<appender-ref ref="Debuglog"/>
-        </logger>
+        </logger> -->
 
         <!-- 第三方日志系统 -->
         <logger name="org.springframework.core" level="info"/>
