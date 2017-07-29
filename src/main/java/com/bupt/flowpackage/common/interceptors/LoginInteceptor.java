@@ -33,41 +33,42 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 		SessionVo sessionInfo = SessionUtil.getAdminSessionInfo();
 		String uri = request.getRequestURI();
 		
-		HandlerMethod handlerMethod = (HandlerMethod) handler; 
-		ResponseBody hasResponseBody = handlerMethod.getMethodAnnotation(ResponseBody.class);
-		
-		if(sessionInfo == null) {
-			if(hasResponseBody != null) {
-				BaseResponse<String> baseResp = new BaseResponse<String>(ResultCode.Result_NO_SESSION);
-				logger.info("\n用户访问url={} 因未登陆或session过期, 返回超时错误信息:{}", uri, baseResp);
-				
-				response.setCharacterEncoding("UTF-8");
-				response.setHeader("Content-type","text/html;charset=UTF-8");
-				PrintWriter writer = response.getWriter();
-				writer.write(baseResp.toString());
-			} else {
-				logger.info("\n用户访问url={} 因未登陆或session过期, 强制跳转到tologin登陆页", uri);
-				response.sendRedirect(request.getContextPath() + "/tologin");
-			}	
-			return false;
-		}else {
-			String currentUri = getSimpleUri(uri);
-			//权限校验
-			if(hasResponseBody != null) {
-				PathMatcher matcher = new AntPathMatcher();
-				if(!matcher.match(API_PATH, uri) && !SessionUtil.checkUrlAuth(currentUri)){
-					BaseResponse<String> baseResp = new BaseResponse<String>(ResultCode.Result_NO_AUTH);
-					logger.info("\n用户访问url={} 该用户loginName={}无权限，返回提示信息！", uri, sessionInfo.getLoginName());
+		if(handler instanceof HandlerMethod) {
+			HandlerMethod handlerMethod = (HandlerMethod) handler; 
+			ResponseBody hasResponseBody = handlerMethod.getMethodAnnotation(ResponseBody.class);
+			if(sessionInfo == null) {
+				if(hasResponseBody != null) {
+					BaseResponse<String> baseResp = new BaseResponse<String>(ResultCode.Result_NO_SESSION);
+					logger.info("\n用户访问url={} 因未登陆或session过期, 返回超时错误信息:{}", uri, baseResp);
+					
 					response.setCharacterEncoding("UTF-8");
 					response.setHeader("Content-type","text/html;charset=UTF-8");
 					PrintWriter writer = response.getWriter();
 					writer.write(baseResp.toString());
-					return false;
-				}
+				} else {
+					logger.info("\n用户访问url={} 因未登陆或session过期, 强制跳转到tologin登陆页", uri);
+					response.sendRedirect(request.getContextPath() + "/tologin");
+				}	
+				return false;
 			}else {
-				if(!SessionUtil.checkUrlAuth(currentUri)) {
-					logger.info("\n用户={} 访问url={} 因无权限, 强制跳转到无权限页面", sessionInfo.getLoginName(), uri);
-					request.getRequestDispatcher("/error/noauth").forward(request, response);
+				String currentUri = getSimpleUri(uri);
+				//权限校验
+				if(hasResponseBody != null) {
+					PathMatcher matcher = new AntPathMatcher();
+					if(!matcher.match(API_PATH, uri) && !SessionUtil.checkUrlAuth(currentUri)){
+						BaseResponse<String> baseResp = new BaseResponse<String>(ResultCode.Result_NO_AUTH);
+						logger.info("\n用户访问url={} 该用户loginName={}无权限，返回提示信息！", uri, sessionInfo.getLoginName());
+						response.setCharacterEncoding("UTF-8");
+						response.setHeader("Content-type","text/html;charset=UTF-8");
+						PrintWriter writer = response.getWriter();
+						writer.write(baseResp.toString());
+						return false;
+					}
+				}else {
+					if(!SessionUtil.checkUrlAuth(currentUri)) {
+						logger.info("\n用户={} 访问url={} 因无权限, 强制跳转到无权限页面", sessionInfo.getLoginName(), uri);
+						request.getRequestDispatcher("/error/noauth").forward(request, response);
+					}
 				}
 			}
 		}

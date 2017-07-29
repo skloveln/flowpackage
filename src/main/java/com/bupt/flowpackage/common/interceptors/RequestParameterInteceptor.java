@@ -33,15 +33,17 @@ public class RequestParameterInteceptor extends HandlerInterceptorAdapter {
 		String referer = request.getHeader("Referer");
 		String uri = request.getRequestURI();
 		
-		HandlerMethod handlerMethod = (HandlerMethod) handler;  
-		MethodParameter[] methodParams = handlerMethod.getMethodParameters();
-		//如果是ajax请求，url=/*/api/** 则用日志aop打印日志，否则打印request里的日志
 		boolean hasBaseRequest = false;
-		for(MethodParameter param : methodParams) {
-			Class<?> paramType = param.getParameterType();
-			if(BaseRequest.class.isAssignableFrom(paramType)) {
-				hasBaseRequest = true;
-				break;
+		if(handler instanceof HandlerMethod) {
+			HandlerMethod handlerMethod = (HandlerMethod) handler;  
+			MethodParameter[] methodParams = handlerMethod.getMethodParameters();
+			//如果是ajax请求，url=/*/api/** 则用日志aop打印日志，否则打印request里的日志
+			for(MethodParameter param : methodParams) {
+				Class<?> paramType = param.getParameterType();
+				if(BaseRequest.class.isAssignableFrom(paramType)) {
+					hasBaseRequest = true;
+					break;
+				}
 			}
 		}
 		String method = request.getMethod();
