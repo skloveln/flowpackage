@@ -13,7 +13,9 @@ public class AdminAddOrEditReq extends BaseRequest{
 	/**密码*/
 	private String password;
 	/**重复密码*/
-	private String rePassword;
+	private String repassword;
+	/**旧密码*/
+	private String oldpassword;
 	/**真实姓名*/
     private String realName;
     /**手机号*/
@@ -22,7 +24,27 @@ public class AdminAddOrEditReq extends BaseRequest{
     private String email;
     
     private String adminDesc;
+    /**是否为自己修改*/
+    private boolean self;
     
+	public boolean isSelf() {
+		return self;
+	}
+	public void setSelf(boolean self) {
+		this.self = self;
+	}
+	public String getRepassword() {
+		return repassword;
+	}
+	public void setRepassword(String repassword) {
+		this.repassword = repassword;
+	}
+	public String getOldpassword() {
+		return oldpassword;
+	}
+	public void setOldpassword(String oldpassword) {
+		this.oldpassword = oldpassword;
+	}
 	public String getAdminDesc() {
 		return adminDesc;
 	}
@@ -53,12 +75,7 @@ public class AdminAddOrEditReq extends BaseRequest{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRePassword() {
-		return rePassword;
-	}
-	public void setRePassword(String rePassword) {
-		this.rePassword = rePassword;
-	}
+	
 	public String getRealName() {
 		return realName;
 	}

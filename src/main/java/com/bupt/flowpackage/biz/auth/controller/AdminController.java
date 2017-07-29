@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bupt.flowpackage.biz.auth.model.AdminAddOrEditReq;
 import com.bupt.flowpackage.biz.auth.model.AdminAddOrEditResp;
 import com.bupt.flowpackage.biz.auth.model.AdminAddReq;
+import com.bupt.flowpackage.biz.auth.model.AdminPwdReq;
 import com.bupt.flowpackage.biz.auth.model.AdminRoleListReq;
 import com.bupt.flowpackage.biz.auth.model.AdminUpdateReq;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
@@ -82,6 +83,37 @@ public class AdminController {
 		}
 		return "admin/admin-form";
 	} 
+	
+	@RequestMapping("/admin-pass")
+	public String editPasword(@RequestParam(required=true)Integer id, ModelMap modelMap) {
+		AdminAddOrEditResp resp = new AdminAddOrEditResp();
+		try{
+			AdminRole adminRole = adminRoleService.getAdminRoleByKey(id);
+			if(adminRole != null) {
+				resp.setAdmin(adminRole);
+			}
+			modelMap.addAttribute("resp", resp);
+		}catch(Exception e) {
+			logger.error("管理员修改密码页面访问失败!", e);
+			throw e;
+		}
+		return "admin/admin-pwd";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/api/admin-updatepwd")
+	public BaseResponse<String> adminUpdatePwd(AdminAddOrEditReq req) {
+		BaseResponse<String> baseResp = new BaseResponse<String>();
+		try{
+			AdminPwdReq adminPwdReq = new AdminPwdReq();
+			BeanUtils.copyProperties(req, adminPwdReq);
+			adminRoleService.adminUpdatePwd(adminPwdReq);
+			baseResp.setMsg("修改密码成功");
+		}catch(Exception e) {
+			baseResp = ExceptionHelper.createResponse(e);
+		}
+		return baseResp;
+	}   
 	
 	@ResponseBody
 	@RequestMapping("/admin-delete")

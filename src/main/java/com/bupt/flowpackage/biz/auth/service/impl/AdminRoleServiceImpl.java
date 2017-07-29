@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bupt.flowpackage.biz.auth.model.AdminAddReq;
+import com.bupt.flowpackage.biz.auth.model.AdminPwdReq;
 import com.bupt.flowpackage.biz.auth.model.AdminRoleListReq;
 import com.bupt.flowpackage.biz.auth.model.AdminUpdateReq;
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
@@ -165,17 +167,43 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		}
 		return true;
 	}
+	
+	public boolean adminUpdatePwd(AdminPwdReq req){
+		SessionVo sessionVo = SessionUtil.getAdminSessionInfo();
+		if(sessionVo.isSuper() || SessionUtil.checkUrlAuth("admin-pass") || req.getAdminId() == sessionVo.getAdminId()){
+			Admin admin = adminMapper.selectByPrimaryKey(req.getAdminId());
+			if(admin == null) {
+				BizException.warn("用户不存在!");
+			}else {
+				if(req.isSelf() && StringUtils.isBlank(req.getOldpassword())) {
+					BizException.warn("原始密码不能为空!");
+				}
+				if(!StringUtils.equals(req.getPassword(), req.getRepassword())) {
+					BizException.warn("重复密码必须和新密码一致");
+				}
+				//更新管理员信息
+				Admin adminInfo = new Admin();
+				adminInfo.setId(req.getAdminId());
+				adminInfo.setPassword(req.getPassword());
+				adminMapper.updateByPrimaryKeySelective(adminInfo);
+			}
+		}else {
+			BizException.warn("你无权限修改用户密码！");
+		}
+		return true;
+	}
 
 	@Override
 	@Transactional("account")
 	public int adminDelete(Integer adminId) {
+		int deleteNum = 0;
 		AdminRole adminRole = adminMapper.selectByPrimaryKey(adminId);
 		if(adminRole == null) {
 			BizException.warn("用户不存在!");
 		}else {
 			adminRoleMapper.deleteSelective(adminRole);
-			adminMapper.deleteByPrimaryKey(adminRole.getAdminId());
+			deleteNum = adminMapper.deleteByPrimaryKey(adminRole.getAdminId());
 		}
-		return 0;
+		return deleteNum;
 	}
 }

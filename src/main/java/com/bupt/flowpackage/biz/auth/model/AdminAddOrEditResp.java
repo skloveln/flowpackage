@@ -16,7 +16,18 @@ public class AdminAddOrEditResp extends BaseBean{
 
 	private AdminRole admin;
 	
+	/**是否是用户操作自己*/
+	private boolean self;
+	
 	private List<Role> roleList;
+	
+	public Boolean getSelf() {
+		return self;
+	}
+
+	public void setSelf(Boolean self) {
+		this.self = self;
+	}
 
 	public AdminRole getAdmin() {
 		return admin;

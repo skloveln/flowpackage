@@ -3,6 +3,7 @@ package com.bupt.flowpackage.biz.auth.service;
 import java.util.List;
 
 import com.bupt.flowpackage.biz.auth.model.AdminAddReq;
+import com.bupt.flowpackage.biz.auth.model.AdminPwdReq;
 import com.bupt.flowpackage.biz.auth.model.AdminRoleListReq;
 import com.bupt.flowpackage.biz.auth.model.AdminUpdateReq;
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
@@ -67,6 +68,14 @@ public interface AdminRoleService {
 	 * @return boolean
 	 */
 	public boolean adminUpdate(AdminUpdateReq req); 
+	
+	/**
+	 * <p>修改密码</p>   
+	 * @param @param req
+	 * @param @return      
+	 * @return boolean
+	 */
+	public boolean adminUpdatePwd(AdminPwdReq req); 
 	
 	/**
 	* @Description 根据角色获取模块菜单

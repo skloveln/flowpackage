@@ -9,12 +9,18 @@ insert into sys_menu (id, menu_no, application_code, menu_parent_no, menu_order,
 	values (2, 101, 1001, 1, 1, '管理员列表', 'admin-list.html', null, true, true);
 insert into sys_menu (id, menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, menu_icon, is_visible, is_leaf)
 	values (3, 102, 1001, 1, 2, '权限管理', 'admin-permission.html', null, true, true);
-insert into sys_menu (menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, munu_type, menu_icon, is_visible, is_leaf)
+insert into sys_menu (menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, menu_type, menu_icon, is_visible, is_leaf)
 	values (103, 1001, 101, 3, '管理员添加', 'admin-add.html', 2, null, true, true);	
-insert into sys_menu (menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, munu_type, menu_icon, is_visible, is_leaf)
+insert into sys_menu (menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, menu_type, menu_icon, is_visible, is_leaf)
 	values (104, 1001, 101, 4, '管理员修改', 'admin-edit.html', 2, null, true, true);	
-insert into sys_menu (menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, munu_type, menu_icon, is_visible, is_leaf)
+insert into sys_menu (menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, menu_type, menu_icon, is_visible, is_leaf)
 	values (105, 1001, 101, 5, '管理员删除', 'admin-delete.html', 2, null, true, true);	
+insert into sys_menu (menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, menu_type, menu_icon, is_visible, is_leaf)
+	values (106, 1001, 101, 6, '修改密码', 'admin-pass.html', 2, null, true, true);
+insert into sys_menu (menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, menu_type, menu_icon, is_visible, is_leaf)
+	values (107, 1001, 101, 7, '禁用', 'admin-forbid.html', 2, null, true, true);	
+insert into sys_menu (menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, menu_type, menu_icon, is_visible, is_leaf)
+	values (108, 1001, 101, 8, '启用', 'admin-resume.html', 2, null, true, true);	
 
 
 insert into sys_menu (id, menu_no, application_code, menu_parent_no, menu_order, menu_name, menu_url, menu_icon, is_visible, is_leaf)
