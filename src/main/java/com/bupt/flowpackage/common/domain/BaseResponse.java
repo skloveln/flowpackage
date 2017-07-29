@@ -18,7 +18,17 @@ public class BaseResponse<T> extends BaseRequest implements IException{
 	private T data;
 	
 	private Page<T> pages;
+	/**响应后浏览器重定向*/
+	private String url;
 	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	public Page<T> getPages() {
 		return pages;
 	}

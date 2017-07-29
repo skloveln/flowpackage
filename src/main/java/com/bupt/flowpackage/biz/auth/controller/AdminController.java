@@ -92,6 +92,7 @@ public class AdminController {
 			if(adminRole != null) {
 				resp.setAdmin(adminRole);
 			}
+			resp.setSelf(false);
 			modelMap.addAttribute("resp", resp);
 		}catch(Exception e) {
 			logger.error("管理员修改密码页面访问失败!", e);
@@ -108,6 +109,11 @@ public class AdminController {
 			AdminPwdReq adminPwdReq = new AdminPwdReq();
 			BeanUtils.copyProperties(req, adminPwdReq);
 			adminRoleService.adminUpdatePwd(adminPwdReq);
+			//个人修改密码，需要重新登陆
+			if(adminPwdReq.isSelf()) {
+				SessionUtil.logout();
+				baseResp.setUrl(SessionUtil.getRequest().getContextPath() + "/index");
+			}
 			baseResp.setMsg("修改密码成功");
 		}catch(Exception e) {
 			baseResp = ExceptionHelper.createResponse(e);

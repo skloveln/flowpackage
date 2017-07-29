@@ -33,10 +33,10 @@
 						<a href="#" class="dropDown_A">${global.adminInfo.loginName} <i class="Hui-iconfont">&#xe6d5;</i></a>
 						<ul class="dropDown-menu menu radius box-shadow">
 							<li>
-								<a href="javascript:;" onClick="myselfinfo()">个人信息</a>
+								<a data-modal="${ctx}/editself?id=${global.adminInfo.adminId}" data-title="修改密码" >修改密码</a>
 							</li>
 							<li>
-								<a href="${ctx}/logout">退出</a>
+								<a data-load="${ctx}/logout" data-confirm="确定要退出登录吗？">退出</a>
 							</li>
 						</ul>
 					</li>

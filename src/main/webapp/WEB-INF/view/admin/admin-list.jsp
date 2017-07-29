@@ -84,12 +84,12 @@
 					<a class="layui-btn layui-btn-mini" data-modal="${ctx}/admin/admin-edit?id={{item.adminId}}" data-title="编辑管理员" >修改</a>
 					<a class="layui-btn layui-btn-mini" data-modal="${ctx}/admin/admin-pass?id={{item.adminId}}" data-title="修改密码" >密码</a>
 					{{if item.loginName != 'admin'}}	
-						{{if item.availableFlag}}					
-							<a class="layui-btn layui-btn-danger layui-btn-mini" data-modal="${ctx}/admin/admin-forbid?id={{item.adminId}}" data-title="禁用管理员" >禁用</a>					
+						{{if item.availableFlag}}		
+							<a data-update="{{item.adminId}}" data-action='${ctx}/admin/admin-forbid' data-title="确认禁用用户吗？" class="layui-btn layui-btn-danger layui-btn-mini">禁用</a>
 						{{else}}
-							<a class="layui-btn layui-btn-mini" data-modal="${ctx}/admin/admin-resume?id={{item.adminId}}" data-title="启用管理员" >启用</a>					
+							<a data-update="{{item.adminId}}" data-action='${ctx}/admin/admin-resume' data-title="确认启用用户吗？" class="layui-btn layui-btn-mini">启用</a>
 						{{/if}}
-						<a data-update="{{item.adminId}}" data-action='${ctx}/admin/admin-delete' class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+						<a data-update="{{item.adminId}}" data-action='${ctx}/admin/admin-delete' data-title="确认删除用户吗？" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 					{{/if}}
 				</td>
 			</tr>

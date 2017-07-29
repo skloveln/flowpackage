@@ -88,9 +88,9 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		WebGlobalVo webGlobalVo = new WebGlobalVo();
-		SessionVo sessionInfo = SessionUtil.getAdminSessionInfo();
 		//添加管理员信息
-		if(sessionInfo != null) {
+		if(modelAndView != null) {
+			SessionVo sessionInfo = SessionUtil.getAdminSessionInfo();
 			webGlobalVo.setAdminInfo(sessionInfo);
 			//获取所有模块
 			List<Application> applicationList = SessionUtil.getApplicationList();

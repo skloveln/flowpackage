@@ -175,9 +175,21 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 			if(admin == null) {
 				BizException.warn("用户不存在!");
 			}else {
-				if(req.isSelf() && StringUtils.isBlank(req.getOldpassword())) {
-					BizException.warn("原始密码不能为空!");
+				if(req.isSelf()) {
+					if(StringUtils.isBlank(req.getOldpassword())) {
+						BizException.warn("原始密码不能为空!");
+					}
+					//不直接比对密码，是不希望查询数据库返回密码
+					AdminRole adminRoleReq = new AdminRole();
+					adminRoleReq.setLoginName(admin.getLoginName());
+					adminRoleReq.setAvailableFlag(true);
+					adminRoleReq.setPassword(req.getOldpassword());
+					Admin adminRole = adminMapper.selectAdminRoleInfo(adminRoleReq);
+					if(adminRole == null) {
+						BizException.warn("原始密码不正确!!");
+					}
 				}
+				
 				if(!StringUtils.equals(req.getPassword(), req.getRepassword())) {
 					BizException.warn("重复密码必须和新密码一致");
 				}

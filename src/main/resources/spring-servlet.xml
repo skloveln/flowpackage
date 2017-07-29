@@ -74,6 +74,7 @@
 			<mvc:exclude-mapping path="/tologin" />
 			<mvc:exclude-mapping path="/login" />
 			<mvc:exclude-mapping path="/logout" />
+			<mvc:exclude-mapping path="/editself" />
 			<mvc:exclude-mapping path="/error/**" />
 			<!-- <mvc:exclude-mapping path="/*/api/**" /> -->
 			<!-- <mvc:exclude-mapping path="/staticlib/**" /> -->

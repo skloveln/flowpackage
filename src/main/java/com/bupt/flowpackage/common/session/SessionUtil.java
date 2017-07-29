@@ -58,7 +58,8 @@ public class SessionUtil {
 	 * @return SessionVo
 	 */
 	public static SessionVo getAdminSessionInfo() {
-		return (SessionVo)getSession().getAttribute(ADMIN_SESSION);
+		Object retObj = getSession().getAttribute(ADMIN_SESSION);
+		return retObj == null ? null : (SessionVo)retObj;
 	}
 	
 	/**

@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bupt.flowpackage.biz.auth.model.AdminAddOrEditResp;
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
 import com.bupt.flowpackage.biz.auth.service.AdminRoleService;
 import com.bupt.flowpackage.common.constants.Constants;
@@ -20,6 +22,7 @@ import com.bupt.flowpackage.common.domain.BaseResponse;
 import com.bupt.flowpackage.common.domain.SessionVo;
 import com.bupt.flowpackage.common.exception.ExceptionHelper;
 import com.bupt.flowpackage.common.session.SessionUtil;
+import com.bupt.flowpackage.mybatis.account.adminrole.model.AdminRole;
 import com.bupt.flowpackage.mybatis.account.application.model.Application;
 
 @Controller
@@ -69,6 +72,23 @@ public class WebLoginController {
 			logger.error("退出失败", e);
 		}
 		return Constants.LOGIN_PAGE;
+	}
+	
+	@RequestMapping("/editself")
+	public String editself(@RequestParam(required=true)Integer id, ModelMap modelMap) {
+		AdminAddOrEditResp resp = new AdminAddOrEditResp();
+		try{
+			AdminRole adminRole = adminRoleService.getAdminRoleByKey(id);
+			if(adminRole != null) {
+				resp.setAdmin(adminRole);
+			}
+			resp.setSelf(true);
+			modelMap.addAttribute("resp", resp);
+		}catch(Exception e) {
+			logger.error("管理员修改密码页面访问失败!", e);
+			throw e;
+		}
+		return "admin/admin-pwd";
 	}
 	
 	@RequestMapping("/tologin")

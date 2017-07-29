@@ -15,7 +15,7 @@
         </div>
     </div>
 	
-	<c:if test="resp.self">
+	<c:if test="${resp.self}">
 	    <div class="layui-form-item">
 	        <label class="layui-form-label">旧的密码</label>
 	        <div class="layui-input-block">
@@ -34,7 +34,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">重复密码</label>
         <div class="layui-input-block">
-            <input type="password" name="repassword" value='' pattern="^\w{5,20}$" required="required" title="重复密码必须和新密码一致" placeholder="请输入重复密码" class="layui-input">
+            <input type="password" name="repassword" value='' pattern="^\w{5,20}$" required="required" title="重复密码必须和新密码一致" placeholder="重复密码必须和新密码一致" class="layui-input">
         </div>
     </div>
 	

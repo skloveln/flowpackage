@@ -10,7 +10,8 @@ layui.use('adminplugs', function(){
     this.$body.on('click', '[data-load]', function () {
         var url = $(this).attr('data-load'), tips = $(this).attr('data-tips');
         function _goLoad() {
-            $.form.load(url, {}, 'GET', null, true, tips);
+            //$.form.load(url, {}, 'GET', null, true, tips);
+        	window.location.href = url;
         }
         if ($(this).attr('data-confirm')) {
             return $.msg.confirm($(this).attr('data-confirm'), _goLoad);
@@ -65,7 +66,8 @@ layui.use('adminplugs', function(){
         }
         var action = $(this).attr('data-action') || $(this).parents('[data-location]').attr('data-location');
         var value = $(this).attr('data-value') || 0, field = $(this).attr('data-field') || 'status';
-        $.msg.confirm('确定要操作这些数据吗？', function () {
+        var msg = $(this).attr('data-title') || '确定要操作这些数据吗？';
+        $.msg.confirm(msg, function () {
             $.form.load(action, {field: field, value: value, id: id}, 'POST');
         });
     });
