@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.bupt.flowpackage.biz.auth.model.WebGlobalVo;
-import com.bupt.flowpackage.common.constants.Constants;
 import com.bupt.flowpackage.common.domain.BaseResponse;
 import com.bupt.flowpackage.common.domain.SessionVo;
 import com.bupt.flowpackage.common.enums.ResultCode;
@@ -51,7 +50,27 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 				response.sendRedirect(request.getContextPath() + "/tologin");
 			}	
 			return false;
-		}		
+		}else {
+			String currentUri = getSimpleUri(uri);
+			//权限校验
+			if(hasResponseBody != null) {
+				PathMatcher matcher = new AntPathMatcher();
+				if(!matcher.match(API_PATH, uri) && !SessionUtil.checkUrlAuth(currentUri)){
+					BaseResponse<String> baseResp = new BaseResponse<String>(ResultCode.Result_NO_AUTH);
+					logger.info("\n用户访问url={} 该用户loginName={}无权限，返回提示信息！", uri, sessionInfo.getLoginName());
+					response.setCharacterEncoding("UTF-8");
+					response.setHeader("Content-type","text/html;charset=UTF-8");
+					PrintWriter writer = response.getWriter();
+					writer.write(baseResp.toString());
+					return false;
+				}
+			}else {
+				if(!SessionUtil.checkUrlAuth(currentUri)) {
+					logger.info("\n用户={} 访问url={} 因无权限, 强制跳转到无权限页面", sessionInfo.getLoginName(), uri);
+					request.getRequestDispatcher("/error/noauth").forward(request, response);
+				}
+			}
+		}
 		return true;
 	}
 	
@@ -84,34 +103,18 @@ public class LoginInteceptor  extends HandlerInterceptorAdapter{
 			}
 			
 			//检查uri是否有权限
-			String url = request.getRequestURI();
-			//----/flowpackage/index
-			String currentUrl = getSimpleUri(url);
-			
+			String uri = request.getRequestURI();
 			String contextPath = request.getContextPath();
 			int start = contextPath.length();
-			int end = url.lastIndexOf("/");
-			String parentUrl = url.substring(start, end);
-			webGlobalVo.setCurrentParentUrl(parentUrl);
+			int end = uri.lastIndexOf("/");
+			String parentUri = uri.substring(start, end);
+			webGlobalVo.setCurrentParentUrl(parentUri);
 			
-			webGlobalVo.setCurrentUrl(currentUrl + ".html");
-			if(modelAndView != null) {
-				if(!SessionUtil.checkUrlAuth(currentUrl)) {
-					logger.info("\n用户={} 访问url={} 因无权限, 强制跳转到无权限页面", sessionInfo.getLoginName(), url);
-					modelAndView.setViewName(Constants.PAGE_NOAUTH);
-				} else {
-					modelAndView.addObject(GLOBAL_INFO, webGlobalVo);
-				}
-			}else {
-				PathMatcher matcher = new AntPathMatcher();
-				if(!matcher.match(API_PATH, url) && !SessionUtil.checkUrlAuth(currentUrl)){
-					BaseResponse<String> baseResp = new BaseResponse<String>(ResultCode.Result_NO_AUTH);
-					logger.info("\n用户访问url={} 该用户loginName={}无权限，返回提示信息！", url, sessionInfo.getLoginName());
-					response.setCharacterEncoding("UTF-8");
-					response.setHeader("Content-type","text/html;charset=UTF-8");
-					PrintWriter writer = response.getWriter();
-					writer.write(baseResp.toString());
-				}
+			//----/flowpackage/index
+			String currentUri = getSimpleUri(uri);
+			webGlobalVo.setCurrentUrl(currentUri + ".html");
+			if(modelAndView != null && SessionUtil.checkUrlAuth(currentUri)) {
+				modelAndView.addObject(GLOBAL_INFO, webGlobalVo);
 			}
 		}
 	}

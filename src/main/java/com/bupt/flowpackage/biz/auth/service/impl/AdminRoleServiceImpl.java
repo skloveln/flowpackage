@@ -173,7 +173,8 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		if(adminRole == null) {
 			BizException.warn("用户不存在!");
 		}else {
-			
+			adminRoleMapper.deleteSelective(adminRole);
+			adminMapper.deleteByPrimaryKey(adminRole.getAdminId());
 		}
 		return 0;
 	}
