@@ -192,6 +192,13 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 		}
 		return true;
 	}
+	
+	public int updateStatus(Integer adminId, boolean status) {
+		Admin admin = new Admin();
+		admin.setId(adminId);
+		admin.setAvailableFlag(status);
+		return adminMapper.updateByPrimaryKeySelective(admin);
+	}
 
 	@Override
 	@Transactional("account")

@@ -315,7 +315,7 @@
       <if test="lastLoginTime != null and lastLoginTime != ''" >
         last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="availableFlag != null and availableFlag != ''" >
+      <if test="availableFlag != null" >
         available_flag = #{availableFlag,jdbcType=BIT},
       </if>
       update_time = now() 

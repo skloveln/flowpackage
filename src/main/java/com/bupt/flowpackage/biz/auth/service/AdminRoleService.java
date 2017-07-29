@@ -9,6 +9,7 @@ import com.bupt.flowpackage.biz.auth.model.AdminUpdateReq;
 import com.bupt.flowpackage.biz.auth.model.UserLoginWebRequest;
 import com.bupt.flowpackage.common.domain.Page;
 import com.bupt.flowpackage.common.domain.SessionVo;
+import com.bupt.flowpackage.mybatis.account.admin.model.Admin;
 import com.bupt.flowpackage.mybatis.account.adminrole.model.AdminRole;
 import com.bupt.flowpackage.mybatis.account.application.model.Application;
 import com.bupt.flowpackage.mybatis.account.role.model.Role;
@@ -97,4 +98,11 @@ public interface AdminRoleService {
 	 */
 	public AdminRole getAdminRoleByKey(Integer adminId);
 	
+	/***
+	 * <p>更改用户状态</p>   
+	 * @param @param admin
+	 * @param @return      
+	 * @return int
+	 */
+	public int updateStatus(Integer adminId, boolean status);
 }

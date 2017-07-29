@@ -113,7 +113,39 @@ public class AdminController {
 			baseResp = ExceptionHelper.createResponse(e);
 		}
 		return baseResp;
-	}   
+	}  
+	
+	/**
+	 * <p>管理员禁用</p>   
+	 * @param @param id
+	 * @param @return      
+	 * @return BaseResponse<String>
+	 */
+	@ResponseBody
+	@RequestMapping("/admin-forbid")
+	public BaseResponse<String> adminForbid(@RequestParam(required=true)Integer id) {
+		BaseResponse<String> baseResp = new BaseResponse<String>();
+		try{
+			adminRoleService.updateStatus(id, false);
+			baseResp.setMsg("管理员禁用成功");
+		}catch(Exception e) {
+			baseResp = ExceptionHelper.createResponse(e);
+		}
+		return baseResp;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/admin-resume")
+	public BaseResponse<String> adminResume(@RequestParam(required=true)Integer id) {
+		BaseResponse<String> baseResp = new BaseResponse<String>();
+		try{
+			adminRoleService.updateStatus(id, true);
+			baseResp.setMsg("管理员启用成功");
+		}catch(Exception e) {
+			baseResp = ExceptionHelper.createResponse(e);
+		}
+		return baseResp;
+	}
 	
 	@ResponseBody
 	@RequestMapping("/admin-delete")
